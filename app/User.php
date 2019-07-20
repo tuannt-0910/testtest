@@ -28,12 +28,43 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function file()
+    {
+        return $this->hasOne('App\Models\File', 'image_id', 'id');
+    }
+
+    public function listTestViewByUser()
+    {
+        return $this->belongsToMany('App\Models\Test', 'test_user', 'user_id', 'test_id');
+    }
+
+    public function createdTests()
+    {
+        return $this->hasMany('App\Models\Test', 'created_user_id', 'id');
+    }
+
+    public function histories()
+    {
+        return $this->hasMany('App\Models\History', 'user_id', 'id');
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany('App\Models\Blog', 'created_user_id', 'id');
+    }
+
+    public function feedbacks()
+    {
+        return $this->hasMany('App\Models\Feedback', 'user_id', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comments', 'user_id', 'id');
+    }
+
+    public function roles()
+    {
+        return $this->hasOne('App\Models\Role', 'role_id', 'id');
+    }
 }
