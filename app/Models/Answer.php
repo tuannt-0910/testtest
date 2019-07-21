@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Answer extends Model
 {
-    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -15,6 +15,14 @@ class Answer extends Model
      * @var string
      */
     protected $table = 'answers';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
 
     /**
      * The attributes that are mass assignable.

@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class History extends Model
 {
-    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -15,6 +15,13 @@ class History extends Model
      * @var string
      */
     protected $table = 'histories';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
