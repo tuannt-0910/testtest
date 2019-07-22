@@ -1,6 +1,6 @@
 <div class="navbar navbar-default header-highlight">
     <div class="navbar-header">
-        <a class="navbar-brand" href="index.html"><img src="{{asset('Admin/assets/images/logo_light.png')}}" alt=""></a>
+        <a class="navbar-brand" href="#"><img src="{{asset('Admin/assets/images/logo_light.png')}}" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -13,35 +13,35 @@
             <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
         </ul>
 
-        <p class="navbar-text"><span class="label bg-success">Online</span></p>
+        <p class="navbar-text"><span class="label bg-success">{{trans('navbar.Online')}}</span></p>
 
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     <img src="{{asset('Admin/assets/images/flags/gb.png')}}" class="position-left" alt="">
-                    English
+                    {{trans('navbar.English')}}
                     <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a class="deutsch"><img src="{{asset('Admin/assets/images/flags/de.png')}}" alt=""> Deutsch</a></li>
-                    <li><a class="ukrainian"><img src="{{asset('Admin/assets/images/flags/ua.png')}}" alt=""> Українська</a></li>
-                    <li><a class="english"><img src="{{asset('Admin/assets/images/flags/gb.png')}}" alt=""> English</a></li>
-                    <li><a class="espana"><img src="{{asset('Admin/assets/images/flags/es.png')}}" alt=""> España</a></li>
-                    <li><a class="russian"><img src="{{asset('Admin/assets/images/flags/ru.png')}}" alt=""> Русский</a></li>
+                    <li><a class="deutsch"><img src="{{asset('Admin/assets/images/flags/de.png')}}" alt=""> {{trans('navbar.Deutsch')}}</a></li>
+                    <li><a class="ukrainian"><img src="{{asset('Admin/assets/images/flags/ua.png')}}" alt=""> {{trans('navbar.Українська')}}</a></li>
+                    <li><a class="english"><img src="{{asset('Admin/assets/images/flags/gb.png')}}" alt=""> {{trans('navbar.English')}}</a></li>
+                    <li><a class="espana"><img src="{{asset('Admin/assets/images/flags/es.png')}}" alt=""> {{trans('navbar.España')}}</a></li>
+                    <li><a class="russian"><img src="{{asset('Admin/assets/images/flags/ru.png')}}" alt=""> {{trans('navbar.Русский')}}</a></li>
                 </ul>
             </li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-bubbles4"></i>
-                    <span class="visible-xs-inline-block position-right">Messages</span>
+                    <span class="visible-xs-inline-block position-right">{{trans('navbar.Messages')}}</span>
                     <span class="badge bg-warning-400">2</span>
                 </a>
 
                 <div class="dropdown-menu dropdown-content width-350">
                     <div class="dropdown-content-heading">
-                        Messages
+                        {{trans('navbar.Messages')}}
                         <ul class="icons-list">
                             <li><a href="#"><i class="icon-compose"></i></a></li>
                         </ul>
@@ -56,63 +56,11 @@
 
                             <div class="media-body">
                                 <a href="#" class="media-heading">
-                                    <span class="text-semibold">James Alexander</span>
-                                    <span class="media-annotation pull-right">04:58</span>
+                                    <span class="text-semibold"></span>
+                                    <span class="media-annotation pull-right"></span>
                                 </a>
 
-                                <span class="text-muted">who knows, maybe that would be the best thing for me...</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <img src="{{asset('Admin/assets/images/placeholder.jpg')}}" class="img-circle img-sm" alt="">
-                                <span class="badge bg-danger-400 media-badge">4</span>
-                            </div>
-
-                            <div class="media-body">
-                                <a href="#" class="media-heading">
-                                    <span class="text-semibold">Margo Baker</span>
-                                    <span class="media-annotation pull-right">12:16</span>
-                                </a>
-
-                                <span class="text-muted">That was something he was unable to do because...</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left"><img src="{{asset('Admin/assets/images/placeholder.jpg')}}" class="img-circle img-sm" alt=""></div>
-                            <div class="media-body">
-                                <a href="#" class="media-heading">
-                                    <span class="text-semibold">Jeremy Victorino</span>
-                                    <span class="media-annotation pull-right">22:48</span>
-                                </a>
-
-                                <span class="text-muted">But that would be extremely strained and suspicious...</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left"><img src="{{asset('Admin/assets/images/placeholder.jpg')}}" class="img-circle img-sm" alt=""></div>
-                            <div class="media-body">
-                                <a href="#" class="media-heading">
-                                    <span class="text-semibold">Beatrix Diaz</span>
-                                    <span class="media-annotation pull-right">Tue</span>
-                                </a>
-
-                                <span class="text-muted">What a strenuous career it is that I've chosen...</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left"><img src="{{asset('Admin/assets/images/placeholder.jpg')}}" class="img-circle img-sm" alt=""></div>
-                            <div class="media-body">
-                                <a href="#" class="media-heading">
-                                    <span class="text-semibold">Richard Vango</span>
-                                    <span class="media-annotation pull-right">Mon</span>
-                                </a>
-
-                                <span class="text-muted">Other travelling salesmen live a life of luxury...</span>
+                                <span class="text-muted"></span>
                             </div>
                         </li>
                     </ul>
@@ -126,14 +74,14 @@
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     <img src="{{asset('Admin/assets/images/placeholder.jpg')}}" alt="">
-                    <span>Victoria</span>
+                    <span></span>
                     <i class="caret"></i>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
-                    <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
-                    <li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+                    <li><a href="#"><i class="icon-user-plus"></i> {{trans('navbar.my_profile')}}</a></li>
+                    <li><a href="#"><i class="icon-cog5"></i> {{trans('navbar.account_settings')}}</a></li>
+                    <li><a href="#"><i class="icon-switch2"></i> {{trans('navbar.logout')}}</a></li>
                 </ul>
             </li>
         </ul>

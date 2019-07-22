@@ -1,3 +1,3 @@
 <div class="footer text-muted">
-    &copy; 2019. <a href="#">Academics</a> by Academics Company
+    &copy; {{trans('footer.2019')}}. <a href="#">{{trans('footer.Academics')}}</a> {{trans('footer.by_academics_company')}}
 </div>
