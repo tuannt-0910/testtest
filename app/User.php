@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username',
+        'firstname',
+        'lastname',
+        'name',
+        'email',
+        'phone',
+        'address',
+        'birthday',
+        'active',
+        'image_id',
+        'role_id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     /**
@@ -25,12 +40,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     public function file()
     {
-        return $this->hasOne('App\Models\File', 'image_id', 'id');
+        return $this->hasOne('App\Models\File', 'id', 'image_id');
     }
 
     public function listTestViewByUser()
@@ -63,8 +79,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Comments', 'user_id', 'id');
     }
 
-    public function roles()
+    public function role()
     {
-        return $this->hasOne('App\Models\Role', 'role_id', 'id');
+        return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
 }

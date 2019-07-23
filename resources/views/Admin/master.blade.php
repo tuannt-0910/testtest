@@ -26,6 +26,13 @@
 
 			<!-- Main content -->
 			<div class="content-wrapper">
+				<div class="page-header mt-15 mb-15">
+					<div class="breadcrumb-line breadcrumb-line-component">
+						<ul class="breadcrumb">
+							@yield('progress_bar')
+						</ul>
+					</div>
+				</div>
 
 				<!-- Content area -->
 				<div class="content">
