@@ -16,5 +16,11 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('admin.home');
+
+    Route::group(['prefix'=>'users'], function () {
+        Route::get('/', 'UserController@index')->name('admin.users.index');
+
+        Route::get('{id}/edit', 'UserController@edit')->name('admin.users.edit');
+    });
 });
