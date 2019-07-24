@@ -15,9 +15,9 @@ class CreateFeedbacksTable extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->longText('content');
-            $table->integer('seen');
+            $table->integer('user_id')->nullable();
+            $table->longText('content')->nullable();
+            $table->integer('seen')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

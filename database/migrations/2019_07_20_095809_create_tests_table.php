@@ -15,15 +15,15 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id');
-            $table->integer('created_user_id');
-            $table->string('name');
-            $table->string('code');
-            $table->longText('content_guide');
-            $table->integer('execute_time');
-            $table->integer('total_question');
-            $table->integer('free');
-            $table->string('publish');
+            $table->integer('category_id')->nullable();
+            $table->integer('created_user_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('code')->nullable();
+            $table->longText('content_guide')->nullable();
+            $table->integer('execute_time')->nullable();
+            $table->integer('total_question')->nullable();
+            $table->integer('free')->nullable();
+            $table->string('publish')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

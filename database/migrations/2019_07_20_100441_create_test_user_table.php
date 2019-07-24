@@ -15,8 +15,8 @@ class CreateTestUserTable extends Migration
     {
         Schema::create('test_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('test_id');
+            $table->integer('user_id')->nullable();
+            $table->integer('test_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

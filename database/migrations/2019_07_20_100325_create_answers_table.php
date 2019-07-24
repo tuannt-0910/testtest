@@ -15,11 +15,11 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('question_id');
-            $table->integer('file_id');
-            $table->string('content');
-            $table->string('answer_type');
-            $table->integer('correct_answer');
+            $table->integer('question_id')->nullable();
+            $table->integer('file_id')->nullable();
+            $table->string('content')->nullable();
+            $table->string('answer_type')->nullable();
+            $table->integer('correct_answer')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

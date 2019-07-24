@@ -3,28 +3,38 @@
 @section('title', trans('page.list_users'))
 
 @section('progress_bar')
-    <li><a href="#"><i class="icon-home2 position-left"></i> {{trans('page.home')}}</a></li>
-    <li class="active">{{trans('page.users.list.users')}}</li>
+    <li><a href="#"><i class="icon-home2 position-left"></i> {{ trans('page.home') }}</a></li>
+    <li class="active">{{ trans('page.users.list.users') }}</li>
 @endsection
 
 @section('content')
     <div class="panel panel-flat">
         <div class="panel-body">
+
             <form class="form-horizontal">
                 <fieldset class="content-group">
-                    <legend class="text-bold">{{trans('page.users.list.list_user')}}</legend>
+                    <legend class="text-bold">{{ trans('page.users.list.list_user') }}</legend>
 
                     <div class="form-group">
-                        <label class="control-label col-lg-2">{{trans('page.search')}}</label>
+
+                        @if(Session::has('success'))
+                            <div class="col-lg-12 alert alert-success">
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
+
+                        <label class="control-label col-lg-2">{{ trans('page.search') }}</label>
 
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" name="keyword" value="{{app('request')->input('keyword')}}">
+                            <input type="text" class="form-control" name="keyword" value="{{ app('request')->input('keyword') }}">
                         </div>
 
                         <div class="col-lg-2">
-                            <input type="submit" class="btn btn-primary">
+                            <input type="submit" class="btn btn-primary" value="{{ trans('page.search') }}">
+                            <a href="{{ route('admin.users.edit') }}" class="btn btn-success">{{ trans('page.add_user') }}</a>
                         </div>
                     </div>
+
                 </fieldset>
             </form>
 
@@ -49,7 +59,7 @@
                                 <tr>
                                     <td>{{((app('request')->page ?? 1) - 1) * $limit + $key + 1}}</td>
                                     <td>{{$user->file->name}}</td>
-                                    <td>{{$user->firstname . ' ' . $user->lastname}}</td>
+                                    <td>{{$user->lastname . ' ' . $user->firstname}}</td>
                                     <td>{{$user->username}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->birthday}}</td>
@@ -58,7 +68,7 @@
                                     <td>
                                         <ul class="icons-list">
                                             <li><a href="{{route('admin.users.edit', ['id' => $user->id])}}" data-popup="tooltip" title="{{trans('page.edit')}}"><i class="icon-pencil7"></i></a></li>
-                                            <li><a href="{{route('admin.users.edit', ['id' => $user->id])}}" data-popup="tooltip" title="{{trans('page.remove')}}"><i class="icon-trash"></i></a></li>
+                                            <li><a href="{{route('admin.users.delete', ['id' => $user->id])}}" data-popup="tooltip" title="{{trans('page.remove')}}"><i class="icon-trash"></i></a></li>
                                         </ul>
                                     </td>
                             @endforeach

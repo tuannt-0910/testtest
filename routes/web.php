@@ -21,6 +21,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
     Route::group(['prefix'=>'users'], function () {
         Route::get('/', 'UserController@index')->name('admin.users.index');
 
-        Route::get('{id}/edit', 'UserController@edit')->name('admin.users.edit');
+        Route::get('edit/{id?}', 'UserController@edit')->name('admin.users.edit');
+        Route::post('edit/{id?}', 'UserController@update')->name('admin.users.update');
+
+        Route::get('delete/{id}', 'UserController@delete')->name('admin.users.delete');
     });
 });

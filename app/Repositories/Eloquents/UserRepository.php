@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\Models\Role;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\User;
 use Config;
@@ -29,5 +30,10 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
     public function getUserById($id)
     {
         return $this->_model->with(['file', 'role'])->find($id);
+    }
+
+    public function getAllRoles()
+    {
+        return Role::select('id', 'name', 'slug')->where('deleted_at', null)->get();
     }
 }

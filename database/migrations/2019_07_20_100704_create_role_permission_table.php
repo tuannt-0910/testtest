@@ -15,8 +15,8 @@ class CreateRolePermissionTable extends Migration
     {
         Schema::create('role_permission', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('permission_id');
-            $table->integer('role_id');
+            $table->integer('permission_id')->nullable();
+            $table->integer('role_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

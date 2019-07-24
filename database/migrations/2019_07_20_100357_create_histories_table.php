@@ -15,12 +15,12 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id');
-            $table->integer('user_id');
-            $table->integer('duration');
-            $table->string('random_seed');
-            $table->integer('score');
-            $table->longText('user_answer');
+            $table->integer('test_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('duration')->nullable();
+            $table->string('random_seed')->nullable();
+            $table->integer('score')->nullable();
+            $table->longText('user_answer')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
