@@ -15,8 +15,8 @@ class CreateTestQuestionTable extends Migration
     {
         Schema::create('test_question', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id');
-            $table->integer('question_id');
+            $table->integer('test_id')->nullable();
+            $table->integer('question_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -28,8 +28,12 @@ mix.styles([
     'public/Admin/assets/js/plugins/forms/styling/switchery.min.js',
     'public/Admin/assets/js/plugins/forms/styling/uniform.min.js',
     'public/Admin/assets/js/plugins/forms/selects/bootstrap_multiselect.js',
+    'public/Admin/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js',
+    'public/Admin/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js',
+    'public/Admin/assets/js/plugins/uploaders/fileinput/fileinput.min.js',
     'public/Admin/assets/js/core/app.js',
-    'public/Admin/assets/js/pages/dashboard.js'
+    'public/Admin/assets/js/pages/dashboard.js',
+    'public/Admin/assets/js/pages/uploader_bootstrap.js'
 ], 'public/js/admin.js')
 .options({
     processCssUrls: false
