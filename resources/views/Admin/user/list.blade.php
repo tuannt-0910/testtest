@@ -58,7 +58,14 @@
                             @foreach($users as $key=>$user)
                                 <tr>
                                     <td>{{((app('request')->page ?? 1) - 1) * $limit + $key + 1}}</td>
-                                    <td>{{$user->file->name}}</td>
+                                    <td>
+                                        <div class="media-left media-middle">
+                                            <img
+                                                src="@if($user && $user->file && $user->file->name){{ asset($user->file->base_folder . '/' . $user->file->name) }}@else{{'Admin/assets/images/placeholder.jpg'}}@endif"
+                                                class="img-circle img-md"
+                                            >
+                                        </div>
+                                    </td>
                                     <td>{{$user->lastname . ' ' . $user->firstname}}</td>
                                     <td>{{$user->username}}</td>
                                     <td>{{$user->email}}</td>
