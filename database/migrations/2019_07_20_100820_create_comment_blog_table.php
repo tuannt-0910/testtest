@@ -15,9 +15,9 @@ class CreateCommentBlogTable extends Migration
     {
         Schema::create('comment_blog', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('blog_id');
-            $table->integer('parent_id');
-            $table->longText('content');
+            $table->integer('blog_id')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
