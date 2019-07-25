@@ -23,5 +23,5 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
         Route::get('delete/{id}', 'UserController@delete')->name('admin.users.delete');
     });
 
-    Route::resource('categories', 'CategoryController');
+    Route::resource('categories', 'CategoryController')->except(['show']);
 });
