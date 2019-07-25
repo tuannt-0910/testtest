@@ -18,14 +18,17 @@ class RoleTableSeeder extends Seeder
             [
                 'name' => 'student',
                 'slug' => 'student',
+                'color' => 'label label-default'
             ],
             [
                 'name' => 'teacher',
                 'slug' => 'teacher',
+                'color' => 'label label-success'
             ],
             [
                 'name' => 'manager',
                 'slug' => 'manager',
+                'color' => 'label label-primary'
             ],
         ];
         foreach ($data as $item) {
