@@ -22,5 +22,7 @@ return [
         'avatar_max' => 'required',
         'avatar_mimes' => 'required',
         'role_required' => 'required',
+        'name_cate_required' => 'required',
+        'name_cate_max' => 'max'
     ]
 ];
