@@ -17,11 +17,10 @@ mix.styles([
     'public/Admin/assets/css/bootstrap.css',
     'public/Admin/assets/css/core.css',
     'public/Admin/assets/css/components.css',
-    'public/Admin/assets/css/colors.css'
+    'public/Admin/assets/css/colors.css',
 ], 'public/css/admin.css')
 .js([
     'public/Admin/assets/js/plugins/loaders/pace.min.js',
-    'public/Admin/assets/js/core/libraries/jquery.min.js',
     'public/Admin/assets/js/core/libraries/bootstrap.min.js',
     'public/Admin/assets/js/plugins/loaders/blockui.min.js',
     'public/Admin/assets/js/plugins/visualization/d3/d3.min.js',
@@ -38,6 +37,7 @@ mix.styles([
 .options({
     processCssUrls: false
 });
+
 mix.autoload({
     jquery: ['$', 'jQuery', 'window.jQuery'],
 });

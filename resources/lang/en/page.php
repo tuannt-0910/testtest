@@ -13,6 +13,7 @@ return [
     'edit' => 'Edit',
     'add' => 'Add',
     'search' => 'Search',
+    'last_edit' => 'Last Edit',
     'users' => [
         'list' => [
             'user' => 'User',
@@ -32,5 +33,16 @@ return [
                 'actions' => 'Actions'
             ]
         ]
+    ],
+    'category' => [
+        'categories' => 'Categories',
+        'list_categories' => 'List categories',
+        'name' => 'Name',
+        'content_guide' => 'Content Guide',
+        'number_of_tests' => 'Number Tests',
+        'actions' => 'Actions',
+        'add_category' => 'Add Category',
+        'cate_name' => 'Category Name',
+        'category_parent' => 'Parent Category',
     ]
 ];
