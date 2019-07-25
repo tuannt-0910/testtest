@@ -17,6 +17,7 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

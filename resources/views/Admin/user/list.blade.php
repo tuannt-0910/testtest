@@ -43,45 +43,45 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{trans('page.users.list.table_property.image')}}</th>
-                            <th>{{trans('page.users.list.table_property.fullname')}}</th>
-                            <th>{{trans('page.users.list.table_property.username')}}</th>
-                            <th>{{trans('page.users.list.table_property.email')}}</th>
-                            <th>{{trans('page.users.list.table_property.birthday')}}</th>
-                            <th>{{trans('page.users.list.table_property.role')}}</th>
-                            <th>{{trans('page.users.list.table_property.address')}}</th>
-                            <th>{{trans('page.users.list.table_property.actions')}}</th>
+                            <th>{{ trans('page.users.list.table_property.image') }}</th>
+                            <th>{{ trans('page.users.list.table_property.fullname') }}</th>
+                            <th>{{ trans('page.users.list.table_property.username') }}</th>
+                            <th>{{ trans('page.users.list.table_property.email') }}</th>
+                            <th>{{ trans('page.users.list.table_property.birthday') }}</th>
+                            <th>{{ trans('page.users.list.table_property.role') }}</th>
+                            <th>{{ trans('page.users.list.table_property.address') }}</th>
+                            <th>{{ trans('page.users.list.table_property.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(count($users) > 0)
                             @foreach($users as $key=>$user)
                                 <tr>
-                                    <td>{{((app('request')->page ?? 1) - 1) * $limit + $key + 1}}</td>
+                                    <td>{{ ((app('request')->page ?? 1) - 1) * $limit + $key + 1 }}</td>
                                     <td>
                                         <div class="media-left media-middle">
                                             <img
-                                                src="@if($user && $user->file && $user->file->name){{ asset($user->file->base_folder . '/' . $user->file->name) }}@else{{'Admin/assets/images/placeholder.jpg'}}@endif"
+                                                src="@if($user && $user->file && $user->file->name){{ asset($user->file->base_folder . '/' . $user->file->name) }}@else{{ 'Admin/assets/images/placeholder.jpg' }}@endif"
                                                 class="img-circle img-md"
                                             >
                                         </div>
                                     </td>
-                                    <td>{{$user->lastname . ' ' . $user->firstname}}</td>
-                                    <td>{{$user->username}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->birthday}}</td>
-                                    <td>{{$user->role->name}}</td>
-                                    <td>{{$user->address}}</td>
+                                    <td>{{ $user->lastname . ' ' . $user->firstname }}</td>
+                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->birthday }}</td>
+                                    <td><span class="{{ $user->role->color }}">{{ $user->role->name }}</span></td>
+                                    <td>{{ $user->address }}</td>
                                     <td>
                                         <ul class="icons-list">
-                                            <li><a href="{{route('admin.users.edit', ['id' => $user->id])}}" data-popup="tooltip" title="{{trans('page.edit')}}"><i class="icon-pencil7"></i></a></li>
-                                            <li><a href="{{route('admin.users.delete', ['id' => $user->id])}}" data-popup="tooltip" title="{{trans('page.remove')}}"><i class="icon-trash"></i></a></li>
+                                            <li><a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
+                                            <li><a href="{{ route('admin.users.delete', ['id' => $user->id]) }}" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></a></li>
                                         </ul>
                                     </td>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="9" class="text-center h2">{{trans('page.no_data')}}</td>
+                                <td colspan="9" class="text-center h2">{{ trans('page.no_data') }}</td>
                             </tr>
                         @endif
                     </tbody>
@@ -89,7 +89,7 @@
 
                 <div class="mt-10 text-center">
                     @if(count($users) > 0)
-                        {{$users->links()}}
+                        {{ $users->links() }}
                     @endif
                 </div>
             </div>
