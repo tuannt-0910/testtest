@@ -24,6 +24,7 @@ return [
         'role_required' => 'required',
         'name_cate_required' => 'required',
         'name_cate_max' => 'max',
+        'guide_category_max' => 'max',
         'testname_required' => 'required',
         'testname_max' => 'required',
         'testcode_required' => 'required',

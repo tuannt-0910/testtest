@@ -31,12 +31,16 @@
                                                 <li data-jstree='{"icon":"icon-clipboard"}'>{{ $test->name }}</li>
                                             @endforeach
 
-                                            <li id="add_item" data-jstree='{"icon":"icon-add"}' data-href="sdfsd"></li>
+                                            <li class="add_item" data-jstree='{"icon":"icon-add"}'
+                                                data-href="{{ route('tests.create', ['category_id' => $childCategory->id]) }}"
+                                            ></li>
                                         </ul>
                                     </li>
                                 @endforeach
 
-                                <li class="add_item" data-jstree='{"icon":"icon-add"}' data-href="{{ route('categories.create', ['parent_id' => $category->id]) }}"></li>
+                                <li class="add_item" data-jstree='{"icon":"icon-add"}'
+                                    data-href="{{ route('categories.create', ['parent_id' => $category->id]) }}"
+                                ></li>
                             </ul>
                         </li>
                     @endforeach

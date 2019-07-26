@@ -32,7 +32,8 @@
                     <li>
                         <a href="{{ route('tests.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.test.list_tests') }}</span></a>
                         <ul>
-                            <li><a href="#"></a></li>
+                            <li><a href="{{ route('tests.index') }}">{{ trans('page.list_tests') }}</a></li>
+                            <li><a href="{{ route('tests.create') }}">{{ trans('page.add_test') }}</a></li>
                         </ul>
                     </li>
                     <li>

@@ -41,6 +41,21 @@
                             @if(isset($errors) && $errors->has('name'))<span class="help-block">{{ $errors->first('name') }}</span>@endif
                         </div>
                     </div>
+
+                    @if($category->parent_id)
+                        <div class="form-group @if(isset($errors) && $errors->has('content_guide')){{ 'has-error has-feedback' }}@endif">
+                            <label class="control-label col-lg-2">{{ trans('page.test.content_guide') }}</label>
+                            <div class="col-lg-10">
+                                <textarea
+                                        name="content_guide"
+                                        rows="5" cols="5"
+                                        class="form-control"
+                                        placeholder="{{ trans('page.test.default_guide') }}"
+                                >{{ $category->content_guide }}</textarea>
+                                @if(isset($errors) && $errors->has('content_guide'))<span class="help-block">{{ $errors->first('content_guide') }}</span>@endif
+                            </div>
+                        </div>
+                    @endif
                 </fieldset>
 
                 <div class="text-right">
