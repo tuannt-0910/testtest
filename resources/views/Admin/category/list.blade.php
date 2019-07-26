@@ -48,7 +48,9 @@
     @foreach($categories as $category)
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <h5 class="panel-title">{{ $category->name }}</h5>
+                <h5 class="panel-title">{{ $category->name }}
+                    <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="btn btn-link" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a>
+                </h5>
 
                 <div class="heading-elements">
                     <ul class="icons-list">
