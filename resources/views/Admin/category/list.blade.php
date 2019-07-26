@@ -10,6 +10,13 @@
 @section('content')
     <div class="panel panel-flat">
         <div class="panel-heading">
+            @if(Session::has('success'))
+                <div class="alert alert-success alert-styled-left alert-arrow-left alert-bordered">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                    <span class="text-semibold">{{ Session::get('success') }}</span>
+                </div>
+            @endif
+
             <h5 class="panel-title">{{ trans('page.category.list_categories') }}</h5>
 
             <div id="html1" class="mt-10">
@@ -74,8 +81,14 @@
                                     <td>{{ $childCategory->updated_at }}</td>
                                     <td>
                                         <ul class="icons-list">
-                                            <li><a href="{{ route('admin.users.edit') }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
-                                            <li><a href="#" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></a></li>
+                                            <li><a href="{{ route('categories.edit', ['category' => $childCategory->id]) }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
+                                            <li>
+                                                <form method="POST" action="{{ route('categories.destroy', ['category' => $childCategory->id]) }}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-link" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </td>
                             @endforeach
