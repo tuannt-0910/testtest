@@ -19,12 +19,10 @@ class UserController extends Controller
      * UserController constructor.
      * @param $userRepository
      */
-    public function __construct
-    (
+    public function __construct(
         UserRepository $userRepository,
         FileRepository $fileRepository
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->fileRepository = $fileRepository;
     }
@@ -60,7 +58,8 @@ class UserController extends Controller
         ];
 
         if ($request->file('avatar')) {
-            $fileUpload = $this->fileRepository->saveSingleImage($request->file('avatar'), $request->get('orientation', 1), 'users');
+            $fileUpload = $this->fileRepository
+                ->saveSingleImage($request->file('avatar'), $request->get('orientation', 1), 'users');
             $user['image_id'] = $fileUpload->id;
         }
 

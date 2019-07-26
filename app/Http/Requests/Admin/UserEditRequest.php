@@ -34,7 +34,7 @@ class UserEditRequest extends FormRequest
             'address' => 'required|max:90',
             'phone' => 'required|max:12',
             'birthday' => 'required',
-            'avatar'=>'image|mimes:jpeg,png,jpg,gif|max:5120',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             'role' => 'required',
         ];
 

@@ -23,6 +23,16 @@ return [
         'avatar_mimes' => 'required',
         'role_required' => 'required',
         'name_cate_required' => 'required',
-        'name_cate_max' => 'max'
+        'name_cate_max' => 'max',
+        'testname_required' => 'required',
+        'testname_max' => 'required',
+        'testcode_required' => 'required',
+        'testcode_max' => 'required',
+        'content_guide_required' => 'required',
+        'content_guide_max' => 'required',
+        'execute_time_required' => 'required',
+        'execute_time_max' => 'required',
+        'total_question_required' => 'required',
+        'total_question_max' => 'required',
     ]
 ];

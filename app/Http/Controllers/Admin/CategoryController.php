@@ -17,13 +17,12 @@ class CategoryController extends Controller
 
     /**
      * CategoryController constructor.
+     * @param $categoryRepository , $fileRepository
      */
-    public function __construct
-    (
+    public function __construct(
         CategoryRepository $categoryRepository,
         FileRepository $fileRepository
-    )
-    {
+    ) {
         $this->categoryRepository = $categoryRepository;
         $this->fileRepository = $fileRepository;
     }
@@ -70,7 +69,8 @@ class CategoryController extends Controller
         $this->categoryRepository->create($newCategory);
 
         $categories = $this->categoryRepository->getTreeCategories();
-        return view('Admin.category.list', ['categories' => $categories])->with('success', Config::get('constant.success'));
+        return view('Admin.category.list', ['categories' => $categories])
+            ->with('success', Config::get('constant.success'));
     }
 
     /**
@@ -107,7 +107,8 @@ class CategoryController extends Controller
             ];
 
             if (!$category->parent_id && $request->file('image_category')) {
-                $fileUpload = $this->fileRepository->saveSingleImage($request->file('image_category'), $request->get('orientation', 1), 'category');
+                $fileUpload = $this->fileRepository
+                    ->saveSingleImage($request->file('image_category'), $request->get('orientation', 1), 'category');
                 $updateCategory['image_id'] = $fileUpload->id;
             }
 
