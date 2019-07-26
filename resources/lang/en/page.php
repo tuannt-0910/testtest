@@ -5,6 +5,8 @@ return [
     'list_users' => 'List Users',
     'edit_user' => 'Edit User',
     'add_user' => 'Add User',
+    'list_tests' => 'List Tests',
+    'add_test' => 'Add Test',
     'home' => 'Home',
     'submit' => 'Submit',
     'role' => 'Role',
