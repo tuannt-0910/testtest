@@ -70,7 +70,7 @@ class Test extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Model', 'category_id', 'id');
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 
     public function questions()
