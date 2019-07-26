@@ -11,10 +11,10 @@
 |
 */
 
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
 
-    Route::group(['prefix'=>'users'], function () {
+    Route::group(['prefix' => 'users'], function () {
         Route::get('/', 'UserController@index')->name('admin.users.index');
 
         Route::get('edit/{id?}', 'UserController@edit')->name('admin.users.edit');
@@ -24,4 +24,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
     });
 
     Route::resource('categories', 'CategoryController')->except(['show']);
+
+    Route::resource('tests', 'TestController')->except(['show']);
+    Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
 });

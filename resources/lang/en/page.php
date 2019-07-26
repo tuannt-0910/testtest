@@ -45,5 +45,22 @@ return [
         'edit_category' => 'Edit Category',
         'cate_name' => 'Category Name',
         'category_parent' => 'Parent Category',
+    ],
+    'test' => [
+        'list_tests' => 'List Tests',
+        'add_tests' => 'Add Test',
+        'edit_tests' => 'Edit Test',
+        'name_test' => 'Name',
+        'test_code' => 'Code',
+        'content_guide' => 'Guide Test',
+        'default_guide' => 'Guide',
+        'category_parent' => 'Category',
+        'created_user' => 'Author',
+        'execute_time' => 'Execute',
+        'total_question' => 'Total',
+        'free' => 'Free',
+        'publish' => 'Publish',
+        'created_at' => 'Created at',
+        'actions' => 'Actions'
     ]
 ];

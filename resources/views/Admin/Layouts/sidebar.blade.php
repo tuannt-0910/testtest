@@ -30,7 +30,7 @@
                         <a href="{{ route('categories.index') }}"><i class="icon-copy"></i> <span>{{ trans('page.category.list_categories') }}</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
+                        <a href="{{ route('tests.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.test.list_tests') }}</span></a>
                         <ul>
                             <li><a href="#"></a></li>
                         </ul>

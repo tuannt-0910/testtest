@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="{{ asset('Admin/assets/css/treejs/style.css') }}">
 
 	<script src="{{ asset('Admin/assets/js/core/libraries/jquery.min.js') }}"></script>
+	<script src="{{ asset('Admin/assets/js/datatables/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('Admin/assets/js/treejs/jstree.min.js') }}"></script>
 	<script type="text/javascript" src="{{asset(mix('js/admin.js'))}}"></script>
 </head>
@@ -59,5 +60,7 @@
 
 	</div>
 	<!-- /page container -->
+
+	@yield('script')
 </body>
 </html>
