@@ -29,6 +29,7 @@ class CategoryRequest extends FormRequest
 
         return [
             'name' => 'required|max:90',
+            'content_guide' => 'max:90',
         ];
     }
     /**
@@ -41,6 +42,7 @@ class CategoryRequest extends FormRequest
         return [
             'name.required' => Config::get('constant.input_errors.name_cate_required'),
             'name.max' => Config::get('constant.input_errors.name_cate_max'),
+            'content_guide.max' => Config::get('constant.input_errors.guide_category_max'),
         ];
     }
 
