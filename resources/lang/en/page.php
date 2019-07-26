@@ -42,6 +42,7 @@ return [
         'number_of_tests' => 'Number Tests',
         'actions' => 'Actions',
         'add_category' => 'Add Category',
+        'edit_category' => 'Edit Category',
         'cate_name' => 'Category Name',
         'category_parent' => 'Parent Category',
     ]

@@ -60,7 +60,7 @@ class Category extends Model
 
     public function file()
     {
-        return $this->hasOne('App\Models\Files', 'image_id', 'id');
+        return $this->hasOne('App\Models\File', 'id', 'image_id');
     }
 
     public function tests()

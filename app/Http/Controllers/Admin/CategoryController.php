@@ -6,20 +6,26 @@ use App\Http\Requests\Admin\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\CategoryRepositoryInterface as CategoryRepository;
+use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
+use Config;
 
 class CategoryController extends Controller
 {
     protected $categoryRepository;
+
+    protected $fileRepository;
 
     /**
      * CategoryController constructor.
      */
     public function __construct
     (
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        FileRepository $fileRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
+        $this->fileRepository = $fileRepository;
     }
 
     /**
@@ -64,7 +70,7 @@ class CategoryController extends Controller
         $this->categoryRepository->create($newCategory);
 
         $categories = $this->categoryRepository->getTreeCategories();
-        return view('Admin.category.list', ['categories' => $categories]);
+        return view('Admin.category.list', ['categories' => $categories])->with('success', Config::get('constant.success'));
     }
 
     /**
@@ -91,9 +97,25 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = $this->categoryRepository->find($id);
+
+        if ($category) {
+            $updateCategory = [
+                'name' => $request->name
+            ];
+
+            if (!$category->parent_id && $request->file('image_category')) {
+                $fileUpload = $this->fileRepository->saveSingleImage($request->file('image_category'), $request->get('orientation', 1), 'category');
+                $updateCategory['image_id'] = $fileUpload->id;
+            }
+
+            $this->categoryRepository->update($id, $updateCategory);
+            return redirect()->route('categories.index')->with('success', Config::get('constant.success'));
+        } else {
+            return redirect()->route('categories.index');
+        }
     }
 
     /**
@@ -104,6 +126,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = $this->categoryRepository->find($id);
+
+        if ($category && $category->parent_id) {
+            $this->categoryRepository->delete($id);
+            return redirect()->route('categories.index')->with('success', Config::get('constant.success'));
+        } else {
+            return redirect()->route('categories.index');
+        }
     }
 }

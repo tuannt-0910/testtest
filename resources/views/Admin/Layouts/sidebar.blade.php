@@ -27,10 +27,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-copy"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#" id="layout1"></a></li>
-                        </ul>
+                        <a href="{{ route('categories.index') }}"><i class="icon-copy"></i> <span>{{ trans('page.category.list_categories') }}</span></a>
                     </li>
                     <li>
                         <a href="#"><i class="icon-droplet2"></i> <span></span></a>
