@@ -27,17 +27,24 @@ class UserEditRequest extends FormRequest
     {
         Session::flash('user', $this->all());
 
-        return [
+        $rules = [
             'username' => 'required|max:90',
             'firstname' => 'required|max:90',
             'lastname' => 'required|max:90',
             'address' => 'required|max:90',
             'phone' => 'required|max:12',
-            'email' => 'required|email|unique:users,email|max:90',
             'birthday' => 'required',
             'avatar'=>'image|mimes:jpeg,png,jpg,gif|max:5120',
             'role' => 'required',
         ];
+
+        if ($this->id) {
+            $rules['email'] = 'required|email|unique:users,email,' . $this->id . ',id|max:90';
+        } else {
+            $rules['email'] = 'required|email|unique:users,email|max:90';
+        }
+
+        return $rules;
     }
 
     /**
