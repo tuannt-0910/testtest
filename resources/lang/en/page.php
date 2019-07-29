@@ -64,5 +64,22 @@ return [
         'publish' => 'Publish',
         'created_at' => 'Created at',
         'actions' => 'Actions'
+    ],
+    'loginAdmin' => [
+        'login_Academics' => 'Admin Login - Academics',
+        'login_to_account' => 'Login to your account',
+        'email' => 'Email',
+        'password' => 'Password',
+        'forgot_password' => 'Forgot password?',
+        'login' => 'Login',
+        'login_failure' => 'login failure'
+    ],
+    'firstLoginAdmin' => [
+        'first_login_Academics' => 'First Login - Academics',
+        'change_pass_first' => 'Change password the first time',
+        'old_password' => 'Old Password',
+        'new_password' => 'New Password',
+        'confirm_password' => 'Confirm Password',
+        'change_password' => 'Change Password'
     ]
 ];

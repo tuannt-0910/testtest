@@ -35,5 +35,18 @@ return [
         'execute_time_max' => 'required',
         'total_question_required' => 'required',
         'total_question_max' => 'required',
+        'old_password_required' => 'required',
+        'old_password_wrong' => 'old password wrong',
+        'old_password_min' => 'required',
+        'old_password_max' => 'required',
+        'new_password_required' => 'required',
+        'new_password_max' => 'required',
+        'new_password_min' => 'required',
+        'confirm_password_required' => 'required',
+        'confirm_password_same' => 'not same',
+        'email_exists' => 'not exists',
+        'password_required' => 'required',
+        'password_max' => 'required',
+        'email_password_wrong' => 'account or password wrong',
     ]
 ];
