@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FirstLoginRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use App\Repositories\Contracts\UserRepositoryInterface as UserRepository;
 use Auth;
 use Config;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -34,18 +31,14 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/admin';
 
-    protected $userRepository;
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(
-        UserRepository $userRepository
-    ) {
+    public function __construct()
+    {
         $this->middleware('guest')->except('logout');
-        $this->userRepository = $userRepository;
     }
 
     public function getLoginAdmin()
@@ -73,27 +66,5 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route('home');
-    }
-
-    public function getFirstLoginAdmin()
-    {
-        return view('Admin.firstLogin');
-    }
-
-    public function postFirstLogin(FirstLoginRequest $request)
-    {
-        $user = Auth()->user();
-        if (!(Hash::check($request->old_password, $user->password))) {
-            return redirect()->back()
-                ->withErrors(['old_password' => Config::get('constant.input_errors.old_password_wrong')]);
-        }
-
-        $editUser = [
-            'password' => bcrypt($request->new_password),
-            'active' => 1
-        ];
-
-        $this->userRepository->update($user->id, $editUser);
-        return redirect()->route('admin.home');
     }
 }
