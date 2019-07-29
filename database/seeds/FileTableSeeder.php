@@ -17,24 +17,31 @@ class FileTableSeeder extends Seeder
         $data = [
             [
                 'name' => 'abc1.jpg',
-                'base_folder' => 'abc.jpg',
+                'base_folder' => '/uploads',
                 'type' => 'image',
                 'purpose' => 'image',
                 'extension' => 'jpg',
             ],
             [
                 'name' => 'abc2.jpg',
-                'base_folder' => 'abc.jpg',
+                'base_folder' => '/uploads',
                 'type' => 'image',
                 'purpose' => 'image',
                 'extension' => 'jpg',
             ],
             [
                 'name' => 'abc3.jpg',
-                'base_folder' => 'abc.jpg',
+                'base_folder' => '/uploads',
                 'type' => 'image',
                 'purpose' => 'image',
                 'extension' => 'jpg',
+            ],
+            [
+                'name' => 'audio.mp3',
+                'base_folder' => '/uploads',
+                'type' => 'audio',
+                'purpose' => 'audio',
+                'extension' => 'mp3',
             ],
         ];
         foreach ($data as $item) {

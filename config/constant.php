@@ -48,5 +48,10 @@ return [
         'password_required' => 'required',
         'password_max' => 'required',
         'email_password_wrong' => 'account or password wrong',
+    ],
+    'color' => [
+        'text' => 'label label-default',
+        'image' => 'label label-success',
+        'audio' => 'label label-primary'
     ]
 ];

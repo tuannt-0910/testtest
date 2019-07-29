@@ -23,7 +23,7 @@ class FileRepository extends EloquentRepository implements FileRepositoryInterfa
     {
         $imageName = $photo->getClientOriginalName();
         $baseFolder = env('IMAGE_UPLOAD_PATH') . '/public/uploads/' . $category;
-        if(!file_exists($baseFolder)){
+        if (!file_exists($baseFolder)) {
             mkdir($baseFolder, 755, true);
         }
 
@@ -48,7 +48,7 @@ class FileRepository extends EloquentRepository implements FileRepositoryInterfa
 
         // xử lý lưu ảnh gốc vào server
         $imageName = date('Ymd_His') . '_' . $imageName;
-        $imageRaw->save($baseFolder . '/' . $imageName , 90);
+        $imageRaw->save($baseFolder . '/' . $imageName, 90);
         $arrData = [
             'name' => $imageName,
             'base_folder' => 'uploads/' . $category

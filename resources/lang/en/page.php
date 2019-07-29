@@ -81,5 +81,14 @@ return [
         'new_password' => 'New Password',
         'confirm_password' => 'Confirm Password',
         'change_password' => 'Change Password'
+    ],
+    'question' => [
+        'questions' => 'Questions',
+        'list_questions' => 'List Questions',
+        'add_question' => 'Add Question',
+        'code' => 'Code',
+        'content' => 'Content',
+        'suggest' => 'Suggest',
+        'type' => 'Type',
     ]
 ];

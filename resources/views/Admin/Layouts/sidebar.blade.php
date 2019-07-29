@@ -37,9 +37,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
+                        <a href="#"><i class="icon-droplet2"></i> <span>{{ trans('page.question.questions') }}</span></a>
                         <ul>
-                            <li><a href="#"></a></li>
+                            <li><a href="{{ route('questions.index') }}">{{ trans('page.question.list_questions') }}</a></li>
+                            <li><a href="{{ route('questions.index') }}">{{ trans('page.question.add_question') }}</a></li>
                         </ul>
                     </li>
                     <li>
