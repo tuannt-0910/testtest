@@ -25,10 +25,6 @@
 
                 <ul class="dropdown-menu">
                     <li><a class="deutsch"><img src="{{asset('Admin/assets/images/flags/de.png')}}" alt=""> {{trans('navbar.Deutsch')}}</a></li>
-                    <li><a class="ukrainian"><img src="{{asset('Admin/assets/images/flags/ua.png')}}" alt=""> {{trans('navbar.Українська')}}</a></li>
-                    <li><a class="english"><img src="{{asset('Admin/assets/images/flags/gb.png')}}" alt=""> {{trans('navbar.English')}}</a></li>
-                    <li><a class="espana"><img src="{{asset('Admin/assets/images/flags/es.png')}}" alt=""> {{trans('navbar.España')}}</a></li>
-                    <li><a class="russian"><img src="{{asset('Admin/assets/images/flags/ru.png')}}" alt=""> {{trans('navbar.Русский')}}</a></li>
                 </ul>
             </li>
 
@@ -81,7 +77,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="#"><i class="icon-user-plus"></i> {{trans('navbar.my_profile')}}</a></li>
                     <li><a href="#"><i class="icon-cog5"></i> {{trans('navbar.account_settings')}}</a></li>
-                    <li><a href="#"><i class="icon-switch2"></i> {{trans('navbar.logout')}}</a></li>
+                    <li><a href="{{ route('logout') }}"><i class="icon-switch2"></i> {{trans('navbar.logout')}}</a></li>
                 </ul>
             </li>
         </ul>
