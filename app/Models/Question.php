@@ -51,7 +51,7 @@ class Question extends Model
 
     public function file()
     {
-        return $this->hasOne('App\Models\File', 'file_id', 'id');
+        return $this->hasOne('App\Models\File', 'id', 'file_id');
     }
 
     public function answers()

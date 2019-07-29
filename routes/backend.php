@@ -37,5 +37,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
 
     Route::resource('questions', 'QuestionController');
-    Route::get('getQuestions', 'TestController@getQuestions')->name('admin.questions.getQuestions');
+    Route::get('getQuestions', 'QuestionController@getQuestions')->name('admin.questions.getQuestions');
 });
