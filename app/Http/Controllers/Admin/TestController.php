@@ -9,6 +9,7 @@ use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
 use App\Repositories\Contracts\CategoryRepositoryInterface as CategoryRepository;
 use Yajra\Datatables\Datatables;
 use Config;
+use Auth;
 
 class TestController extends Controller
 {
@@ -102,7 +103,7 @@ class TestController extends Controller
             'content_guide' => $request->content_guide,
             'execute_time' => $request->execute_time,
             'total_question' => $request->total_question,
-            'created_user_id' => 1,
+            'created_user_id' => Auth::user()->id,
             'category_id' => $request->category_id,
             'free' => isset($request->free) ? 1 : 0,
             'publish' => isset($request->publish) ? 1 : 0
@@ -166,7 +167,11 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        $this->testRepository->delete($id);
-        return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+        $test = $this->testRepository->find($id);
+        if ($test) {
+            $this->testRepository->delete($id);
+            return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+        }
+        return redirect()->route('tests.index');
     }
 }

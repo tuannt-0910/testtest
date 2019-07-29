@@ -45,5 +45,5 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{ asset('Admin/assets/js/list_user.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('Admin/assets/js/list_test.js') }}"></script>
 @endsection
