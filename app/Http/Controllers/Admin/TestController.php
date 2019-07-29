@@ -44,6 +44,12 @@ class TestController extends Controller
         $tests = $this->testRepository->getAllTest();
 
         return Datatables::of($tests)
+            ->editColumn('free', function ($test) {
+                return $test->free ? 'x' : '';
+            })
+            ->editColumn('publish', function ($test) {
+                return $test->publish ? 'x' : '';
+            })
             ->addColumn('action', function ($test) {
                 $data = '<ul class="icons-list">' .
                             '<li>' .

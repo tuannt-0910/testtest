@@ -11,6 +11,14 @@
 |
 */
 
+Route::get('admin/login', 'Auth\LoginController@getLoginAdmin')->name('admin.getLogin');
+Route::post('admin/login', 'Auth\LoginController@login')->name('admin.postLogin');
+
+Route::get('admin/first-login', 'Auth\LoginController@getFirstLoginAdmin')->name('admin.getFirstLogin');
+Route::post('admin/first-login', 'Auth\LoginController@postFirstLogin')->name('admin.postFirstLogin');
+
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
 
@@ -27,4 +35,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::resource('tests', 'TestController')->except(['show']);
     Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
+
+    Route::resource('questions', 'QuestionController');
+    Route::get('getQuestions', 'TestController@getQuestions')->name('admin.questions.getQuestions');
 });

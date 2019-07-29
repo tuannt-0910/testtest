@@ -32,6 +32,7 @@ class CategoryRequest extends FormRequest
             'content_guide' => 'max:90',
         ];
     }
+
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -45,5 +46,4 @@ class CategoryRequest extends FormRequest
             'content_guide.max' => Config::get('constant.input_errors.guide_category_max'),
         ];
     }
-
 }
