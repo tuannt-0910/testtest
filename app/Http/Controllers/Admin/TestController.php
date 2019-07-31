@@ -45,6 +45,12 @@ class TestController extends Controller
         $tests = $this->testRepository->getAllTest();
 
         return Datatables::of($tests)
+            ->editColumn('name', function ($test) {
+                return '<a href="' . route('tests.show', ['id' => $test->id]) . '">' . $test->name . '</a>';
+            })
+            ->editColumn('code', function ($test) {
+                return '<a href="' . route('tests.show', ['id' => $test->id]) . '">' . $test->code . '</a>';
+            })
             ->editColumn('free', function ($test) {
                 return $test->free ? 'x' : '';
             })
@@ -71,6 +77,7 @@ class TestController extends Controller
                         '</ul>';
                 return $data;
             })
+            ->rawColumns(['name', 'code', 'action'])
             ->make(true);
     }
 
@@ -120,7 +127,9 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        $test = $this->testRepository->find($id);
+        $questions = $this->testRepository->getQuestionsByTestId($id);
+        return view('Admin.test.show', ['test' => $test, 'questions' => $questions]);
     }
 
     /**
