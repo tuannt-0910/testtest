@@ -33,7 +33,10 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
         return Question::with([
             'tests' => function ($query) use ($id) {
                 $query->where('tests.id', $id);
-            }
+            },
+            'file',
+            'answers.file',
+            'comments'
         ])->whereHas('tests', function ($query) use ($id) {
             $query->where('tests.id', $id);
         })->paginate(config('constant.limit_questions_test'));

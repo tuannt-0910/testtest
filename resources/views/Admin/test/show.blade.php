@@ -26,7 +26,8 @@
                 @foreach($questions as $key => $question)
                     <div class="form-group">
                         <div class="alert alert-info mb-10 pb-5 pl-10">
-                            <label class="text-semibold">{{ trans('page.test.question') }} {{ $key + 1 }}: {{ $question->content }}</label>
+                            <a href="{{ route('questions.edit', ['id' => $question->id]) }}" type="button" class="close"><i class="icon-pencil7"></i></a>
+                            <label class="text-semibold">{{ trans('page.test.question') }} {{ $key + 1 }} - {{ $question->code }}: {{ $question->content }}</label>
                         </div>
 
                         <div class="row">

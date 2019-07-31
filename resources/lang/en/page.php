@@ -85,12 +85,17 @@ return [
         'change_password' => 'Change Password'
     ],
     'question' => [
+        'edit_question' => 'Edit question',
         'questions' => 'Questions',
         'list_questions' => 'List Questions',
         'add_question' => 'Add Question',
+        'content_default' => 'Chon dap an dung nhat',
         'code' => 'Code',
         'content' => 'Content',
         'suggest' => 'Suggest',
         'type' => 'Type',
+        'question_type' => 'Question Type',
+        'image' => 'Image',
+        'audio' => 'Audio',
     ]
 ];

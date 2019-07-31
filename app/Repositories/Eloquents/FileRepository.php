@@ -47,10 +47,29 @@ class FileRepository extends EloquentRepository implements FileRepositoryInterfa
         $imageRaw->rotate($deg);
 
         // xử lý lưu ảnh gốc vào server
-        $imageName = date('Ymd_His') . '_' . $imageName;
+        $imageName = time() . '_' . $imageName;
         $imageRaw->save($baseFolder . '/' . $imageName, 90);
         $arrData = [
             'name' => $imageName,
+            'base_folder' => 'uploads/' . $category
+        ];
+
+        $file = $this->create($arrData);
+        return $file;
+    }
+
+    public function saveSingleAudio($audio, $category)
+    {
+        $audioName = $audio->getClientOriginalName();
+        $baseFolder = env('IMAGE_UPLOAD_PATH') . '/public/uploads/' . $category;
+        if (!file_exists($baseFolder)) {
+            mkdir($baseFolder, 755, true);
+        }
+
+        $audioName = time() . '_' . $audioName;
+        $audio->move($baseFolder, $audioName);
+        $arrData = [
+            'name' => $audioName,
             'base_folder' => 'uploads/' . $category
         ];
 

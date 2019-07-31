@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\QuestionRepositoryInterface as QuestionRepository;
+use App\Repositories\Contracts\AnswerRepositoryInterface as AnswerRepository;
+use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
 use Yajra\Datatables\Datatables;
 use Config;
 
@@ -12,14 +14,22 @@ class QuestionController extends Controller
 {
     protected $questionRepository;
 
+    protected $fileRepository;
+
+    protected $answerRepository;
+
     /**
      * QuestionController constructor.
      * @param $questionRepository
      */
     public function __construct(
-        QuestionRepository $questionRepository
+        QuestionRepository $questionRepository,
+        FileRepository $fileRepository,
+        AnswerRepository $answerRepository
     ) {
         $this->questionRepository = $questionRepository;
+        $this->fileRepository = $fileRepository;
+        $this->answerRepository = $answerRepository;
     }
 
 
@@ -98,7 +108,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('Admin.question.edit');
+        return view('Admin.question.add');
     }
 
     /**
@@ -109,7 +119,23 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = $this->saveQuestion($request);
+
+        for ($i = 1; $i <= 4; $i++) {
+            if ($request->input('answer_content_' . $i) || $request->input('answer_file_' . $i)) {
+                $this->saveAnswer(
+                    $request,
+                    $question->id,
+                    'answer_content_' . $i,
+                    'answer_file_' . $i,
+                    $i == $request->input('key') ? 1 : 0,
+                    $i <= count($question->answers) ? $question->answers[$i - 1]->id : null
+                );
+            }
+        }
+
+        return redirect()->route('questions.show', ['id' => $question->id])
+            ->with('success', Config::get('constant.success'));
     }
 
     /**
@@ -120,7 +146,12 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = $this->questionRepository->find($id);
+        if ($question) {
+            return view('admin.test.question', ['question' => $question]);
+        } else {
+            return redirect()->route('questions.index');
+        }
     }
 
     /**
@@ -131,7 +162,12 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        return view('Admin.question.edit');
+        $question = $this->questionRepository->find($id);
+        if ($question) {
+            return view('Admin.question.edit', ['question' => $question]);
+        } else {
+            return redirect()->route('questions.index');
+        }
     }
 
     /**
@@ -143,7 +179,85 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = $this->questionRepository->find($id);
+        if ($question) {
+            $this->saveQuestion($request, $id);
+
+            for ($i = 1; $i <= 4; $i++) {
+                if ($request->input('answer_content_' . $i) || $request->input('answer_file_' . $i)) {
+                    $this->saveAnswer(
+                        $request,
+                        $id,
+                        'answer_content_' . $i,
+                        'answer_file_' . $i,
+                        $i == $request->input('key') ? 1 : 0,
+                        $i <= count($question->answers) ? $question->answers[$i - 1]->id : null
+                    );
+                } elseif ($i <= count($question->answers)) {
+                    $this->answerRepository->delete($question->answers[$i - 1]->id);
+                }
+            }
+
+            return redirect()->route('questions.show', ['id' => $id])->with('success', Config::get('constant.success'));
+        } else {
+            return redirect()->route('questions.index');
+        }
+    }
+
+    public function saveQuestion($request, $id = null)
+    {
+        $question_type = 'text';
+        switch ($request->input('question_type')) {
+            case 2:
+                $question_type = 'image';
+                $fileUpload = $this->fileRepository
+                    ->saveSingleImage($request->file('image'), $request->get('orientation', 1), 'question/' . $id);
+                break;
+            case 3:
+                $question_type = 'audio';
+                $fileUpload = $this->fileRepository
+                    ->saveSingleAudio($request->file('image'), 'question/' . $id);
+                break;
+        }
+
+        $question = [
+            'code' => $request->input('code'),
+            'content_suggest' => $request->input('content_suggest'),
+            'content' => $request->input('content'),
+            'question_type' => $question_type,
+            'file_id' => isset($fileUpload) ? $fileUpload->id : null
+        ];
+
+        if ($id) {
+            return $this->questionRepository->update($id, $question);
+        } else {
+            return $this->questionRepository->create($question);
+        }
+    }
+
+    public function saveAnswer($request, $question_id, $inputContentName, $inputFileName, $correct_answer, $id = null)
+    {
+        if ($request->file($inputFileName)) {
+            $fileUpload = $this->fileRepository
+                ->saveSingleImage(
+                    $request->file($inputFileName),
+                    $request->get('orientation', 1),
+                    'question/' . $question_id
+                );
+        }
+
+        $answer = [
+            'content' => $request->input($inputContentName),
+            'question_id' => $question_id,
+            'file_id' => isset($fileUpload) ? $fileUpload->id : null,
+            'correct_answer' => $correct_answer
+        ];
+
+        if ($id) {
+            $this->answerRepository->update($id, $answer);
+        } else {
+            $this->answerRepository->create($answer);
+        }
     }
 
     /**
