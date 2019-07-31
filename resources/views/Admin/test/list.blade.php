@@ -1,6 +1,6 @@
 @extends('Admin.master')
 
-@section('title', trans('page.list_users'))
+@section('title', trans('page.test.list_tests'))
 
 @section('progress_bar')
     <li><a href="{{ route('admin.home') }}"><i class="icon-home2 position-left"></i> {{ trans('page.home') }}</a></li>

@@ -55,7 +55,7 @@
                     </thead>
                     <tbody>
                         @if(count($users) > 0)
-                            @foreach($users as $key=>$user)
+                            @foreach($users as $key => $user)
                                 <tr>
                                     <td>{{ ((app('request')->page ?? 1) - 1) * $limit + $key + 1 }}</td>
                                     <td>

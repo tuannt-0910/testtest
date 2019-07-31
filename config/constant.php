@@ -2,6 +2,8 @@
 
 return [
     'paginate' => 10,
+    'limit_questions' => 10,
+    'limit_questions_test' => 20,
     'success' => 'Action success',
     'input_errors' => [
         'username_required' => 'required',

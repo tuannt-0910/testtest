@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::resource('categories', 'CategoryController')->except(['show']);
 
-    Route::resource('tests', 'TestController')->except(['show']);
+    Route::resource('tests', 'TestController');
     Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
 
     Route::resource('questions', 'QuestionController');
