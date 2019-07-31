@@ -63,7 +63,9 @@ return [
         'free' => 'Free',
         'publish' => 'Publish',
         'created_at' => 'Created at',
-        'actions' => 'Actions'
+        'actions' => 'Actions',
+        'question' => 'Question',
+        'no_questions' => 'No Questions'
     ],
     'loginAdmin' => [
         'login_Academics' => 'Admin Login - Academics',
