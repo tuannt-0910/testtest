@@ -51,6 +51,7 @@ class QuestionController extends Controller
             ->editColumn('code', function ($question) {
                 $code = '<a href="' . route('questions.show', ['id' => $question->id]) . '">' .
                     $question->code . '</a>';
+
                 return $code;
             })
             ->editColumn('content', function ($question) {
@@ -64,6 +65,7 @@ class QuestionController extends Controller
                         $content .= '<audio src="' . $url_file . '" controls />';
                     }
                 }
+
                 return $content;
             })
             ->editColumn('question_type', function ($question) {
@@ -80,6 +82,7 @@ class QuestionController extends Controller
                         break;
                 }
                 $type .= $question->question_type . '</span>';
+
                 return $type;
             })
             ->addColumn('action', function ($question) {
@@ -100,6 +103,7 @@ class QuestionController extends Controller
                                 '</form>' .
                             '</li>' .
                         '</ul>';
+
                 return $data;
             })
             ->rawColumns(['code', 'content', 'action', 'question_type'])
@@ -230,7 +234,7 @@ class QuestionController extends Controller
             'content_suggest' => $request->input('content_suggest'),
             'content' => $request->input('content'),
             'question_type' => $question_type,
-            'file_id' => isset($fileUpload) ? $fileUpload->id : null
+            'file_id' => isset($fileUpload) ? $fileUpload->id : null,
         ];
 
         if ($id) {
@@ -255,7 +259,7 @@ class QuestionController extends Controller
             'content' => $request->input($inputContentName),
             'question_id' => $question_id,
             'file_id' => isset($fileUpload) ? $fileUpload->id : null,
-            'correct_answer' => $correct_answer
+            'correct_answer' => $correct_answer,
         ];
 
         if ($id) {
@@ -276,8 +280,10 @@ class QuestionController extends Controller
         $question = $this->questionRepository->find($id);
         if ($question) {
             $this->questionRepository->delete($id);
+
             return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
         }
+
         return redirect()->route('questions.index');
     }
 }

@@ -33,8 +33,8 @@ return [
                 'address' => 'Address',
                 'role' => 'Role',
                 'actions' => 'Actions',
-            ]
-        ]
+            ],
+        ],
     ],
     'category' => [
         'categories' => 'Categories',
@@ -103,5 +103,14 @@ return [
         'no_comments' => 'No Comments',
         'default_text_comment' => '... a message',
         'send' => 'Send',
+    ],
+    'comment' => [
+        'comments' => 'Comments',
+        'list_comments' => 'List comments',
+        'question_code' => 'Question code',
+        'author' => 'Author',
+        'question_content' => 'Question content',
+        'content' => 'Command',
+        'created_at' => 'Time',
     ],
 ];

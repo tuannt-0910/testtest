@@ -35,7 +35,7 @@ class QuestionImport implements OnEachRow
             'code' => $row[1],
             'question_type' => $row[2],
             'content_suggest' => $row[3],
-            'content' => $row[4]
+            'content' => $row[4],
         ];
         $question = $this->questionRepository->create($question);
 
@@ -44,7 +44,7 @@ class QuestionImport implements OnEachRow
                 'question_id' => $question->id,
                 'content' => $row[$index],
                 'answer_type' => 'text',
-                'correct_answer' => (4 + $row[9]) == $index ? 1 : 0
+                'correct_answer' => (4 + $row[9]) == $index ? 1 : 0,
             ];
             $this->answerRepository->create($answer);
         }

@@ -27,7 +27,7 @@ class FirstLoginRequest extends FormRequest
         return [
             'old_password' => 'required',
             'new_password' => 'required|min:6|max:25',
-            'confirm_password' => 'required|same:new_password'
+            'confirm_password' => 'required|same:new_password',
         ];
     }
 

@@ -2,5 +2,5 @@
 
 return [
     'Main' => 'Main',
-    'Dashboard' => 'Dashboard'
+    'Dashboard' => 'Dashboard',
 ];

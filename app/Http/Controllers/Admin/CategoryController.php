@@ -35,6 +35,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->getTreeCategories();
+
         return view('Admin.category.list', ['categories' => $categories]);
     }
 
@@ -64,11 +65,12 @@ class CategoryController extends Controller
     {
         $newCategory = [
             'name' => $request->name,
-            'parent_id' => $request->parent_id
+            'parent_id' => $request->parent_id,
         ];
         $this->categoryRepository->create($newCategory);
 
         $categories = $this->categoryRepository->getTreeCategories();
+
         return view('Admin.category.list', ['categories' => $categories])
             ->with('success', Config::get('constant.success'));
     }
@@ -113,6 +115,7 @@ class CategoryController extends Controller
             }
 
             $this->categoryRepository->update($id, $updateCategory);
+
             return redirect()->route('categories.index')->with('success', Config::get('constant.success'));
         } else {
             return redirect()->route('categories.index');
@@ -131,6 +134,7 @@ class CategoryController extends Controller
 
         if ($category && $category->parent_id) {
             $this->categoryRepository->delete($id);
+
             return redirect()->route('categories.index')->with('success', Config::get('constant.success'));
         } else {
             return redirect()->route('categories.index');

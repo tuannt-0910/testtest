@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\CommentRepositoryInterface as CommentRepository;
 use Auth;
+use Yajra\Datatables\Datatables;
 
 class CommentController extends Controller
 {
@@ -21,6 +22,42 @@ class CommentController extends Controller
         $this->commentRepository = $commentRepository;
     }
 
+    public function index()
+    {
+        return view('Admin.comment.index');
+    }
+
+    public function getComments()
+    {
+        $comments = $this->commentRepository->getAllComments();
+
+        return Datatables::of($comments)
+            ->editColumn('code', function ($comment) {
+                return '<a href="' . route('questions.show', ['id' => $comment->question->id]) . '">' .
+                    $comment->question->code . '</a>';
+            })
+            ->addColumn('author', function ($comment) {
+                return $comment->user->username;
+            })
+            ->addColumn('question_content', function ($comment) {
+                $content = $comment->question->content;
+
+                if ($comment->question->file) {
+                    $url_file = asset($comment->question->file->base_folder . '/' . $comment->question->file->name);
+                    if ($comment->question->file->type == 'image') {
+                        $content .= '<img class="img-md" src="' . $url_file . '" alt="' .
+                            $comment->question->file->name . '"/>';
+                    } elseif ($comment->question->file->type == 'audio') {
+                        $content .= '<audio src="' . $url_file . '" controls />';
+                    }
+                }
+
+                return $content;
+            })
+            ->rawColumns(['name', 'code', 'question_content'])
+            ->make(true);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -32,7 +69,7 @@ class CommentController extends Controller
         $comment = [
             'content' => $request->input('content'),
             'user_id' => Auth::user()->id,
-            'question_id' => $request->input('question_id')
+            'question_id' => $request->input('question_id'),
         ];
         $comment = $this->commentRepository->create($comment)->load(['user']);
         $data = [

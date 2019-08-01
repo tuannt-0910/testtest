@@ -31,6 +31,7 @@ class UserController extends Controller
     {
         $limit = Config::get('constant.paginate');
         $users = $this->userRepository->getAllUserByKeyword($request->keyword);
+
         return view('Admin.user.list', ['users' => $users, 'limit' => $limit]);
     }
 
@@ -41,6 +42,7 @@ class UserController extends Controller
         if ($id) {
             $user = $this->userRepository->getUserById($id);
         }
+
         return view('Admin.user.edit', ['user' => $user, 'roles' => $roles]);
     }
 
@@ -54,7 +56,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'email' => $request->email,
-            'role_id' => $request->role
+            'role_id' => $request->role,
         ];
 
         if ($request->file('avatar')) {
@@ -75,6 +77,7 @@ class UserController extends Controller
     public function delete($id)
     {
         $this->userRepository->delete($id);
+
         return redirect()->route('admin.users.index')->with('success', Config::get('constant.success'));
     }
 }

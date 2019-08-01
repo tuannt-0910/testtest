@@ -44,10 +44,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
+                        <a href="{{ route('comments.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.comment.comments') }}</span></a>
                     </li>
                     <li>
                         <a href="#"><i class="icon-droplet2"></i> <span></span></a>
