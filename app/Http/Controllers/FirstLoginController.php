@@ -44,6 +44,7 @@ class FirstLoginController extends Controller
         ];
 
         $this->userRepository->update($user->id, $editUser);
+
         return redirect()->route('admin.home');
     }
 }

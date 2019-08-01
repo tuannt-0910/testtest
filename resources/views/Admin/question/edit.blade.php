@@ -108,3 +108,7 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script type="text/javascript" src="{{ asset('Admin/assets/js/add_question.js') }}"></script>
+@endsection

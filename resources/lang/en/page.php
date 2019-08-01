@@ -32,7 +32,7 @@ return [
                 'phone' => 'Phone',
                 'address' => 'Address',
                 'role' => 'Role',
-                'actions' => 'Actions'
+                'actions' => 'Actions',
             ]
         ]
     ],
@@ -65,7 +65,7 @@ return [
         'created_at' => 'Created at',
         'actions' => 'Actions',
         'question' => 'Question',
-        'no_questions' => 'No Questions'
+        'no_questions' => 'No Questions',
     ],
     'loginAdmin' => [
         'login_Academics' => 'Admin Login - Academics',
@@ -74,7 +74,7 @@ return [
         'password' => 'Password',
         'forgot_password' => 'Forgot password?',
         'login' => 'Login',
-        'login_failure' => 'login failure'
+        'login_failure' => 'login failure',
     ],
     'firstLoginAdmin' => [
         'first_login_Academics' => 'First Login - Academics',
@@ -82,13 +82,14 @@ return [
         'old_password' => 'Old Password',
         'new_password' => 'New Password',
         'confirm_password' => 'Confirm Password',
-        'change_password' => 'Change Password'
+        'change_password' => 'Change Password',
     ],
     'question' => [
         'edit_question' => 'Edit question',
         'questions' => 'Questions',
         'list_questions' => 'List Questions',
         'add_question' => 'Add Question',
+        'show_question' => 'Show',
         'content_default' => 'Chon dap an dung nhat',
         'code' => 'Code',
         'content' => 'Content',
@@ -97,5 +98,10 @@ return [
         'question_type' => 'Question Type',
         'image' => 'Image',
         'audio' => 'Audio',
-    ]
+        'comments' => 'Comments',
+        'close' => 'Close',
+        'no_comments' => 'No Comments',
+        'default_text_comment' => '... a message',
+        'send' => 'Send',
+    ],
 ];

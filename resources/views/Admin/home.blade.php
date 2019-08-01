@@ -78,21 +78,21 @@
                         <div class="col-md-4">
                             <div class="content-group">
                                 <h6 class="text-semibold no-margin"><i class="icon-clipboard3 position-left text-slate"></i> </h6>
-                                <span class="text-muted text-size-small">{{trans('home.this_week')}}</span>
+                                <span class="text-muted text-size-small">{{ trans('home.this_week') }}</span>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="content-group">
                                 <h6 class="text-semibold no-margin"><i class="icon-calendar3 position-left text-slate"></i> </h6>
-                                <span class="text-muted text-size-small">{{trans('home.this_month')}}</span>
+                                <span class="text-muted text-size-small">{{ trans('home.this_month') }}</span>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="content-group">
                                 <h6 class="text-semibold no-margin"><i class="icon-comments position-left text-slate"></i> </h6>
-                                <span class="text-muted text-size-small">{{trans('home.all')}}</span>
+                                <span class="text-muted text-size-small">{{ trans('home.all') }}</span>
                             </div>
                         </div>
                     </div>
