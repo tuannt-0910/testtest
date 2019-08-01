@@ -3,6 +3,14 @@
 return [
     'paginate' => 10,
     'limit_questions' => 10,
+    'icon' => [
+        'link_logo' => asset('Admin/assets/images/logo_light.png'),
+        'link_country_gb' => asset('Admin/assets/images/flags/gb.png'),
+        'link_country_de' => asset('Admin/assets/images/flags/de.png'),
+        'link_country_placeholder' => asset('Admin/assets/images/placeholder.jpg'),
+    ],
+    'active' => 1,
+    'not_active' => 0,
     'limit_questions_test' => 20,
     'success' => 'Action success',
     'input_errors' => [
@@ -54,6 +62,6 @@ return [
     'color' => [
         'text' => 'label label-default',
         'image' => 'label label-success',
-        'audio' => 'label label-primary'
+        'audio' => 'label label-primary',
     ]
 ];

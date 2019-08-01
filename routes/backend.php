@@ -38,4 +38,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::resource('questions', 'QuestionController');
     Route::get('getQuestions', 'QuestionController@getQuestions')->name('admin.questions.getQuestions');
+
+    Route::resource('comments', 'CommentController')->except(['index', 'show', 'edit', 'update', 'create']);
 });

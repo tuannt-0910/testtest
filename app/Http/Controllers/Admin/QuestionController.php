@@ -48,6 +48,11 @@ class QuestionController extends Controller
         $questions = $this->questionRepository->getAllQuestions();
 
         return Datatables::of($questions)
+            ->editColumn('code', function ($question) {
+                $code = '<a href="' . route('questions.show', ['id' => $question->id]) . '">' .
+                    $question->code . '</a>';
+                return $code;
+            })
             ->editColumn('content', function ($question) {
                 $content = $question->content;
 
@@ -97,7 +102,7 @@ class QuestionController extends Controller
                         '</ul>';
                 return $data;
             })
-            ->rawColumns(['content', 'action', 'question_type'])
+            ->rawColumns(['code', 'content', 'action', 'question_type'])
             ->make(true);
     }
 
@@ -146,9 +151,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = $this->questionRepository->find($id);
+        $question = $this->questionRepository->getQuestion($id);
         if ($question) {
-            return view('admin.test.question', ['question' => $question]);
+            return view('Admin.question.question', ['question' => $question]);
         } else {
             return redirect()->route('questions.index');
         }
