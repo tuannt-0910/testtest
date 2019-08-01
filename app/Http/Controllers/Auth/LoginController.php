@@ -51,9 +51,11 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            if (Auth::user()->active) {
+            if (Auth::user()->active == Config::get('constant.active')) {
+
                 return redirect()->route('admin.home');
             } else {
+
                 return redirect()->route('admin.getFirstLogin');
             }
         } else {
@@ -65,6 +67,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+
         return redirect()->route('home');
     }
 }

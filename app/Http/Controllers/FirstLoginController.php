@@ -7,6 +7,7 @@ use App\Repositories\Contracts\UserRepositoryInterface as UserRepository;
 use App\Http\Requests\FirstLoginRequest;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Config;
 
 class FirstLoginController extends Controller
 {
@@ -40,10 +41,11 @@ class FirstLoginController extends Controller
 
         $editUser = [
             'password' => bcrypt($request->new_password),
-            'active' => 1
+            'active' => Config::get('constant.active'),
         ];
 
         $this->userRepository->update($user->id, $editUser);
+
         return redirect()->route('admin.home');
     }
 }

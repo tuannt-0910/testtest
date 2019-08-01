@@ -20,4 +20,16 @@ class QuestionRepository extends EloquentRepository implements QuestionRepositor
     {
         return $this->_model->with(['file'])->get();
     }
+
+    public function getQuestion($id)
+    {
+        return $this->_model->with([
+            'file',
+            'comments',
+            'comments.user',
+            'answers',
+            'comments',
+            'answers.file'
+        ])->find($id);
+    }
 }
