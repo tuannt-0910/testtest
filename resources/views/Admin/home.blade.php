@@ -3,7 +3,7 @@
 @section('title', trans('page.home_academics'))
 
 @section('progress_bar')
-    <li class="active">Home</li>
+    <li class="active">{{ trans('page.home') }}</li>
 @endsection
 
 @section('content')

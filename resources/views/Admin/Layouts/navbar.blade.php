@@ -1,6 +1,6 @@
 <div class="navbar navbar-default header-highlight">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img src="{{ config('constant.icon.link_logo') }}" alt=""></a>
+        <a class="navbar-brand" href="#"><img src="{{ config('constant.icon.link_logo') }}"></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -18,13 +18,13 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ config('constant.icon.link_country_gb') }}" class="position-left" alt="">
+                    <img src="{{ config('constant.icon.link_country_gb') }}" class="position-left">
                     {{ trans('navbar.English') }}
                     <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a class="deutsch"><img src="{{ config('constant.icon.link_country_de') }}" alt=""> {{ trans('navbar.Deutsch') }}</a></li>
+                    <li><a class="deutsch"><img src="{{ config('constant.icon.link_country_de') }}"> {{ trans('navbar.Deutsch') }}</a></li>
                 </ul>
             </li>
 
@@ -46,7 +46,7 @@
                     <ul class="media-list dropdown-content-body">
                         <li class="media">
                             <div class="media-left">
-                                <img src="{{ config('constant.icon.link_country_placeholder') }}" class="img-circle img-sm" alt="">
+                                <img src="{{ config('constant.icon.link_country_placeholder') }}" class="img-circle img-sm">
                                 <span class="badge bg-danger-400 media-badge">5</span>
                             </div>
 
@@ -62,7 +62,7 @@
                     </ul>
 
                     <div class="dropdown-content-footer">
-                        <a href="#" data-popup="tooltip" title="All messages"><i class="icon-menu display-block"></i></a>
+                        <a href="#" data-popup="tooltip"><i class="icon-menu display-block"></i></a>
                     </div>
                 </div>
             </li>

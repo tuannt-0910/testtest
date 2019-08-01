@@ -63,12 +63,12 @@
                                 <div class="modal-body">
                                     <div id="messages">
                                         @foreach($question->comments as $comment)
-                                            <div class="message_{{ $comment->id }}">
+                                            <div id="message_{{ $comment->id }}">
                                                 <h6 class="text-semibold">{{ $comment->user->username }} -
                                                     <span class="content-group-sm text-muted">{{ $comment->created_at }}</span>
-                                                    <a href="{{ route('comments.destroy', ['id' => $comment->id]) }}"
-                                                       data-urlDestroy="{{ route('comments.destroy', ['id' => $comment->id]) }}"
-                                                       type="button" class="close"><i class="icon-bin2"></i></a>
+                                                    <button data-urlDestroy="{{ route('comments.destroy', ['id' => $comment->id]) }}"
+                                                            data-id_message="message_{{ $comment->id }}"
+                                                       type="button" class="close btn btn-link message_destroy"><i class="icon-bin2"></i></button>
                                                 </h6>
                                                 <p>{{ $comment->content }}</p>
 

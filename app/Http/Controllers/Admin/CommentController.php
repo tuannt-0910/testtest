@@ -15,7 +15,7 @@ class CommentController extends Controller
      * CommentController constructor.
      * @param $commentRepository
      */
-    public function __construct (
+    public function __construct(
         CommentRepository $commentRepository
     ) {
         $this->commentRepository = $commentRepository;
@@ -35,7 +35,12 @@ class CommentController extends Controller
             'question_id' => $request->input('question_id')
         ];
         $comment = $this->commentRepository->create($comment)->load(['user']);
-        return response()->json($comment);
+        $data = [
+            'comment' => $comment,
+            'urlDestroy' => route('comments.destroy', ['id' => $comment->id]),
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -46,6 +51,8 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $checkDelete = $this->commentRepository->delete($id);
+
+        return response()->json($checkDelete);
     }
 }

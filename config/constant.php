@@ -9,6 +9,8 @@ return [
         'link_country_de' => asset('Admin/assets/images/flags/de.png'),
         'link_country_placeholder' => asset('Admin/assets/images/placeholder.jpg'),
     ],
+    'active' => 1,
+    'not_active' => 0,
     'limit_questions_test' => 20,
     'success' => 'Action success',
     'input_errors' => [
@@ -60,6 +62,6 @@ return [
     'color' => [
         'text' => 'label label-default',
         'image' => 'label label-success',
-        'audio' => 'label label-primary'
+        'audio' => 'label label-primary',
     ]
 ];
