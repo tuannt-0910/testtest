@@ -75,6 +75,7 @@ class TestController extends Controller
                                 '</form>' .
                             '</li>' .
                         '</ul>';
+
                 return $data;
             })
             ->rawColumns(['name', 'code', 'action'])
@@ -91,8 +92,10 @@ class TestController extends Controller
         $allCates = $this->categoryRepository->getTreeCategories();
         if ($request->input('category_id')) {
             $category = $this->categoryRepository->find($request->input('category_id'));
+
             return view('Admin.test.add', ['category' => $category, 'allCates' => $allCates]);
         }
+
         return view('Admin.test.add', ['allCates' => $allCates]);
     }
 
@@ -113,9 +116,10 @@ class TestController extends Controller
             'created_user_id' => Auth::user()->id,
             'category_id' => $request->category_id,
             'free' => isset($request->free) ? 1 : 0,
-            'publish' => isset($request->publish) ? 1 : 0
+            'publish' => isset($request->publish) ? 1 : 0,
         ];
         $this->testRepository->create($test);
+
         return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
     }
 
@@ -129,6 +133,7 @@ class TestController extends Controller
     {
         $test = $this->testRepository->find($id);
         $questions = $this->testRepository->getQuestionsByTestId($id);
+
         return view('Admin.test.show', ['test' => $test, 'questions' => $questions]);
     }
 
@@ -142,6 +147,7 @@ class TestController extends Controller
     {
         $allCates = $this->categoryRepository->getTreeCategories();
         $test = $this->testRepository->getTest($id);
+
         return view('Admin.test.add', ['test' => $test, 'allCates' => $allCates]);
     }
 
@@ -162,9 +168,10 @@ class TestController extends Controller
             'total_question' => $request->total_question,
             'category_id' => $request->category_id,
             'free' => isset($request->free) ? 1 : 0,
-            'publish' => isset($request->publish) ? 1 : 0
+            'publish' => isset($request->publish) ? 1 : 0,
         ];
         $this->testRepository->update($id, $test);
+
         return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
     }
 
@@ -179,8 +186,21 @@ class TestController extends Controller
         $test = $this->testRepository->find($id);
         if ($test) {
             $this->testRepository->delete($id);
+
             return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
         }
+
         return redirect()->route('tests.index');
+    }
+
+    public function getChooseAddQuestion($test_id)
+    {
+        $test = $this->testRepository->find($test_id);
+        return view('Admin.test.chooseQuestion', ['test' => $test]);
+    }
+
+    public function postChooseAddQuestion(Request $request)
+    {
+        dd($request->all());
     }
 }

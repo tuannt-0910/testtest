@@ -10,5 +10,5 @@ return [
     'Online' => 'Online',
     'my_profile' => 'My profile',
     'account_settings' => 'Account settings',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
 ];

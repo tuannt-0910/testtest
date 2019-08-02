@@ -33,8 +33,10 @@ return [
                 'address' => 'Address',
                 'role' => 'Role',
                 'actions' => 'Actions',
-            ]
-        ]
+                'password' => 'Create Password',
+                'password_default' => 'academics',
+            ],
+        ],
     ],
     'category' => [
         'categories' => 'Categories',
@@ -65,7 +67,11 @@ return [
         'created_at' => 'Created at',
         'actions' => 'Actions',
         'question' => 'Question',
+        'selected_question' => 'Selected question',
+        'index' => '#',
         'no_questions' => 'No Questions',
+        'guide_choose_add_question' => 'Search question, then add questions in test',
+        'search_question' => 'Search question',
     ],
     'loginAdmin' => [
         'login_Academics' => 'Admin Login - Academics',
@@ -89,6 +95,8 @@ return [
         'questions' => 'Questions',
         'list_questions' => 'List Questions',
         'add_question' => 'Add Question',
+        'choose_question' => 'Add choose Question',
+        'add_question_by_file' => 'Add Question by file',
         'show_question' => 'Show',
         'content_default' => 'Chon dap an dung nhat',
         'code' => 'Code',
@@ -103,5 +111,18 @@ return [
         'no_comments' => 'No Comments',
         'default_text_comment' => '... a message',
         'send' => 'Send',
+        'create_question' => 'Create',
+        'import_question' => 'Import questions',
+        'file_upload' => 'Choose file upload',
+        'import_to_tests' => 'Import to tests:',
+    ],
+    'comment' => [
+        'comments' => 'Comments',
+        'list_comments' => 'List comments',
+        'question_code' => 'Question code',
+        'author' => 'Author',
+        'question_content' => 'Question content',
+        'content' => 'Command',
+        'created_at' => 'Time',
     ],
 ];

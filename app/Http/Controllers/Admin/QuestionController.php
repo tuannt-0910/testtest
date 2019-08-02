@@ -4,32 +4,38 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
 use App\Repositories\Contracts\QuestionRepositoryInterface as QuestionRepository;
 use App\Repositories\Contracts\AnswerRepositoryInterface as AnswerRepository;
 use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
+use App\Services\ExcelService;
 use Yajra\Datatables\Datatables;
 use Config;
 
 class QuestionController extends Controller
 {
+    protected $excelService;
+
+    protected $testRepository;
+
     protected $questionRepository;
 
     protected $fileRepository;
 
     protected $answerRepository;
 
-    /**
-     * QuestionController constructor.
-     * @param $questionRepository
-     */
     public function __construct(
         QuestionRepository $questionRepository,
         FileRepository $fileRepository,
-        AnswerRepository $answerRepository
+        AnswerRepository $answerRepository,
+        TestRepository $testRepository,
+        ExcelService $excelService
     ) {
         $this->questionRepository = $questionRepository;
         $this->fileRepository = $fileRepository;
         $this->answerRepository = $answerRepository;
+        $this->testRepository = $testRepository;
+        $this->excelService = $excelService;
     }
 
 
@@ -51,6 +57,7 @@ class QuestionController extends Controller
             ->editColumn('code', function ($question) {
                 $code = '<a href="' . route('questions.show', ['id' => $question->id]) . '">' .
                     $question->code . '</a>';
+
                 return $code;
             })
             ->editColumn('content', function ($question) {
@@ -64,6 +71,7 @@ class QuestionController extends Controller
                         $content .= '<audio src="' . $url_file . '" controls />';
                     }
                 }
+
                 return $content;
             })
             ->editColumn('question_type', function ($question) {
@@ -80,6 +88,7 @@ class QuestionController extends Controller
                         break;
                 }
                 $type .= $question->question_type . '</span>';
+
                 return $type;
             })
             ->addColumn('action', function ($question) {
@@ -100,6 +109,7 @@ class QuestionController extends Controller
                                 '</form>' .
                             '</li>' .
                         '</ul>';
+
                 return $data;
             })
             ->rawColumns(['code', 'content', 'action', 'question_type'])
@@ -230,7 +240,7 @@ class QuestionController extends Controller
             'content_suggest' => $request->input('content_suggest'),
             'content' => $request->input('content'),
             'question_type' => $question_type,
-            'file_id' => isset($fileUpload) ? $fileUpload->id : null
+            'file_id' => isset($fileUpload) ? $fileUpload->id : null,
         ];
 
         if ($id) {
@@ -255,7 +265,7 @@ class QuestionController extends Controller
             'content' => $request->input($inputContentName),
             'question_id' => $question_id,
             'file_id' => isset($fileUpload) ? $fileUpload->id : null,
-            'correct_answer' => $correct_answer
+            'correct_answer' => $correct_answer,
         ];
 
         if ($id) {
@@ -276,8 +286,40 @@ class QuestionController extends Controller
         $question = $this->questionRepository->find($id);
         if ($question) {
             $this->questionRepository->delete($id);
+
             return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
         }
+
         return redirect()->route('questions.index');
+    }
+
+    public function getImport(Request $request)
+    {
+        $tests = $this->testRepository->getAllTest();
+        if ($request->test_id) {
+            $selected_test = $this->testRepository->find($request->test_id);
+            if ($selected_test) {
+                return view('Admin.question.import', ['tests' => $tests, 'selected_test' => $selected_test]);
+            }
+        }
+
+        return view('Admin.question.import', ['tests' => $tests]);
+    }
+
+    public function postImport(Request $request)
+    {
+        $this->excelService->importFileQuestion($request);
+
+        return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
+    }
+
+    public function getSearchQuestion(Request $request)
+    {
+        $questions = [];
+        if ($request->input('keyword')) {
+            $questions = $this->questionRepository->getSearchByCode($request->input('keyword'));
+        }
+
+        return response()->json($questions);
     }
 }

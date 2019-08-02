@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Config;
 
 class CheckFirstLogin
 {
@@ -16,9 +17,10 @@ class CheckFirstLogin
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->active) {
+        if (Auth::user()->active == Config::get('constant.not_active')) {
             return redirect()->route('admin.getFirstLogin');
         }
+
         return $next($request);
     }
 }

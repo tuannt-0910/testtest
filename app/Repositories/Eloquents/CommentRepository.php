@@ -16,4 +16,11 @@ class CommentRepository extends EloquentRepository implements CommentRepositoryI
         return Comment::class;
     }
 
+    public function getAllComments()
+    {
+        return $this->_model->with([
+            'question',
+            'user'
+        ])->get();
+    }
 }

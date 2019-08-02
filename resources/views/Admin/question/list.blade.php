@@ -20,6 +20,11 @@
                             <span class="text-semibold">{{ Session::get('success') }}</span>
                         </div>
                     @endif
+
+                    <div class="col-lg-12 text-right">
+                        <a href="{{ route('questions.create') }}" class="btn btn-primary">{{ trans('page.question.create_question') }}</a>
+                        <a href="{{ route('admin.questions.getImport') }}" class="btn btn-success">{{ trans('page.question.import_question') }}</a>
+                    </div>
                 </div>
                 <input id="route_getDatas" type="hidden" value="{{ route('admin.questions.getQuestions') }}">
             </fieldset>
