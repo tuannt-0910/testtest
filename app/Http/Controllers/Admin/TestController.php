@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\TestRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\TestQuestionRepositoryInterface as TestQuestionRepository;
 use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
 use App\Repositories\Contracts\CategoryRepositoryInterface as CategoryRepository;
 use Yajra\Datatables\Datatables;
@@ -17,16 +18,20 @@ class TestController extends Controller
 
     protected $categoryRepository;
 
+    protected $testQuestionRepository;
+
     /**
      * TestController constructor.
      * @param $testRepository , $categoryRepository
      */
     public function __construct(
         TestRepository $testRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        TestQuestionRepository $testQuestionRepository
     ) {
         $this->testRepository = $testRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->testQuestionRepository = $testQuestionRepository;
     }
 
 
@@ -199,8 +204,17 @@ class TestController extends Controller
         return view('Admin.test.chooseQuestion', ['test' => $test]);
     }
 
-    public function postChooseAddQuestion(Request $request)
+    public function postChooseAddQuestion(Request $request, $test_id)
     {
-        dd($request->all());
+        $test = $this->testQuestionRepository->find($test_id);
+        if ($test && $request->seleted_questions && count($request->seleted_questions) > 0 ) {
+            $tests = [$test_id];
+            $questions = $request->seleted_questions;
+            $this->testQuestionRepository->createRelationTestsQuestions($tests, $questions);
+
+            return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+        }
+
+        return redirect()->back()->with('action_fault', Config::get('constant.action_fault'));
     }
 }
