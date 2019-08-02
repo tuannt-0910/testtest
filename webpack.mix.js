@@ -30,9 +30,11 @@ mix.styles([
     'public/Admin/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js',
     'public/Admin/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js',
     'public/Admin/assets/js/plugins/uploaders/fileinput/fileinput.min.js',
+    'public/Admin/assets/js/plugins/forms/inputs/duallistbox.min.js',
     'public/Admin/assets/js/core/app.js',
     'public/Admin/assets/js/pages/dashboard.js',
     'public/Admin/assets/js/pages/uploader_bootstrap.js',
+    'public/Admin/assets/js/pages/form_dual_listboxes.js',
 ], 'public/js/admin.js')
 .options({
     processCssUrls: false

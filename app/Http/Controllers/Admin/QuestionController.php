@@ -4,32 +4,38 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
 use App\Repositories\Contracts\QuestionRepositoryInterface as QuestionRepository;
 use App\Repositories\Contracts\AnswerRepositoryInterface as AnswerRepository;
 use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
+use App\Services\ExcelService;
 use Yajra\Datatables\Datatables;
 use Config;
 
 class QuestionController extends Controller
 {
+    protected $excelService;
+
+    protected $testRepository;
+
     protected $questionRepository;
 
     protected $fileRepository;
 
     protected $answerRepository;
 
-    /**
-     * QuestionController constructor.
-     * @param $questionRepository
-     */
     public function __construct(
         QuestionRepository $questionRepository,
         FileRepository $fileRepository,
-        AnswerRepository $answerRepository
+        AnswerRepository $answerRepository,
+        TestRepository $testRepository,
+        ExcelService $excelService
     ) {
         $this->questionRepository = $questionRepository;
         $this->fileRepository = $fileRepository;
         $this->answerRepository = $answerRepository;
+        $this->testRepository = $testRepository;
+        $this->excelService = $excelService;
     }
 
 
@@ -285,5 +291,35 @@ class QuestionController extends Controller
         }
 
         return redirect()->route('questions.index');
+    }
+
+    public function getImport(Request $request)
+    {
+        $tests = $this->testRepository->getAllTest();
+        if ($request->test_id) {
+            $selected_test = $this->testRepository->find($request->test_id);
+            if ($selected_test) {
+                return view('Admin.question.import', ['tests' => $tests, 'selected_test' => $selected_test]);
+            }
+        }
+
+        return view('Admin.question.import', ['tests' => $tests]);
+    }
+
+    public function postImport(Request $request)
+    {
+        $this->excelService->importFileQuestion($request);
+
+        return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
+    }
+
+    public function getSearchQuestion(Request $request)
+    {
+        $questions = [];
+        if ($request->input('keyword')) {
+            $questions = $this->questionRepository->getSearchByCode($request->input('keyword'));
+        }
+
+        return response()->json($questions);
     }
 }

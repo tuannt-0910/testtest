@@ -23,6 +23,15 @@
                     </div>
                 @endif
 
+                <div class="form-group">
+                    <div class="text-right">
+                        <a href="{{ route('questions.create') }}" class="btn btn-primary mr-5">{{ trans('page.question.create_question') }}</a>
+                        <a href="{{ route('admin.questions.chooseAddQuestion', ['test_id' => $test->id]) }}" class="btn btn-default mr-5">{{ trans('page.question.choose_question') }}</a>
+                        <a href="{{ route('admin.questions.getImport') }}" class="btn btn-success">{{ trans('page.question.import_question') }}</a>
+                    </div>
+                </div>
+                <hr />
+
                 @foreach($questions as $key => $question)
                     <div class="form-group">
                         <div class="alert alert-info mb-10 pb-5 pl-10">

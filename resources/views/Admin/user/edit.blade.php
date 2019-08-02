@@ -92,6 +92,16 @@
                         </div>
                     </div>
 
+                    @if(!$user)
+                        <div class="form-group @if(isset($errors) && $errors->has('password')){{ 'has-error has-feedback' }}@endif">
+                            <label class="control-label col-lg-2"><b>{{ trans('page.users.list.table_property.password') }}</b></label>
+                            <div class="col-lg-10">
+                                <input name="password" type="text" class="form-control" placeholder="{{ trans('page.users.list.table_property.password_default') }}">
+                                @if(isset($errors) && $errors->has('password'))<span class="help-block">{{ $errors->first('password') }}</span>@endif
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group @if(isset($errors) && $errors->has('birthday')){{ 'has-error has-feedback' }}@endif">
                         <label class="control-label col-lg-2">{{ trans('page.users.list.table_property.birthday') }}</label>
                         <div class="col-lg-10">

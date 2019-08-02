@@ -68,6 +68,9 @@ class UserController extends Controller
         if ($id) {
             $this->userRepository->update($id, $user);
         } else {
+            $password = $request->password;
+            $password = bcrypt($password ? $password : config('constant.default_password'));
+            $user['password'] = $password;
             $this->userRepository->create($user);
         }
 

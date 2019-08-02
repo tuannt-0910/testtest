@@ -192,4 +192,15 @@ class TestController extends Controller
 
         return redirect()->route('tests.index');
     }
+
+    public function getChooseAddQuestion($test_id)
+    {
+        $test = $this->testRepository->find($test_id);
+        return view('Admin.test.chooseQuestion', ['test' => $test]);
+    }
+
+    public function postChooseAddQuestion(Request $request)
+    {
+        dd($request->all());
+    }
 }

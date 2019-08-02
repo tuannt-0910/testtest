@@ -4,49 +4,40 @@ namespace App\Imports;
 
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
-use App\Repositories\Contracts\QuestionRepositoryInterface as QuestionRepository;
-use App\Repositories\Contracts\AnswerRepositoryInterface as AnswerRepository;
+use App\Repositories\Eloquents\QuestionRepository;
+use App\Repositories\Eloquents\AnswerRepository;
 
 class QuestionImport implements OnEachRow
 {
-    protected $questionRepository;
+    public $datas = [];
 
-    protected $answerRepository;
-
-    /**
-     * QuestionImport constructor.
-     * @param $questionRepository
-     */
-    public function __construct(
-        QuestionRepository $questionRepository,
-        AnswerRepository $answerRepository
-    ) {
-        $this->questionRepository = $questionRepository;
-        $this->answerRepository = $answerRepository;
-    }
-
-    /**
-     * @param Row $row
-     */
     public function onRow(Row $row)
     {
+        $questionRepository = new QuestionRepository();
+        $answerRepository = new AnswerRepository();
+
         $row = $row->toArray();
         $question = [
-            'code' => $row[1],
-            'question_type' => $row[2],
-            'content_suggest' => $row[3],
-            'content' => $row[4],
+            'code' => $row[0],
+            'question_type' => $row[1],
+            'content_suggest' => $row[2],
+            'content' => $row[3],
         ];
-        $question = $this->questionRepository->create($question);
+        $question = $questionRepository->create($question);
 
-        for ($index = 5; $index < 9; $index++) {
+        for ($index = 4; $index < 8; $index++) {
             $answer = [
                 'question_id' => $question->id,
                 'content' => $row[$index],
                 'answer_type' => 'text',
-                'correct_answer' => (4 + $row[9]) == $index ? 1 : 0,
+                'correct_answer' => (3 + $row[8]) == $index ? 1 : 0,
             ];
-            $this->answerRepository->create($answer);
+
+            if ($answer['content']) {
+                $answerRepository->create($answer);
+            }
         }
+
+        array_push($this->datas, $question);
     }
 }

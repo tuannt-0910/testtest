@@ -32,4 +32,9 @@ class QuestionRepository extends EloquentRepository implements QuestionRepositor
             'answers.file'
         ])->find($id);
     }
+
+    public function getSearchByCode($keyword)
+    {
+        return $this->_model->where('code', 'like', '%' . $keyword . '%')->get();
+    }
 }
