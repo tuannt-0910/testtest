@@ -3,7 +3,7 @@
         <div class="sidebar-user">
             <div class="category-content">
                 <div class="media">
-                    <a href="#" class="media-left"><img src="{{ config('constant.icon.link_country_placeholder') }}" class="img-circle img-sm"></a>
+                    <a href="#" class="media-left"><img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" class="img-circle img-sm"></a>
                     <div class="media-body">
                         <span class="media-heading text-semibold"></span>
                         <div class="text-size-mini text-muted">
@@ -41,13 +41,11 @@
                         <ul>
                             <li><a href="{{ route('questions.index') }}">{{ trans('page.question.list_questions') }}</a></li>
                             <li><a href="{{ route('questions.create') }}">{{ trans('page.question.add_question') }}</a></li>
+                            <li><a href="{{ route('admin.questions.getImport') }}">{{ trans('page.question.add_question_by_file') }}</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
+                        <a href="{{ route('comments.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.comment.comments') }}</span></a>
                     </li>
                     <li>
                         <a href="#"><i class="icon-droplet2"></i> <span></span></a>

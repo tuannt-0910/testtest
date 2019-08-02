@@ -48,4 +48,17 @@ $(function () {
             }
         });
     });
+
+    $('#list_comments_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: $('#route_getDatas').val(),
+        columns: [
+            { data: 'code', name: 'code' },
+            { data: 'author', name: 'author' },
+            { data: 'question_content', name: 'question_content' },
+            { data: 'content', name: 'content' },
+            { data: 'created_at', name: 'created_at' },
+        ]
+    });
 });

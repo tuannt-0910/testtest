@@ -33,11 +33,24 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::resource('categories', 'CategoryController')->except(['show']);
 
+    Route::group(['prefix' => 'tests'], function () {
+        Route::get('choose-add-question/{test_id}', 'TestController@getChooseAddQuestion')
+            ->name('admin.questions.chooseAddQuestion');
+        Route::post('choose-add-question/{test_id}', 'TestController@postChooseAddQuestion');
+        Route::get('search_question', 'QuestionController@getSearchQuestion')->name('admin.question.search');
+
+        Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
+    });
     Route::resource('tests', 'TestController');
-    Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
 
+    Route::group(['prefix' => 'questions'], function () {
+        Route::get('getQuestions', 'QuestionController@getQuestions')->name('admin.questions.getQuestions');
+
+        Route::get('import', 'QuestionController@getImport')->name('admin.questions.getImport');
+        Route::post('import', 'QuestionController@postImport')->name('admin.questions.postImport');
+    });
     Route::resource('questions', 'QuestionController');
-    Route::get('getQuestions', 'QuestionController@getQuestions')->name('admin.questions.getQuestions');
 
-    Route::resource('comments', 'CommentController')->except(['index', 'show', 'edit', 'update', 'create']);
+    Route::resource('comments', 'CommentController')->except(['show', 'edit', 'update', 'create']);
+    Route::get('getComments', 'CommentController@getComments')->name('admin.comments.getComments');
 });

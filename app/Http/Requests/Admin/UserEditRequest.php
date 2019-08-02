@@ -42,6 +42,10 @@ class UserEditRequest extends FormRequest
             $rules['email'] = 'required|email|unique:users,email,' . $this->id . ',id|max:90';
         } else {
             $rules['email'] = 'required|email|unique:users,email|max:90';
+            $rules['password'] = 'max:90';
+            if ($this->password) {
+                $rules['password'] .= '|min:5';
+            }
         }
 
         return $rules;

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Config;
 
 class PassedFirstLogin
 {
@@ -16,9 +17,10 @@ class PassedFirstLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->active) {
+        if (Auth::user()->active == Config::get('constant.active')) {
             return redirect()->route('admin.home');
         }
+
         return $next($request);
     }
 }

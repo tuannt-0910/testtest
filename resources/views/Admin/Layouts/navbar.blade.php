@@ -1,6 +1,6 @@
 <div class="navbar navbar-default header-highlight">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img src="{{ config('constant.icon.link_logo') }}"></a>
+        <a class="navbar-brand" href="#"><img src="{{ asset(config('constant.icon.link_logo')) }}"></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -18,13 +18,13 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ config('constant.icon.link_country_gb') }}" class="position-left">
+                    <img src="{{ asset(config('constant.icon.link_country_gb')) }}" class="position-left">
                     {{ trans('navbar.English') }}
                     <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a class="deutsch"><img src="{{ config('constant.icon.link_country_de') }}"> {{ trans('navbar.Deutsch') }}</a></li>
+                    <li><a class="deutsch"><img src="{{ asset(config('constant.icon.link_country_de')) }}"> {{ trans('navbar.Deutsch') }}</a></li>
                 </ul>
             </li>
 
@@ -46,7 +46,7 @@
                     <ul class="media-list dropdown-content-body">
                         <li class="media">
                             <div class="media-left">
-                                <img src="{{ config('constant.icon.link_country_placeholder') }}" class="img-circle img-sm">
+                                <img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" class="img-circle img-sm">
                                 <span class="badge bg-danger-400 media-badge">5</span>
                             </div>
 
@@ -69,7 +69,7 @@
 
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ config('constant.icon.link_country_placeholder') }}" alt="">
+                    <img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" alt="">
                     <span></span>
                     <i class="caret"></i>
                 </a>
