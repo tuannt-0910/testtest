@@ -16,4 +16,17 @@ class TestQuestionRepository extends EloquentRepository implements TestQuestionR
         return TestQuestion::class;
     }
 
+    public function createRelationTestsQuestions($tests, $questions)
+    {
+        foreach ($tests as $test_id) {
+            foreach ($questions as $question_id) {
+                $testQuestion = [
+                    'test_id' => $test_id,
+                    'question_id' => $question_id
+                ];
+
+                $this->create($testQuestion);
+            }
+        }
+    }
 }

@@ -36,7 +36,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::group(['prefix' => 'tests'], function () {
         Route::get('choose-add-question/{test_id}', 'TestController@getChooseAddQuestion')
             ->name('admin.questions.chooseAddQuestion');
-        Route::post('choose-add-question/{test_id}', 'TestController@postChooseAddQuestion');
+        Route::post('choose-add-question/{test_id}', 'TestController@postChooseAddQuestion')
+            ->name('admin.questions.postChooseAddQuestion');
         Route::get('search_question', 'QuestionController@getSearchQuestion')->name('admin.question.search');
 
         Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
