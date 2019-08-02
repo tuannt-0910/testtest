@@ -12,9 +12,19 @@
 @section('content')
     <div class="panel panel-flat">
         <div class="panel-body">
-            <form class="form-horizontal" method="POST" action="">
+            <form class="form-horizontal" method="POST"
+                  action="{{ route('admin.questions.postChooseAddQuestion', ['test' => $test->id]) }}">
+                @csrf
+
                 <fieldset class="content-group">
                     <legend class="text-bold">{{ $test->name }}</legend>
+
+                    @if(Session::has('action_fault'))
+                        <div class="alert alert-danger alert-styled-left alert-arrow-left alert-bordered">
+                            <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                            <span class="text-semibold">{{ Session::get('action_fault') }}</span>
+                        </div>
+                    @endif
 
                     <p class="content-group">{{ trans('page.test.guide_choose_add_question') }}</p>
 
@@ -22,8 +32,8 @@
                         <div class="col-lg-6">
                             <div class="col-lg-12 mb-10">
                                 <div class="col-lg-8">
-                                    <input id="keyword_search" data-urlSearch="{{ route('admin.question.search') }}" type="text" class="form-control"
-                                           placeholder="{{ trans('page.question.code') }}">
+                                    <input id="keyword_search" data-urlSearch="{{ route('admin.question.search') }}" type="text"
+                                           class="form-control" placeholder="{{ trans('page.question.code') }}">
                                 </div>
                             </div>
                             <div class="col-lg-12">
