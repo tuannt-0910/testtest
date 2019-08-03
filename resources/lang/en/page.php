@@ -2,7 +2,6 @@
 
 return [
     'home_academics' => 'Home - Academics',
-    'label_confirm_remove' => 'Ready?',
     'list_users' => 'List Users',
     'edit_user' => 'Edit User',
     'add_user' => 'Add User',

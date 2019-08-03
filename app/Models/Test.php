@@ -60,7 +60,9 @@ class Test extends Model
 
     public function listUserViewTest()
     {
-        return $this->belongsToMany('App\User', 'test_user', 'test_id', 'user_id');
+        return $this->belongsToMany('App\User', 'test_user', 'test_id', 'user_id')
+            ->withPivot(['deleted_at'])
+            ->withTimestamps();
     }
 
     public function listHistories()

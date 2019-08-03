@@ -113,11 +113,13 @@ class UserController extends Controller
         $selectedTestIds = json_decode($request->input('selectedTestIds'));
         $user = $this->userRepository->find($user_id);
         if ($user) {
-            $this->userRepository->setRoleTest($user_id, $selectedTestIds);
+            if ($this->userRepository->setRoleTest($user_id, $selectedTestIds)) {
+                return response()->json(['status' => true, 'message' => config('constant.success')]);
+            }
 
-            return response()->json();
+            return response()->json(['status' => false, 'message' => config('constant.action_fault')]);
         }
 
-        return response()->json();
+        return response()->json(['status' => false, 'message' => config('constant.action_use_wrong')]);
     }
 }

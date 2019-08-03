@@ -28,15 +28,4 @@ $(function () {
             });
         },
     });
-
-    $("#btnDeselectAll").click(function () {
-        var labelConfirm = $(this).attr('data-labelConfirm');
-        if (confirm(labelConfirm)) {
-            $(".tree-checkbox-hierarchical").fancytree("getTree").visit(function (node) {
-                node.setSelected(false);
-            });
-
-            return false;
-        }
-    });
 });

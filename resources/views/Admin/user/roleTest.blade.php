@@ -16,10 +16,6 @@
                 <p class="content-group">{{ trans('page.users.guide_choose_role_test') }}</p>
                 @csrf
 
-                <p>
-                    <a href="#" id="btnDeselectAll"
-                       data-labelConfirm="{{ trans('page.label_confirm_remove') }}">{{ trans('page.users.deselect_all') }}</a>
-                </p>
                 <div class="tree-checkbox-hierarchical well border-left-sucess border-left-lg"
                      data-urlSetRole="{{ route('admin.users.postRoleTest', ['user_id' => $user->id]) }}">
                     <ul>
