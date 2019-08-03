@@ -2,7 +2,10 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\Models\Category;
 use App\Models\Role;
+use App\Models\Test;
+use App\Models\TestQuestion;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\User;
 use Config;
@@ -35,5 +38,21 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
     public function getAllRoles()
     {
         return Role::select('id', 'name', 'slug')->where('deleted_at', null)->get();
+    }
+
+    public function getTreeTestsWithRole($roleTests, $user_id)
+    {
+        return Category::where('parent_id', null)->with([
+            'childCategories',
+            'childCategories.tests',
+            'childCategories.tests.listUserViewTest' => function ($query) use ($user_id) {
+                $query->where('users.id', $user_id);
+            }
+        ])->get();
+    }
+
+    public function setRoleTest($user_id, $selectedTestIds)
+    {
+        TestQuestion::whereNotIn('id', $selectedTestIds)->delete();
     }
 }

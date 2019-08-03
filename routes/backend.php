@@ -31,6 +31,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         Route::post('edit/{id?}', 'UserController@update')->name('admin.users.update');
 
         Route::get('delete/{id}', 'UserController@delete')->name('admin.users.delete');
+
+        Route::get('role_tests/{user_id}', 'UserController@getRoleTest')->name('admin.users.role_tests');
+        Route::post('role_tests/{user_id}', 'UserController@postRoleTest')->name('admin.users.postRoleTest');
     });
 
     Route::resource('categories', 'CategoryController')->except(['show']);
