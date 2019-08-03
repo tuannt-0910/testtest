@@ -65,5 +65,11 @@ return [
         'text' => 'label label-default',
         'image' => 'label label-success',
         'audio' => 'label label-primary',
-    ]
+    ],
+    'column_chart' => [
+        'color_tests' => '#E53935',
+        'color_tested' => '#3949AB',
+        'height' => 500,
+        'tick_rotate' => 45,
+    ],
 ];
