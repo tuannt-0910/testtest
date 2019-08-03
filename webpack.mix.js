@@ -36,6 +36,10 @@ mix.styles([
     'public/Admin/assets/js/pages/uploader_bootstrap.js',
     'public/Admin/assets/js/pages/form_dual_listboxes.js',
     'public/Admin/assets/js/charts/c3/c3_lines_areas.js',
+    'public/Admin/assets/js/core/libraries/jquery_ui/effects.min.js',
+    'public/Admin/assets/js/core/libraries/jquery_ui/interactions.min.js',
+    'public/Admin/assets/js/plugins/trees/fancytree_all.min.js',
+    'public/Admin/assets/js/pages/extra_trees.js',
 ], 'public/js/admin.js')
 .options({
     processCssUrls: false

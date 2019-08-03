@@ -9,4 +9,8 @@ interface UserRepositoryInterface
     public function getUserById($id);
 
     public function getAllRoles();
+
+    public function getTreeTestsWithRole($roleTests, $user_id);
+
+    public function setRoleTest($user_id, $selectedTestIds);
 }
