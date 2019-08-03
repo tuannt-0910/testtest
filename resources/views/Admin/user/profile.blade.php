@@ -11,7 +11,13 @@
     <div class="content-group">
         <div class="panel-body bg-blue border-radius-top text-center">
             <a href="#" class="display-inline-block content-group-sm">
-                <img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" class="img-circle img-responsive" alt="" style="width: 120px; height: 120px;">
+                <img src="
+                    @if($user->image_id)
+                        {{ asset($user->file->base_folder . '/' . $user->file->name) }}
+                    @else
+                        {{ asset(config('constant.icon.link_country_placeholder')) }}
+                    @endif
+                    " class="img-circle img-responsive" style="width: 120px; height: 120px;">
             </a>
 
             <div class="content-group-sm">

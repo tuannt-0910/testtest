@@ -60,10 +60,13 @@
                                     <td>{{ ((app('request')->page ?? 1) - 1) * $limit + $key + 1 }}</td>
                                     <td>
                                         <div class="media-left media-middle">
-                                            <img
-                                                src="@if($user && $user->file && $user->file->name){{ asset($user->file->base_folder . '/' . $user->file->name) }}@else{{ 'Admin/assets/images/placeholder.jpg' }}@endif"
-                                                class="img-circle img-md"
-                                            >
+                                            <img src="
+                                                @if($user->image_id)
+                                                    {{ asset($user->file->base_folder . '/' . $user->file->name) }}
+                                                @else
+                                                    {{ asset(config('constant.icon.link_country_placeholder')) }}
+                                                @endif
+                                                " class="img-circle img-md" >
                                         </div>
                                     </td>
                                     <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->lastname . ' ' . $user->firstname }}</a></td>

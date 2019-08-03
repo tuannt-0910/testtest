@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <div class="col-lg-2"></div>
-                        @if($user && $user->file && $user->file->name)
+                        @if($user && $user->image_id)
                             <div class="col-lg-6">
                                 <div class="thumb thumb-rounded">
                                     <img src="{{ asset($user->file->base_folder . '/' . $user->file->name) }}" alt="{{ $user->file->name }}">
