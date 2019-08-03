@@ -73,7 +73,10 @@
                                     <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->username }}</a></td>
                                     <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->email }}</a></td>
                                     <td>{{ $user->birthday }}</td>
-                                    <td><span class="{{ $user->role->color }}">{{ $user->role->name }}</span></td>
+                                    <td>
+                                        <span class="{{ $user->role->color }}">{{ $user->role->name }}</span><hr />
+                                        <a href="{{ route('admin.users.role_tests', ['user_id' => $user->id]) }}">{{ trans('page.users.role_test') }}</a>
+                                    </td>
                                     <td>{{ $user->address }}</td>
                                     <td>
                                         <ul class="icons-list">

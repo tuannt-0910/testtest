@@ -15,6 +15,7 @@ return [
     'limit_questions_test' => 20,
     'success' => 'Action success',
     'action_fault' => 'Action fault',
+    'action_use_wrong' => 'User wrong',
     'input_errors' => [
         'username_required' => 'required',
         'username_max' => 'required',

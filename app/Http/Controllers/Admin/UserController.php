@@ -95,4 +95,31 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', Config::get('constant.success'));
     }
+
+    public function getRoleTest($user_id)
+    {
+        $user = $this->userRepository->find($user_id);
+        if ($user) {
+            $categories = $this->userRepository->getTreeTestsWithRole($user->listTestViewByUser, $user_id);
+
+            return view('Admin.user.roleTest', ['categories' => $categories, 'user' => $user]);
+        }
+
+        return redirect()->route('admin.users.index');
+    }
+
+    public function postRoleTest(Request $request, $user_id)
+    {
+        $selectedTestIds = json_decode($request->input('selectedTestIds'));
+        $user = $this->userRepository->find($user_id);
+        if ($user) {
+            if ($this->userRepository->setRoleTest($user_id, $selectedTestIds)) {
+                return response()->json(['status' => true, 'message' => config('constant.success')]);
+            }
+
+            return response()->json(['status' => false, 'message' => config('constant.action_fault')]);
+        }
+
+        return response()->json(['status' => false, 'message' => config('constant.action_use_wrong')]);
+    }
 }

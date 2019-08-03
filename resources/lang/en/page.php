@@ -5,6 +5,7 @@ return [
     'list_users' => 'List Users',
     'edit_user' => 'Edit User',
     'add_user' => 'Add User',
+    'test_role' => 'Test Roles',
     'profile' => 'Profile',
     'list_tests' => 'List Tests',
     'add_test' => 'Add Test',
@@ -77,6 +78,9 @@ return [
         'phone' => 'Phone',
         'address' => 'Address',
         'role' => 'Role',
+        'role_test' => 'Role Test',
+        'guide_choose_role_test' => 'Choose categorys or tests',
+        'deselect_all' => 'Deselect all',
     ],
     'category' => [
         'categories' => 'Categories',
