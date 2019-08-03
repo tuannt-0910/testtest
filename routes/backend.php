@@ -25,6 +25,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', 'UserController@index')->name('admin.users.index');
 
+        Route::get('profile/{id?}', 'UserController@profile')->name('admin.users.profile');
+
         Route::get('edit/{id?}', 'UserController@edit')->name('admin.users.edit');
         Route::post('edit/{id?}', 'UserController@update')->name('admin.users.update');
 
