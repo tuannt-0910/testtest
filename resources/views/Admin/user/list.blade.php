@@ -66,9 +66,9 @@
                                             >
                                         </div>
                                     </td>
-                                    <td>{{ $user->lastname . ' ' . $user->firstname }}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->lastname . ' ' . $user->firstname }}</a></td>
+                                    <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->username }}</a></td>
+                                    <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->email }}</a></td>
                                     <td>{{ $user->birthday }}</td>
                                     <td><span class="{{ $user->role->color }}">{{ $user->role->name }}</span></td>
                                     <td>{{ $user->address }}</td>

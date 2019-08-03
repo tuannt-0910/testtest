@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\UserRepositoryInterface as UserRepository;
 use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
 use Config;
+use Auth;
 
 class UserController extends Controller
 {
@@ -33,6 +34,17 @@ class UserController extends Controller
         $users = $this->userRepository->getAllUserByKeyword($request->keyword);
 
         return view('Admin.user.list', ['users' => $users, 'limit' => $limit]);
+    }
+
+    public function profile($id = null)
+    {
+        if ($id) {
+            $user = $this->userRepository->find($id);
+        } else {
+            $user = Auth::user();
+        }
+
+        return view('Admin.user.profile', ['user' => $user]);
     }
 
     public function edit($id = null)

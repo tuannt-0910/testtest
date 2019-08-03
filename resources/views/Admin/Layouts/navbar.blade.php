@@ -75,8 +75,8 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#"><i class="icon-user-plus"></i> {{ trans('navbar.my_profile') }}</a></li>
-                    <li><a href="#"><i class="icon-cog5"></i> {{ trans('navbar.account_settings') }}</a></li>
+                    <li><a href="{{ route('admin.users.profile') }}"><i class="icon-user-plus"></i> {{ trans('navbar.my_profile') }}</a></li>
+                    <li><a href="{{ route('admin.users.edit', ['id' => Auth::user()->id]) }}"><i class="icon-cog5"></i> {{ trans('navbar.account_settings') }}</a></li>
                     <li><a href="{{ route('logout') }}"><i class="icon-switch2"></i> {{ trans('navbar.logout') }}</a></li>
                 </ul>
             </li>
