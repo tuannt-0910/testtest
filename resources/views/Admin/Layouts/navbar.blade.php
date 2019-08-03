@@ -69,14 +69,20 @@
 
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" alt="">
+                    <img src="
+                        @if(Auth::user()->image_id)
+                            {{ asset(Auth::user()->file->base_folder . '/' . Auth::user()->file->name) }}
+                        @else
+                            {{ asset(config('constant.icon.link_country_placeholder')) }}
+                        @endif
+                    ">
                     <span></span>
                     <i class="caret"></i>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#"><i class="icon-user-plus"></i> {{ trans('navbar.my_profile') }}</a></li>
-                    <li><a href="#"><i class="icon-cog5"></i> {{ trans('navbar.account_settings') }}</a></li>
+                    <li><a href="{{ route('admin.users.profile') }}"><i class="icon-user-plus"></i> {{ trans('navbar.my_profile') }}</a></li>
+                    <li><a href="{{ route('admin.users.edit', ['id' => Auth::user()->id]) }}"><i class="icon-cog5"></i> {{ trans('navbar.account_settings') }}</a></li>
                     <li><a href="{{ route('logout') }}"><i class="icon-switch2"></i> {{ trans('navbar.logout') }}</a></li>
                 </ul>
             </li>

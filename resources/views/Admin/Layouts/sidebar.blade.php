@@ -3,7 +3,15 @@
         <div class="sidebar-user">
             <div class="category-content">
                 <div class="media">
-                    <a href="#" class="media-left"><img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" class="img-circle img-sm"></a>
+                    <a href="{{ route('admin.users.profile') }}" class="media-left">
+                        <img src="
+                            @if(Auth::user()->image_id)
+                                {{ asset(Auth::user()->file->base_folder . '/' . Auth::user()->file->name) }}
+                            @else
+                                {{ asset(config('constant.icon.link_country_placeholder')) }}
+                            @endif
+                            " class="img-circle img-sm">
+                    </a>
                     <div class="media-body">
                         <span class="media-heading text-semibold"></span>
                         <div class="text-size-mini text-muted">
@@ -46,42 +54,6 @@
                     </li>
                     <li>
                         <a href="{{ route('comments.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.comment.comments') }}</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span></span></a>
-                        <ul>
-                            <li><a href="#"></a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
