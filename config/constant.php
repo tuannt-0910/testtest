@@ -16,6 +16,7 @@ return [
     'success' => 'Action success',
     'action_fault' => 'Action fault',
     'action_use_wrong' => 'User wrong',
+    'title_action_setRole' => 'Set Role',
     'input_errors' => [
         'username_required' => 'required',
         'username_max' => 'required',
