@@ -23,6 +23,19 @@
                     </div>
                 @endif
 
+                <div class="content-group-sm">
+                    <h5 class="text-semibold no-margin">({{ $test->code }}) - {{ $test->name }}</h5>
+                    <span class="display-block">
+                        <label class="label label-default">{{ trans('page.test.category_parent') }} : {{ $test->category->name }}</label>
+                        @if($test->free)<label class="label label-success">{{ trans('page.test.free') }}</label>@endif
+                        @if($test->publish)<label class="label label-primary">{{ trans('page.test.publish') }}</label>@endif
+                        <label class="label label-default">{{ $test->created_at }}</label>
+                    </span>
+                    <span class="display-block">{{ $test->content_guide }}</span>
+                    <span class="display-block">{{ trans('page.test.number_questions') }} : {{ $test->total_question }} / {{ count($test->questions) }}</span>
+                    <span class="display-block">{{ trans('page.test.execute_time') }} : {{ $test->execute_time }}'</span>
+                </div>
+
                 <div class="form-group">
                     <div class="text-right">
                         <a href="{{ route('questions.create') }}" class="btn btn-primary mr-5">{{ trans('page.question.create_question') }}</a>
