@@ -19,6 +19,7 @@ mix.styles([
     'public/Admin/assets/css/components.css',
     'public/Admin/assets/css/colors.css',
     'public/Admin/assets/css/icheck/icheck-material.min.css',
+    'public/Admin/assets/css/toastr/toastr.min.css',
 ], 'public/css/admin.css')
 .js([
     'public/Admin/assets/js/plugins/loaders/pace.min.js',

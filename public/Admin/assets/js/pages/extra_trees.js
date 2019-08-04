@@ -1,5 +1,7 @@
 $(function () {
     var _token = $('input[name="_token"]').val();
+    toastr.options.closeButton = true;
+    toastr.options.closeHtml = '<button><i class="icon-bin"></i></button>';
 
     $(".tree-checkbox-hierarchical").fancytree({
         checkbox: true,
@@ -20,10 +22,16 @@ $(function () {
                 cache: false,
                 data: {_token : _token, selectedTestIds : selectedTestIds},
                 success: function (data) {
-                    console.log(data);
+                    if (data.status) {
+                        toastr.success(data.message, data.title);
+                    } else {
+                        console.log('error: ' + data);
+                        toastr.error(data.message, data.title);
+                    }
                 },
                 error: function (data) {
                     console.log('error: ' + data);
+                    toastr.error(data.message, data.title);
                 }
             });
         },
