@@ -79,7 +79,7 @@ return [
         'address' => 'Address',
         'role' => 'Role',
         'role_test' => 'Role Test',
-        'guide_choose_role_test' => 'Choose categorys or tests',
+        'guide_choose_role_test' => 'Choose categorys or tests:',
         'deselect_all' => 'Deselect all',
     ],
     'category' => [
@@ -116,6 +116,7 @@ return [
         'no_questions' => 'No Questions',
         'guide_choose_add_question' => 'Search question, then add questions in test',
         'search_question' => 'Search question',
+        'number_questions' => 'Number of questions',
     ],
     'loginAdmin' => [
         'login_Academics' => 'Admin Login - Academics',
