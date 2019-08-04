@@ -13,6 +13,8 @@
     <script src="{{ asset('Admin/assets/js/core/libraries/jquery.min.js') }}"></script>
     <script src="{{ asset('Admin/assets/js/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('Admin/assets/js/treejs/jstree.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('Admin/assets/js/toastr/toastr.min.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset(mix('js/admin.js')) }}"></script>
 </head>
 
