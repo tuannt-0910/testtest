@@ -17,7 +17,7 @@
                     @else
                         {{ asset(config('constant.icon.link_country_placeholder')) }}
                     @endif
-                    " class="img-circle img-responsive" style="width: 120px; height: 120px;">
+                    " class="img-circle img-responsive image_profile">
             </a>
 
             <div class="content-group-sm">
