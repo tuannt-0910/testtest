@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::group(['namespace' => 'Client'], function () {
+    Route::get('/', 'HomeController@home')->name('client.home');
+});
