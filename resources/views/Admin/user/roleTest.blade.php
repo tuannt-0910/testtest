@@ -15,13 +15,7 @@
                 <legend class="text-bold">{{ trans('page.test_role') }}</legend>
                 <div class="content-group-sm">
                     <h5 class="text-semibold no-margin">
-                        <img src="
-                            @if($user->image_id)
-                                {{ asset($user->file->base_folder . '/' . $user->file->name) }}
-                            @else
-                                {{ asset(config('constant.icon.link_country_placeholder')) }}
-                            @endif
-                                " class="img-circle img-responsive image_profile"
+                        <img src="{{ src_image_use($user) }}" class="img-circle img-responsive image_profile"
                         >
                         ({{ $user->username }}) {{ $user->lastname }} {{ $user->firstname }}
                     </h5>
