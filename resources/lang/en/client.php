@@ -54,7 +54,6 @@ return [
         'academics_tests' => 'Academics - Tests',
         'test_code' => 'Test code',
         'name_test' => 'Test name',
-        'test' => 'Tests',
         'execute_time' => 'Execute time',
     ]
 ];

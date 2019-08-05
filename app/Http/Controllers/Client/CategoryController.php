@@ -27,7 +27,7 @@ class CategoryController extends Controller
         if ($category && !$category->parent_id) {
             $childCategories = $this->categoryRepository->getChildCategories($category_id);
 
-            return view('Client.categories', ['childCategories' => $childCategories]);
+            return view('Client.categories', ['category' => $category, 'childCategories' => $childCategories]);
         }
 
         return redirect()->route('home');
@@ -39,7 +39,7 @@ class CategoryController extends Controller
         if ($category && $category->parent_id) {
             $tests = $this->testRepository->getTestInCategory($category_id);
 
-            return view('Client.tests', ['tests' => $tests]);
+            return view('Client.tests', ['category' => $category, 'tests' => $tests]);
         }
 
         return redirect()->route('home');
