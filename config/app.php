@@ -177,6 +177,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*

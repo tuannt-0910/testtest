@@ -1,5 +1,7 @@
 @extends('Client.master')
 
+@section('title', trans('client.home.academics'))
+
 @section('content')
     @include('Client.layouts.slide')
 
@@ -22,8 +24,9 @@
                             <div class="feature-1-content">
                                 <h2>{{ $category->name }}</h2>
                                 <p>{{ trans('client.home.try_test') }}</p>
-                                <p><a href="#"
-                                      class="btn btn-primary px-4 rounded-0">{{ trans('client.home.learn_more') }}</a>
+                                <p>
+                                    <a href="{{ route('client.categories', ['category_id' => $category->id]) }}"
+                                       class="btn btn-primary px-4 rounded-0">{{ trans('client.home.learn_more') }}</a>
                                 </p>
                             </div>
                         </div>
