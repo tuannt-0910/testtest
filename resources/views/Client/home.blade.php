@@ -1,27 +1,7 @@
 @extends('Client.master')
 
 @section('content')
-    <div class="hero-slide owl-carousel site-blocks-cover">
-        <div class="intro-section background-image-hero1">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-                        <h1>{{ trans('client.home.academics_university') }}</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="intro-section background-image-hero1">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-                        <h1>{{ trans('client.home.you_can_learn_anything') }}</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('Client.layouts.slide')
 
     <div class="site-section pb-0">
         <div class="container">
@@ -74,8 +54,7 @@
                             </figure>
                             <div class="course-1-content pb-4">
                                 <h2>How To Create Mobile Apps Using Ionic</h2>
-                                <p><a href="#"
-                                      class="btn btn-primary rounded-0 px-4">{{ trans('client.home.enroll_test') }}</a>
+                                <p><a href="#" class="btn btn-primary rounded-0 px-4">{{ trans('client.home.enroll_test') }}</a>
                                 </p>
                             </div>
                         </div>

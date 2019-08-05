@@ -24,7 +24,7 @@
     <div class="container">
         <div class="d-flex align-items-center">
             <div class="site-logo">
-                <a href="{{ route('client.home') }}" class="d-block">
+                <a href="{{ route('home') }}" class="d-block">
                     <img src="{{ asset(config('constant.icon.link_logo')) }}" class="img-fluid">
                 </a>
             </div>

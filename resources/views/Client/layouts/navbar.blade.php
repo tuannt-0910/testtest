@@ -1,7 +1,7 @@
 <nav class="site-navigation position-relative text-right" role="navigation">
     <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
         <li class="active">
-            <a href="{{ route('client.home') }}" class="nav-link text-left">{{ trans('client.header.home') }}</a>
+            <a href="{{ route('home') }}" class="nav-link text-left">{{ trans('client.header.home') }}</a>
         </li>
         @foreach($categories as $category)
             <li class="has-children">
