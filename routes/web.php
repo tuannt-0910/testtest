@@ -11,6 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('login', 'Auth\LoginController@getLogin')->name('client.getLogin');
+Route::post('login', 'Auth\LoginController@postLogin')->name('client.postLogin');
+
+Route::group(['namespace' => 'Client'], function () {
+    Route::get('/', 'HomeController@home')->name('home');
+
+    Route::get('categories/{category_id}', 'CategoryController@getCategories')->name('client.categories');
+
+    Route::get('tests/{category_id}', 'CategoryController@getTests')->name('client.tests');
+
+    Route::get('test/{test_id}', 'TestController@getTest')->name('client.test.get');
+    Route::post('test/{test_id}', 'TestController@postTest')->name('client.test.post');
+
+    Route::get('ranking', 'RankingController@getRanking')->name('client.ranking');
+
+    Route::get('histories', 'HistoryController@getHistories')->name('client.histories');
+});

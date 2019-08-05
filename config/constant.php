@@ -5,10 +5,19 @@ return [
     'limit_questions' => 10,
     'default_password' => 'academics',
     'icon' => [
-        'link_logo' => 'Admin/assets/images/logo_light.png',
+        'link_logo' => 'Client/images/logo.jpg',
         'link_country_gb' => 'Admin/assets/images/flags/gb.png',
         'link_country_de' => 'Admin/assets/images/flags/de.png',
         'link_country_placeholder' => 'Admin/assets/images/placeholder.jpg',
+    ],
+    'links' => [
+        'link_facebook' => '#',
+        'link_youtube' => '#',
+        'link_twitter' => '#'
+    ],
+    'setting' => [
+        'phone_help' => '0136 548 245',
+        'email_help' => 'admin@gmail.com',
     ],
     'active' => 1,
     'not_active' => 0,

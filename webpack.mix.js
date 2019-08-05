@@ -50,3 +50,11 @@ mix.styles([
 mix.autoload({
     jquery: ['$', 'jQuery', 'window.jQuery'],
 });
+
+mix.styles([
+    'public/Client/css/style.css',
+    'public/Client/css/fix.css',
+], 'public/css/client.css')
+.options({
+    processCssUrls: false
+});
