@@ -1,6 +1,6 @@
 <?php
-if (!function_exists('src_image_use')) {
-    function src_image_use($user)
+if (!function_exists('srcImageUse')) {
+    function srcImageUse($user)
     {
         if ($user->image_id) {
             return asset($user->file->base_folder . '/' . $user->file->name);

@@ -45,7 +45,7 @@ return [
             'September',
             'October',
             'November',
-            'December'
+            'December',
         ],
     ],
     'users' => [

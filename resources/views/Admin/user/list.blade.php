@@ -60,7 +60,7 @@
                                     <td>{{ ((app('request')->page ?? 1) - 1) * $limit + $key + 1 }}</td>
                                     <td>
                                         <div class="media-left media-middle">
-                                            <img src="{{ src_image_use($user) }}" class="img-circle img-md" >
+                                            <img src="{{ srcImageUse($user) }}" class="img-circle img-md" >
                                         </div>
                                     </td>
                                     <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->lastname . ' ' . $user->firstname }}</a></td>

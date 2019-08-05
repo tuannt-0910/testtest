@@ -41,4 +41,9 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
             $query->where('tests.id', $id);
         })->paginate(config('constant.limit_questions_test'));
     }
+
+    public function getTestInCategory($categoryId)
+    {
+        return $this->_model->where('category_id', $categoryId)->get();
+    }
 }

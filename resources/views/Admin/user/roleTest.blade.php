@@ -15,7 +15,7 @@
                 <legend class="text-bold">{{ trans('page.test_role') }}</legend>
                 <div class="content-group-sm">
                     <h5 class="text-semibold no-margin">
-                        <img src="{{ src_image_use($user) }}" class="img-circle img-responsive image_profile"
+                        <img src="{{ srcImageUse($user) }}" class="img-circle img-responsive image_profile"
                         >
                         ({{ $user->username }}) {{ $user->lastname }} {{ $user->firstname }}
                     </h5>

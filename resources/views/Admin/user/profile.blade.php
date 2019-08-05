@@ -11,7 +11,7 @@
     <div class="content-group">
         <div class="panel-body bg-blue border-radius-top text-center">
             <a href="#" class="display-inline-block content-group-sm">
-                <img src="{{ src_image_use($user) }}" class="img-circle img-responsive image_profile">
+                <img src="{{ srcImageUse($user) }}" class="img-circle img-responsive image_profile">
             </a>
 
             <div class="content-group-sm">

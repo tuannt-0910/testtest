@@ -2,6 +2,7 @@
 
 return [
     'academics' => 'Academics',
+    'no_data' => 'No data',
     'header' => [
         'login' => 'Login',
         'home' => 'Home',
@@ -42,5 +43,18 @@ return [
             'cum molestias? Quod quae molestias modi fugiat quisquam. Eligendi recusandae officiis debitis quas ' .
             'beatae aliquam?',
         'new_update' => 'News & Updates',
+        'academics' => 'Academics',
     ],
+    'category' => [
+        'academics_categories' => 'Academics - Categories',
+        'categories' => 'Categories',
+        'name_category' => 'Category name',
+    ],
+    'tests' => [
+        'academics_tests' => 'Academics - Tests',
+        'test_code' => 'Test code',
+        'name_test' => 'Test name',
+        'test' => 'Tests',
+        'execute_time' => 'Execute time',
+    ]
 ];

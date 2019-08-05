@@ -9,4 +9,6 @@ interface TestRepositoryInterface
     public function getTest($id);
 
     public function getQuestionsByTestId($id);
+
+    public function getTestInCategory($categoryId);
 }
