@@ -7,7 +7,7 @@
 
     <div class="site-section pb-0">
         <div class="container">
-            <div class="row mb-5 justify-content-center text-center">
+            <div class="row justify-content-center text-center">
                 <div class="col-lg-4 mb-5">
                     <h2 class="section-title-underline mb-5">
                         <span>{{ trans('client.category.categories') }} - {{ $category->name }}</span>

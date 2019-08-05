@@ -11,4 +11,6 @@ interface TestRepositoryInterface
     public function getQuestionsByTestId($id);
 
     public function getTestInCategory($categoryId);
+
+    public function getQuestionAnswerTest($testId, $seed, $limit);
 }

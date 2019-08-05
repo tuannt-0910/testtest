@@ -32,7 +32,15 @@ class TestController extends Controller
 
     public function getTest($test_id)
     {
-        return view('Client.test');
+        $test = $this->testRepository->find($test_id);
+        if ($test) {
+            $seed = rand(1, 2000000000);
+            $test = $this->testRepository->getQuestionAnswerTest($test_id, $seed, $test->total_question);
+
+            return view('Client.test', ['test' => $test]);
+        }
+
+        return redirect()->route('home');
     }
 
     public function postTest(Request $request, $test_id)

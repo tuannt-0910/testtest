@@ -59,6 +59,19 @@ return [
     'testGuide' => [
         'academics_test_guide' => 'Academics - Test Guide',
         'guide' => 'Guide',
-        'ready' => 'Ready'
-    ]
+        'ready' => 'Ready',
+    ],
+    'history' => [
+        'academics_history' => 'Academics - History',
+        'history' => 'History',
+        'test_code' => 'Code',
+        'name_test' => 'Name',
+        'duration' => 'Duration',
+        'score' => 'Score',
+        'created_at' => 'Test date',
+    ],
+    'ranking' => [
+        'academics_ranking' => 'Academics - Ranking',
+        'ranking' => 'Ranking',
+    ],
 ];
