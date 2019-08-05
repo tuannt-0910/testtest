@@ -21,6 +21,8 @@ Route::group(['namespace' => 'Client'], function () {
 
     Route::get('tests/{category_id}', 'CategoryController@getTests')->name('client.tests');
 
+    Route::get('guide-test/{test_id}', 'TestController@getGuideTest')->name('client.test.guide');
+
     Route::get('test/{test_id}', 'TestController@getTest')->name('client.test.get');
     Route::post('test/{test_id}', 'TestController@postTest')->name('client.test.post');
 

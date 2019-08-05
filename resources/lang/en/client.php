@@ -55,5 +55,10 @@ return [
         'test_code' => 'Test code',
         'name_test' => 'Test name',
         'execute_time' => 'Execute time',
+    ],
+    'testGuide' => [
+        'academics_test_guide' => 'Academics - Test Guide',
+        'guide' => 'Guide',
+        'ready' => 'Ready'
     ]
 ];
