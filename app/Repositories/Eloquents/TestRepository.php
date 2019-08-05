@@ -41,4 +41,23 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
             $query->where('tests.id', $id);
         })->paginate(config('constant.limit_questions_test'));
     }
+
+    public function getTestInCategory($categoryId)
+    {
+        return $this->_model->where('category_id', $categoryId)->get();
+    }
+
+    public function getQuestionAnswerTest($testId, $seed, $limit)
+    {
+        return $this->_model->with([
+            'questions' => function ($query) use ($seed, $limit) {
+                $query->where('questions.deleted_at', null)->inRandomOrder($seed)->limit($limit);
+            },
+            'questions.file',
+            'questions.answers' => function ($query) use ($seed) {
+                $query->where('answers.deleted_at', null)->inRandomOrder($seed);
+            },
+            'questions.answers.file',
+        ])->where('id', $testId)->first();
+    }
 }

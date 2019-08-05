@@ -52,6 +52,7 @@ mix.autoload({
 });
 
 mix.styles([
+    'public/Admin/assets/css/icheck/icheck-material.min.css',
     'public/Client/css/style.css',
     'public/Client/css/fix.css',
 ], 'public/css/client.css')
