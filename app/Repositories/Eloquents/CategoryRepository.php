@@ -23,4 +23,8 @@ class CategoryRepository extends EloquentRepository implements CategoryRepositor
         return $this->_model->where('parent_id', null)->with(['childCategories', 'childCategories.tests'])->get();
     }
 
+    public function getCategories()
+    {
+        return $this->_model->where('parent_id', null)->with(['childCategories'])->get();
+    }
 }
