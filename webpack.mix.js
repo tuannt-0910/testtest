@@ -52,35 +52,9 @@ mix.autoload({
 });
 
 mix.styles([
-    'public/Client/fonts/front.css',
-    'public/Client/fonts/icomoon/style.css',
-    'public/Client/css/bootstrap.min.css',
-    'public/Client/css/jquery-ui.css',
-    'public/Client/css/owl.carousel.min.css',
-    'public/Client/css/owl.theme.default.min.css',
-    'public/Client/css/owl.theme.default.min.css',
-    'public/Client/css/jquery.fancybox.min.css',
-    'public/Client/css/bootstrap-datepicker.css',
-    'public/Client/fonts/flaticon/font/flaticon.css',
-    'public/Client/css/aos.css',
     'public/Client/css/style.css',
+    'public/Client/css/fix.css',
 ], 'public/css/client.css')
-.js([
-    'public/Client/js/jquery-3.3.1.min.js',
-    'public/Client/js/jquery-migrate-3.0.1.min.js',
-    'public/Client/js/jquery-ui.js',
-    'public/Client/js/popper.min.js',
-    'public/Client/js/bootstrap.min.js',
-    'public/Client/js/owl.carousel.min.js',
-    'public/Client/js/jquery.stellar.min.js',
-    'public/Client/js/jquery.countdown.min.js',
-    'public/Client/js/bootstrap-datepicker.min.js',
-    'public/Client/js/jquery.easing.1.3.js',
-    'public/Client/js/aos.js',
-    'public/Client/js/jquery.fancybox.min.js',
-    'public/Client/js/jquery.sticky.js',
-    'public/Client/js/main.js',
-], 'public/js/client.js')
 .options({
     processCssUrls: false
 });
