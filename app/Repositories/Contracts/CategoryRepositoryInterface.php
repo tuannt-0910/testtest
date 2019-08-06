@@ -9,4 +9,6 @@ interface CategoryRepositoryInterface
     public function getCategories();
 
     public function getChildCategories($parentCategory_id);
+
+    public function getAllChildCateTests();
 }

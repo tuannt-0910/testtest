@@ -3,6 +3,7 @@
 return [
     'paginate' => 10,
     'limit_questions' => 10,
+    'limit_ranking' => 10,
     'default_password' => 'academics',
     'icon' => [
         'link_logo' => 'Client/images/logo.jpg',
@@ -10,6 +11,11 @@ return [
         'link_country_de' => 'Admin/assets/images/flags/de.png',
         'link_country_placeholder' => 'Admin/assets/images/placeholder.jpg',
         'link_star' => 'Client/images/star.png',
+    ],
+    'ranking' => [
+        '0_ranking' => 'bg-warning',
+        '1_ranking' => 'bg-primary',
+        '2_ranking' => 'bg-success',
     ],
     'stars' => [
         '1_star' => 20,
