@@ -9,3 +9,12 @@
 .background-image-about_1 {
     background-image: url('../Client/images/about_1.jpg');
 }
+
+.background-primary {
+    background-color: #00c853;
+    color: #fff;
+}
+
+.w-20 {
+    width: 20%;
+}

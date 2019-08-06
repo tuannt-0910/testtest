@@ -69,9 +69,25 @@ return [
         'duration' => 'Duration',
         'score' => 'Score',
         'created_at' => 'Test date',
+        'test' => 'Test',
+        'back' => 'Back Category'
     ],
     'ranking' => [
         'academics_ranking' => 'Academics - Ranking',
         'ranking' => 'Ranking',
+        '#' => '#',
+        'user_name' => 'Username',
+        'email' => 'Email',
+        'test_code' => 'Code',
+        'name_test' => 'Name',
+        'score' => 'Score',
+    ],
+    'test' => [
+        'academics_test' => 'Academics - Test',
+        'content_question' => 'Question',
+        'send' => 'Send',
+        'score' => 'Score',
+        'duration' => 'Duration',
+        'questions' => 'Questions',
     ],
 ];

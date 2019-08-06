@@ -29,4 +29,6 @@ Route::group(['namespace' => 'Client'], function () {
     Route::get('ranking', 'RankingController@getRanking')->name('client.ranking');
 
     Route::get('histories', 'HistoryController@getHistories')->name('client.histories');
+
+    Route::get('history/{history_id}', 'HistoryController@getHistory')->name('client.history');
 });
