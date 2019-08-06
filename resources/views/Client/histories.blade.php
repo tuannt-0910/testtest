@@ -69,11 +69,11 @@
                                 <tbody>
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td><a href="#">{{ $history->test->code }}</a></td>
-                                            <td><a href="#">{{ $history->test->name }}</a></td>
-                                            <td><a href="#">{{ toMinutes($history->duration) }}</a></td>
-                                            <td><a href="#">{{ $history->score }}</a></td>
-                                            <td><a href="#">{{ $history->created_at }}</a></td>
+                                            <td><a href="{{ route('client.history', $history->id) }}">{{ $history->test->code }}</a></td>
+                                            <td><a href="{{ route('client.history', $history->id) }}">{{ $history->test->name }}</a></td>
+                                            <td><a href="{{ route('client.history', $history->id) }}">{{ toMinutes($history->duration) }}</a></td>
+                                            <td><a href="{{ route('client.history', $history->id) }}">{{ $history->score }}</a></td>
+                                            <td><a href="{{ route('client.history', $history->id) }}">{{ $history->created_at }}</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

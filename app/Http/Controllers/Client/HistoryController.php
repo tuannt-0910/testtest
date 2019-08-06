@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\CategoryRepositoryInterface as CategoryRepository;
 use App\Repositories\Contracts\HistoryRepositoryInterface as HistoryRepository;
+use App\Services\TestService;
 use Auth;
 
 class HistoryController extends Controller
@@ -14,12 +15,16 @@ class HistoryController extends Controller
 
     protected $historyRepository;
 
+    protected $testService;
+
     public function __construct(
         HistoryRepository $historyRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        TestService $testService
     ) {
         $this->historyRepository = $historyRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->testService = $testService;
     }
 
     public function getHistories(Request $request)
@@ -42,5 +47,16 @@ class HistoryController extends Controller
         ];
 
         return view('Client.histories', $datas);
+    }
+
+    public function getHistory($history_id)
+    {
+        $user_id = Auth::user()->id;
+        $history = $this->testService->getHistory($user_id, $history_id);
+        if ($history) {
+            return view('Client.history', ['history' => $history]);
+        }
+
+        return redirect()->route('home');
     }
 }

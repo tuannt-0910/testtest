@@ -76,4 +76,26 @@ class TestService
 
         return $test;
     }
+
+    public function getHistory($user_id, $history_id)
+    {
+        $history = $this->historyRepository->find($history_id);
+        if ($history) {
+            $wrongQuestions = [];
+            $user_answers = json_decode($history->user_answer);
+            foreach ($user_answers as $user_answer) {
+                $question = $this->historyRepository->getQuestionById($user_answer->question_id);
+                if ($question) {
+                    $question->no = $user_answer->no;
+                    $question->chosen_answer = $user_answer->chosen_answer;
+                    $wrongQuestions[] = $question;
+                }
+            }
+            $history->questions = $wrongQuestions;
+
+            return $history;
+        }
+
+        return false;
+    }
 }

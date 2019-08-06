@@ -69,7 +69,8 @@ return [
         'duration' => 'Duration',
         'score' => 'Score',
         'created_at' => 'Test date',
-        'test' => 'Test'
+        'test' => 'Test',
+        'back' => 'Back Category'
     ],
     'ranking' => [
         'academics_ranking' => 'Academics - Ranking',

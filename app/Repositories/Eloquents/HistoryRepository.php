@@ -3,7 +3,9 @@
 namespace App\Repositories\Eloquents;
 
 use App\Models\History;
+use App\Models\Question;
 use App\Repositories\Contracts\HistoryRepositoryInterface;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class HistoryRepository extends EloquentRepository implements HistoryRepositoryInterface
@@ -59,5 +61,38 @@ class HistoryRepository extends EloquentRepository implements HistoryRepositoryI
         }
 
         return $query->paginate(config('constant.limit_history'));
+    }
+
+    public function getHistory($user_id, $history_id)
+    {
+        $user = User::find($user_id);
+        $history = $this->_model->find($history_id);
+        if ($history && $history->user_id == $user->id) {
+            $seed = $history->random_seed;
+            $limit = $history->test->total_question;
+
+            return $this->_model->with([
+                'test',
+                'test.questions' => function ($query) use ($seed, $limit) {
+                    $query->where('questions.deleted_at', null)->inRandomOrder($seed)->limit($limit);
+                },
+                'test.questions.file',
+                'test.questions.answers' => function ($query) use ($seed) {
+                    $query->where('answers.deleted_at', null)->inRandomOrder($seed);
+                },
+                'test.questions.answers.file',
+            ])->find($history_id);
+        }
+
+        return false;
+    }
+
+    public function getQuestionById($question_id)
+    {
+        return Question::with([
+            'file',
+            'answers',
+            'answers.file',
+        ])->find($question_id);
     }
 }
