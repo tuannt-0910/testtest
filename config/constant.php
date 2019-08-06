@@ -9,6 +9,14 @@ return [
         'link_country_gb' => 'Admin/assets/images/flags/gb.png',
         'link_country_de' => 'Admin/assets/images/flags/de.png',
         'link_country_placeholder' => 'Admin/assets/images/placeholder.jpg',
+        'link_star' => 'Client/images/star.png',
+    ],
+    'stars' => [
+        '1_star' => 20,
+        '2_star' => 40,
+        '3_star' => 60,
+        '4_star' => 80,
+        '5_star' => 100,
     ],
     'links' => [
         'link_facebook' => '#',

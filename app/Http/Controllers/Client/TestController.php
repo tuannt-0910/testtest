@@ -5,15 +5,21 @@ namespace App\Http\Controllers\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
+use App\Services\TestService;
+use Auth;
 
 class TestController extends Controller
 {
     protected $testRepository;
 
+    protected $testService;
+
     public function __construct(
-        TestRepository $testRepository
+        TestRepository $testRepository,
+        TestService $testService
     ) {
         $this->testRepository = $testRepository;
+        $this->testService = $testService;
     }
 
     public function getGuideTest($test_id)
@@ -37,6 +43,8 @@ class TestController extends Controller
             $seed = rand(1, 2000000000);
             $test = $this->testRepository->getQuestionAnswerTest($test_id, $seed, $test->total_question);
 
+            session()->put('test_seed', $seed);
+
             return view('Client.test', ['test' => $test]);
         }
 
@@ -45,6 +53,13 @@ class TestController extends Controller
 
     public function postTest(Request $request, $test_id)
     {
-        return view('Client.test');
+        $seed = session('test_seed');
+        $user_id = null;
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+        }
+        $result = $this->testService->getResult($request, $seed, $test_id, $user_id);
+
+        return view('Client.result', ['test' => $result]);
     }
 }

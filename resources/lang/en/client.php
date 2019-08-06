@@ -74,4 +74,12 @@ return [
         'academics_ranking' => 'Academics - Ranking',
         'ranking' => 'Ranking',
     ],
+    'test' => [
+        'academics_test' => 'Academics - Test',
+        'content_question' => 'Question',
+        'send' => 'Send',
+        'score' => 'Score',
+        'duration' => 'Duration',
+        'questions' => 'Questions',
+    ],
 ];
