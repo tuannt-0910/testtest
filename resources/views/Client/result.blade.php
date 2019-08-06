@@ -35,7 +35,7 @@
                                     <tr>
                                         <th>{{ $test->score ?? 0 }}</th>
                                         <th>{{ $test->correctNumber }} / {{ $test->total_question }}</th>
-                                        <th>{{ floor($test->history->duration / 60) }} : {{ $test->history->duration % 60 }}</th>
+                                        <th>{{ toMinutes($test->history->duration) }}</th>
                                     </tr>
                                 </tbody>
                             </table>

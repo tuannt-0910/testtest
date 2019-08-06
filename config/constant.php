@@ -4,6 +4,7 @@ return [
     'paginate' => 10,
     'limit_questions' => 10,
     'limit_ranking' => 10,
+    'limit_history' => 10,
     'default_password' => 'academics',
     'icon' => [
         'link_logo' => 'Client/images/logo.jpg',

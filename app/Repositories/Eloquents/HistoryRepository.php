@@ -33,4 +33,31 @@ class HistoryRepository extends EloquentRepository implements HistoryRepositoryI
 
         return $query->get();
     }
+
+    public function getHistories($user_id, $test_id = null, $score = null, $from_date = null, $to_date = null)
+    {
+        $query = $this->_model->with([
+            'test',
+            'user',
+        ])->where('user_id', $user_id)
+        ->orderBy('created_at', 'DESC');
+
+        if ($test_id) {
+            $query->where('test_id', $test_id);
+        }
+
+        if ($score) {
+            $query->where('score', '>=', $score);
+        }
+
+        if ($from_date) {
+            $query->whereDate('created_at', '>=', $from_date);
+        }
+
+        if ($to_date) {
+            $query->whereDate('created_at', '<=', $to_date);
+        }
+
+        return $query->paginate(config('constant.limit_history'));
+    }
 }

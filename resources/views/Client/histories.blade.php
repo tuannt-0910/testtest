@@ -22,37 +22,37 @@
                         </div>
                         <div class="feature-1-content">
                             <form class="row mb-4">
-                                <div class="col-lg-2">
-                                    <select name="category_id" class="form-control">
-                                        <optgroup label="sdfgdf">
-                                            <option></option>
-                                        </optgroup>
+                                <div class="col-lg-3">
+                                    <select name="test_id" class="form-control">
+                                        <option value="">{{ trans('client.history.test') }}</option>
+                                        @foreach($childCategories as $category)
+                                            <optgroup label="{{ $category->name }}">
+                                                @foreach($category->tests as $test)
+                                                    <option value="{{ $test->id }}" @if($test_id == $test->id){{ 'selected' }}@endif>
+                                                        ({{ $test->code }}) {{ $test->name }}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
                                     </select>
                                 </div>
 
-                                <div class="col-lg-2">
-                                    <select name="category_id" class="form-control">
-                                        <optgroup label="sdfgdf">
-                                            <option></option>
-                                        </optgroup>
-                                    </select>
+                                <div class="col-lg-1">
+                                    <input name="score" type="text" value="{{ $score }}"
+                                           class="form-control" placeholder="{{ trans('client.history.score') }}">
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <input name="from_date" type="date" value="{{ $from_date }}" class="form-control">
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <input name="to_date" type="date" value="{{ $to_date }}" class="form-control">
                                 </div>
 
                                 <div class="col-lg-2">
-                                    <input type="text" class="form-control" placeholder="score">
-                                </div>
-
-                                <div class="col-lg-2">
-                                    <input type="date" class="form-control" placeholder="from">
-                                </div>
-
-                                <div class="col-lg-2">
-                                    <input type="date" class="form-control" placeholder="to">
-                                </div>
-
-                                <div class="col-lg-2">
-                                    <button class="btn btn-primary mr-2"><i class="icon-search"></i></button>
-                                    <button class="btn btn-danger"><i class="icon-remove"></i></button>
+                                    <button type="submit" class="btn btn-primary mr-2"><i class="icon-search"></i></button>
+                                    <a href="{{ route('client.histories') }}" class="btn btn-danger"><i class="icon-remove"></i></a>
                                 </div>
                             </form>
 
@@ -67,9 +67,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach($histories as $history)
+                                        <tr>
+                                            <td><a href="#">{{ $history->test->code }}</a></td>
+                                            <td><a href="#">{{ $history->test->name }}</a></td>
+                                            <td><a href="#">{{ toMinutes($history->duration) }}</a></td>
+                                            <td><a href="#">{{ $history->score }}</a></td>
+                                            <td><a href="#">{{ $history->created_at }}</a></td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+
+                            {{ $histories->appends(request()->input())->links() }}
                         </div>
                     </div>
                 </div>
