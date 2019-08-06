@@ -207,7 +207,7 @@ class TestController extends Controller
     public function postChooseAddQuestion(Request $request, $test_id)
     {
         $test = $this->testQuestionRepository->find($test_id);
-        if ($test && $request->seleted_questions && count($request->seleted_questions) > 0 ) {
+        if ($test && $request->seleted_questions && count($request->seleted_questions) > 0) {
             $tests = [$test_id];
             $questions = $request->seleted_questions;
             $this->testQuestionRepository->createRelationTestsQuestions($tests, $questions);

@@ -45,6 +45,9 @@
     <script src="{{ asset('Client/js/jquery.fancybox.min.js') }}"></script>
     <script src="{{ asset('Client/js/jquery.sticky.js') }}"></script>
     <script src="{{ asset('Client/js/jquery.mb.YTPlayer.min.js') }}"></script>
+    <script src="{{ asset('Client/js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('Client/js/main.js') }}"></script>
+
+    @yield('script')
 </body>
 </html>

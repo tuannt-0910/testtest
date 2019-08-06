@@ -3,12 +3,27 @@
 return [
     'paginate' => 10,
     'limit_questions' => 10,
+    'limit_ranking' => 10,
+    'limit_history' => 10,
     'default_password' => 'academics',
     'icon' => [
         'link_logo' => 'Client/images/logo.jpg',
         'link_country_gb' => 'Admin/assets/images/flags/gb.png',
         'link_country_de' => 'Admin/assets/images/flags/de.png',
         'link_country_placeholder' => 'Admin/assets/images/placeholder.jpg',
+        'link_star' => 'Client/images/star.png',
+    ],
+    'ranking' => [
+        '0_ranking' => 'bg-warning',
+        '1_ranking' => 'bg-primary',
+        '2_ranking' => 'bg-success',
+    ],
+    'stars' => [
+        '1_star' => 20,
+        '2_star' => 40,
+        '3_star' => 60,
+        '4_star' => 80,
+        '5_star' => 100,
     ],
     'links' => [
         'link_facebook' => '#',

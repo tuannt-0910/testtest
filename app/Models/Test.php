@@ -62,7 +62,8 @@ class Test extends Model
     {
         return $this->belongsToMany('App\User', 'test_user', 'test_id', 'user_id')
             ->withPivot(['deleted_at'])
-            ->withTimestamps();
+            ->withTimestamps()
+            ->wherePivot('deleted_at', null);
     }
 
     public function listHistories()
@@ -77,6 +78,9 @@ class Test extends Model
 
     public function questions()
     {
-        return $this->belongsToMany('App\Models\Question', 'test_question', 'test_id', 'question_id');
+        return $this->belongsToMany('App\Models\Question', 'test_question', 'test_id', 'question_id')
+            ->withPivot(['deleted_at'])
+            ->withTimestamps()
+            ->wherePivot('deleted_at', null);
     }
 }
