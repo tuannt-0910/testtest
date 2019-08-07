@@ -26,7 +26,7 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
 
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'users', 'middleware' => 'checkViewUsers'], function () {
         Route::get('/', 'UserController@index')->name('admin.users.index');
 
         Route::get('profile/{id?}', 'UserController@profile')->name('admin.users.profile');
@@ -40,9 +40,10 @@ Route::group([
         Route::post('role_tests/{user_id}', 'UserController@postRoleTest')->name('admin.users.postRoleTest');
     });
 
-    Route::resource('categories', 'CategoryController')->except(['show']);
+    Route::resource('categories', 'CategoryController')->middleware('checkViewCategories')
+        ->except(['show']);
 
-    Route::group(['prefix' => 'tests'], function () {
+    Route::group(['prefix' => 'tests', 'middleware' => 'checkViewTests'], function () {
         Route::get('choose-add-question/{test_id}', 'TestController@getChooseAddQuestion')
             ->name('admin.questions.chooseAddQuestion');
         Route::post('choose-add-question/{test_id}', 'TestController@postChooseAddQuestion')
@@ -51,16 +52,18 @@ Route::group([
 
         Route::get('getTests', 'TestController@getTests')->name('admin.test.getTests');
     });
-    Route::resource('tests', 'TestController');
+    Route::resource('tests', 'TestController')->middleware('checkViewTests');
 
-    Route::group(['prefix' => 'questions'], function () {
+    Route::group(['prefix' => 'questions', 'middleware' => 'checkViewQuestions'], function () {
         Route::get('getQuestions', 'QuestionController@getQuestions')->name('admin.questions.getQuestions');
 
         Route::get('import', 'QuestionController@getImport')->name('admin.questions.getImport');
         Route::post('import', 'QuestionController@postImport')->name('admin.questions.postImport');
     });
-    Route::resource('questions', 'QuestionController');
+    Route::resource('questions', 'QuestionController')->middleware('checkViewQuestions');
 
-    Route::resource('comments', 'CommentController')->except(['show', 'edit', 'update', 'create']);
-    Route::get('getComments', 'CommentController@getComments')->name('admin.comments.getComments');
+    Route::group(['middleware' => 'checkViewCommands'], function () {
+        Route::resource('comments', 'CommentController')->except(['show', 'edit', 'update', 'create']);
+        Route::get('getComments', 'CommentController@getComments')->name('admin.comments.getComments');
+    });
 });
