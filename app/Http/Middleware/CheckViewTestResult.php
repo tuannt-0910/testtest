@@ -19,6 +19,6 @@ class CheckViewTestResult
             return $next($request);
         }
 
-        return redirect()->route('client.home');
+        return redirect()->route('home');
     }
 }

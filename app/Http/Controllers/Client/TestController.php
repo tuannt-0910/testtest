@@ -55,10 +55,13 @@ class TestController extends Controller
     {
         $test = $this->testRepository->find($test_id);
         if ($test) {
-            $seed = rand(1, 2000000000);
+            if (session()->has('test_seed_' . $test_id)) {
+                $seed = session('test_seed_' . $test_id);
+            } else {
+                $seed = rand(1, 2000000000);
+                session()->put('test_seed_' . $test_id, $seed);
+            }
             $test = $this->testRepository->getQuestionAnswerTest($test_id, $seed, $test->total_question);
-
-            session()->put('test_seed', $seed);
 
             return view('Client.test', ['test' => $test]);
         }
@@ -68,19 +71,18 @@ class TestController extends Controller
 
     public function postTest(Request $request, $test_id)
     {
-        $seed = session('test_seed');
         $user_id = null;
         if (Auth::check()) {
             $user_id = Auth::user()->id;
         }
-        $result = $this->testService->getResult($request, $seed, $test_id, $user_id);
+        $result = $this->testService->getResult($request, $test_id, $user_id);
 
         return view('Client.result', ['test' => $result]);
     }
 
     public function postCommand(Request $request, $question_id)
     {
-        if (Auth::user()->can('add-command')) {
+        if (Auth::user()->can('add-command-client')) {
             $comment = [
                 'content' => $request->input('content'),
                 'user_id' => Auth::user()->id,

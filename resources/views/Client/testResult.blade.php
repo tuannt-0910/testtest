@@ -28,10 +28,12 @@
                                         <label class="text-semibold">
                                             {{ trans('client.test.content_question') }} {{ $key + 1 }}: ({{ $question->code }}) {{ $question->content }}
                                         </label>
-                                        <button type="button" class="btn btn-default btn-sm close text-danger"
-                                                data-toggle="modal" data-target="#modal_{{ $question->id }}">
-                                            <i class="icon-comments"></i>
-                                        </button>
+                                        @can('view-command-client')
+                                            <button type="button" class="btn btn-default btn-sm close text-danger"
+                                                    data-toggle="modal" data-target="#modal_{{ $question->id }}">
+                                                <i class="icon-comments"></i>
+                                            </button>
+                                        @endcan
                                     </div>
 
                                     <div class="row">
@@ -55,48 +57,50 @@
                                         </div>
                                     </div>
 
-                                    @csrf
-                                    <div id="modal_{{ $question->id }}" class="modal fade">
-                                        <div class="modal-dialog mw-60">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="close">{{ trans('page.question.comments') }} - ({{ $question->code }})</h5>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    <div class="messages">
-                                                        @foreach($question->comments as $comment)
-                                                            <div id="message_{{ $comment->id }}">
-                                                                <h6 class="text-semibold">{{ $comment->user->username }} -
-                                                                    <span class="content-group-sm text-muted">{{ $comment->created_at }}</span>
-                                                                </h6>
-                                                                <p>{{ $comment->content }}</p>
-
-                                                                <hr>
-                                                            </div>
-                                                        @endforeach
+                                    @can('view-command-client')
+                                        @csrf
+                                        <div id="modal_{{ $question->id }}" class="modal fade">
+                                            <div class="modal-dialog mw-60">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="close">{{ trans('page.question.comments') }} - ({{ $question->code }})</h5>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
 
-                                                    @if(count($question->comments) == 0)
-                                                        <h6 class="text-semibold">{{ trans('page.question.no_comments') }}</h6>
-                                                    @endif
+                                                    <div class="modal-body">
+                                                        <div class="messages">
+                                                            @foreach($question->comments as $comment)
+                                                                <div id="message_{{ $comment->id }}">
+                                                                    <h6 class="text-semibold">{{ $comment->user->username }} -
+                                                                        <span class="content-group-sm text-muted">{{ $comment->created_at }}</span>
+                                                                    </h6>
+                                                                    <p>{{ $comment->content }}</p>
 
-                                                    @can('add-command')
-                                                        <textarea rows="5" cols="5" class="form-control content_message"
-                                                                  placeholder="{{ trans('page.question.default_text_comment') }}"></textarea>
-                                                        <button data-urlStore="{{ route('client.comment.post', ['question_id' => $question->id]) }}"
-                                                                data-question_id="{{ $question->id }}"
-                                                                type="button" class="btn btn-primary send_message">{{ trans('page.question.send') }}</button>
-                                                    @endcan
-                                                </div>
+                                                                    <hr>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-link" data-dismiss="modal">{{ trans('page.question.close') }}</button>
+                                                        @if(count($question->comments) == 0)
+                                                            <h6 class="text-semibold">{{ trans('page.question.no_comments') }}</h6>
+                                                        @endif
+
+                                                        @can('add-command-client')
+                                                            <textarea rows="5" cols="5" class="form-control content_message"
+                                                                      placeholder="{{ trans('page.question.default_text_comment') }}"></textarea>
+                                                            <button data-urlStore="{{ route('client.comment.post', ['question_id' => $question->id]) }}"
+                                                                    data-question_id="{{ $question->id }}"
+                                                                    type="button" class="btn btn-primary send_message">{{ trans('page.question.send') }}</button>
+                                                        @endcan
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-link" data-dismiss="modal">{{ trans('page.question.close') }}</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endcan
                                 </div>
                             @endforeach
                         </div>
@@ -120,7 +124,7 @@
 @endsection
 
 @section('script')
-    @can('view-commands')
+    @can('add-command-client')
         <script type="text/javascript" src="{{ asset('Client/js/comment.js') }}"></script>
     @endcan
 @endsection

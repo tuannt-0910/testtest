@@ -19,10 +19,15 @@ class TestService
         $this->historyRepository = $historyRepository;
     }
 
-    public function getResult($request, $seed, $test_id, $user_id)
+    public function getResult($request, $test_id, $user_id)
     {
         $test = $this->testRepository->find($test_id);
         if ($test) {
+            $seed = session('test_seed_' . $test_id);
+            if (!$seed) {
+                $history = session('history_' . $test_id);
+                $seed = $history->random_seed;
+            }
             $test = $this->testRepository->getQuestionAnswerTest($test_id, $seed, $test->total_question);
 
             return $this->scoreTest($request, $seed, $test_id, $user_id, $test);
@@ -71,7 +76,13 @@ class TestService
             'score' => $score,
             'user_answer' => $wrongQuestions
         ];
-        $history = $this->historyRepository->create($history);
+        if (session()->has('test_seed_' . $test_id)) {
+            $history = $this->historyRepository->create($history);
+            session()->forget('test_seed_' . $test_id);
+            session()->put('history_' . $test_id, $history);
+        } else {
+            $history = session('history_' . $test_id, $history);
+        }
         $test->history = $history;
 
         return $test;

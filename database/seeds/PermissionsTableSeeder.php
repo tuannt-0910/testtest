@@ -104,6 +104,14 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'remove-question',
             ],
             [
+                'name' => 'Add Command Client',
+                'slug' => 'add-command-client',
+            ],
+            [
+                'name' => 'View Commands Client',
+                'slug' => 'view-commands-client',
+            ],
+            [
                 'name' => 'View Commands',
                 'slug' => 'view-commands',
             ],
