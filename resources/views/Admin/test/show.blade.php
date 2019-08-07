@@ -38,9 +38,15 @@
 
                 <div class="form-group">
                     <div class="text-right">
-                        <a href="{{ route('questions.create') }}" class="btn btn-primary mr-5">{{ trans('page.question.create_question') }}</a>
-                        <a href="{{ route('admin.questions.chooseAddQuestion', ['test_id' => $test->id]) }}" class="btn btn-default mr-5">{{ trans('page.question.choose_question') }}</a>
-                        <a href="{{ route('admin.questions.getImport') }}" class="btn btn-success">{{ trans('page.question.import_question') }}</a>
+                        @can('add-question')
+                            <a href="{{ route('questions.create') }}" class="btn btn-primary mr-5">{{ trans('page.question.create_question') }}</a>
+                        @endcan
+                        @can('choose-question-test')
+                            <a href="{{ route('admin.questions.chooseAddQuestion', ['test_id' => $test->id]) }}" class="btn btn-default mr-5">{{ trans('page.question.choose_question') }}</a>
+                        @endcan
+                        @can('import-questions')
+                            <a href="{{ route('admin.questions.getImport') }}" class="btn btn-success">{{ trans('page.question.import_question') }}</a>
+                        @endcan
                     </div>
                 </div>
                 <hr />

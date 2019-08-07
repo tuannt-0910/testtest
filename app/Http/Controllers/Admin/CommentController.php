@@ -66,18 +66,22 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = [
-            'content' => $request->input('content'),
-            'user_id' => Auth::user()->id,
-            'question_id' => $request->input('question_id'),
-        ];
-        $comment = $this->commentRepository->create($comment)->load(['user']);
-        $data = [
-            'comment' => $comment,
-            'urlDestroy' => route('comments.destroy', ['id' => $comment->id]),
-        ];
+        if (Auth::user()->can('add-command')) {
+            $comment = [
+                'content' => $request->input('content'),
+                'user_id' => Auth::user()->id,
+                'question_id' => $request->input('question_id'),
+            ];
+            $comment = $this->commentRepository->create($comment)->load(['user']);
+            $data = [
+                'comment' => $comment,
+                'urlDestroy' => route('comments.destroy', ['id' => $comment->id]),
+            ];
 
-        return response()->json($data);
+            return response()->json($data);
+        }
+
+        return response()->json(false);
     }
 
     /**
@@ -88,8 +92,12 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $checkDelete = $this->commentRepository->delete($id);
+        if (Auth::user()->can('remove-command')) {
+            $checkDelete = $this->commentRepository->delete($id);
 
-        return response()->json($checkDelete);
+            return response()->json($checkDelete);
+        }
+
+        return response()->json(false);
     }
 }

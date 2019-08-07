@@ -18,6 +18,6 @@ class CheckViewQuestions
         if ($request->user()->can('view-questions')) {
             return $next($request);
         }
-        return redirect()->route('Admin.home');
+        return redirect()->route('admin.home');
     }
 }

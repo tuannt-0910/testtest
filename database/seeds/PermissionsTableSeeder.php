@@ -72,6 +72,10 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'edit-test',
             ],
             [
+                'name' => 'Choose Question in Test',
+                'slug' => 'choose-question-test',
+            ],
+            [
                 'name' => 'Remove Test',
                 'slug' => 'remove-test',
             ],

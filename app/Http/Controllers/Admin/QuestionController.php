@@ -130,7 +130,11 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('Admin.question.add');
+        if (Auth::user()->can('add-question')) {
+            return view('Admin.question.add');
+        }
+
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -141,23 +145,27 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $question = $this->saveQuestion($request);
+        if (Auth::user()->can('add-question')) {
+            $question = $this->saveQuestion($request);
 
-        for ($i = 1; $i <= 4; $i++) {
-            if ($request->input('answer_content_' . $i) || $request->input('answer_file_' . $i)) {
-                $this->saveAnswer(
-                    $request,
-                    $question->id,
-                    'answer_content_' . $i,
-                    'answer_file_' . $i,
-                    $i == $request->input('key') ? 1 : 0,
-                    $i <= count($question->answers) ? $question->answers[$i - 1]->id : null
-                );
+            for ($i = 1; $i <= 4; $i++) {
+                if ($request->input('answer_content_' . $i) || $request->input('answer_file_' . $i)) {
+                    $this->saveAnswer(
+                        $request,
+                        $question->id,
+                        'answer_content_' . $i,
+                        'answer_file_' . $i,
+                        $i == $request->input('key') ? 1 : 0,
+                        $i <= count($question->answers) ? $question->answers[$i - 1]->id : null
+                    );
+                }
             }
+
+            return redirect()->route('questions.show', ['id' => $question->id])
+                ->with('success', Config::get('constant.success'));
         }
 
-        return redirect()->route('questions.show', ['id' => $question->id])
-            ->with('success', Config::get('constant.success'));
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -185,7 +193,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->questionRepository->find($id);
-        if ($question) {
+        if ($question && Auth::user()->can('edit-question')) {
             return view('Admin.question.edit', ['question' => $question]);
         } else {
             return redirect()->route('questions.index');
@@ -202,7 +210,7 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         $question = $this->questionRepository->find($id);
-        if ($question) {
+        if ($question && Auth::user()->can('edit-question')) {
             $this->saveQuestion($request, $id);
 
             for ($i = 1; $i <= 4; $i++) {
@@ -291,7 +299,7 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = $this->questionRepository->find($id);
-        if ($question) {
+        if ($question && Auth::user()->can('remove-question')) {
             $this->questionRepository->delete($id);
 
             return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
@@ -302,22 +310,30 @@ class QuestionController extends Controller
 
     public function getImport(Request $request)
     {
-        $tests = $this->testRepository->getAllTest();
-        if ($request->test_id) {
-            $selected_test = $this->testRepository->find($request->test_id);
-            if ($selected_test) {
-                return view('Admin.question.import', ['tests' => $tests, 'selected_test' => $selected_test]);
+        if (Auth::user()->can('import-questions')) {
+            $tests = $this->testRepository->getAllTest();
+            if ($request->test_id) {
+                $selected_test = $this->testRepository->find($request->test_id);
+                if ($selected_test) {
+                    return view('Admin.question.import', ['tests' => $tests, 'selected_test' => $selected_test]);
+                }
             }
+
+            return view('Admin.question.import', ['tests' => $tests]);
         }
 
-        return view('Admin.question.import', ['tests' => $tests]);
+        return redirect()->route('questions.index');
     }
 
     public function postImport(Request $request)
     {
-        $this->excelService->importFileQuestion($request);
+        if (Auth::user()->can('import-questions')) {
+            $this->excelService->importFileQuestion($request);
 
-        return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
+            return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
+        }
+
+        return redirect()->route('questions.index');
     }
 
     public function getSearchQuestion(Request $request)
