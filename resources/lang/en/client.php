@@ -45,6 +45,7 @@ return [
             'beatae aliquam?',
         'new_update' => 'News & Updates',
         'academics' => 'Academics',
+        'free' => 'Free++',
     ],
     'category' => [
         'academics_categories' => 'Academics - Categories',
