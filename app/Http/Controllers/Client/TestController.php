@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
+use App\Repositories\Contracts\CommentRepositoryInterface as CommentRepository;
 use App\Services\TestService;
 use Auth;
 
@@ -14,12 +15,16 @@ class TestController extends Controller
 
     protected $testService;
 
+    protected $commentRepository;
+
     public function __construct(
         TestRepository $testRepository,
-        TestService $testService
+        TestService $testService,
+        CommentRepository $commentRepository
     ) {
         $this->testRepository = $testRepository;
         $this->testService = $testService;
+        $this->commentRepository = $commentRepository;
     }
 
     public function getGuideTest($test_id)
@@ -31,6 +36,16 @@ class TestController extends Controller
             } else {
                 return redirect()->route('client.test.get', ['test_id' => $test_id]);
             }
+        }
+
+        return redirect()->route('home');
+    }
+
+    public function getResult($test_id)
+    {
+        $test = $this->testRepository->getQuestionAnswerResult($test_id);
+        if ($test) {
+            return view('Client.testResult', ['test' => $test]);
         }
 
         return redirect()->route('home');
@@ -61,5 +76,25 @@ class TestController extends Controller
         $result = $this->testService->getResult($request, $seed, $test_id, $user_id);
 
         return view('Client.result', ['test' => $result]);
+    }
+
+    public function postCommand(Request $request, $question_id)
+    {
+        if (Auth::user()->can('add-command')) {
+            $comment = [
+                'content' => $request->input('content'),
+                'user_id' => Auth::user()->id,
+                'question_id' => $request->input('question_id'),
+            ];
+            $comment = $this->commentRepository->create($comment)->load(['user']);
+            $data = [
+                'comment' => $comment,
+                'urlDestroy' => route('comments.destroy', ['id' => $comment->id]),
+            ];
+
+            return response()->json($data);
+        }
+
+        return response()->json(false);
     }
 }

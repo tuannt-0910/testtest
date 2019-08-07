@@ -76,6 +76,12 @@
                                             <td><a href="{{ route('client.history', $history->id) }}">{{ $history->created_at }}</a></td>
                                         </tr>
                                     @endforeach
+
+                                    @if(!count($histories))
+                                        <tr>
+                                            <td colspan="5">{{ trans('client.no_data') }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
 

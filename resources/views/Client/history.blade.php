@@ -70,12 +70,12 @@
                                             <div class="col-md-6">
                                                 <div class="
                                                     @if($answer->correct_answer)
-                                                {{ 'icheck-material-green ' }}
-                                                @elseif($answer->correct_answer != $question->chosen_answer)
-                                                {{ 'icheck-material-red ' }}
-                                                @else
-                                                {{ 'icheck-material-gray ' }}
-                                                @endif
+                                                        {{ 'icheck-material-green ' }}
+                                                    @elseif($answer->correct_answer != $question->chosen_answer)
+                                                        {{ 'icheck-material-red ' }}
+                                                    @else
+                                                        {{ 'icheck-material-gray ' }}
+                                                    @endif
                                                     pl-2
                                                     ">
                                                     <input type="radio" disabled

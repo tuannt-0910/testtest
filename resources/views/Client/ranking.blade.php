@@ -68,6 +68,12 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
+                                    @if(!count($rankings))
+                                        <tr>
+                                            <td colspan="6">{{ trans('client.no_data') }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

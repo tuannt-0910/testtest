@@ -124,8 +124,8 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'set-role',
             ],
             [
-                'name' => 'Test Test',
-                'slug' => 'test-test',
+                'name' => 'View Result',
+                'slug' => 'view-result',
             ],
         ];
         foreach ($data as $item) {
