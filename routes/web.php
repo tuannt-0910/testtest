@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('login', 'Auth\LoginController@getLogin')->name('client.getLogin');
-Route::post('login', 'Auth\LoginController@postLogin')->name('client.postLogin');
+Route::get('login', 'Auth\LoginController@getLoginClient')->name('client.getLogin');
+Route::post('login', 'Auth\LoginController@loginClient')->name('client.postLogin');
 
 Route::group(['namespace' => 'Client'], function () {
     Route::get('/', 'HomeController@home')->name('home');
@@ -28,7 +28,9 @@ Route::group(['namespace' => 'Client'], function () {
 
     Route::get('ranking', 'RankingController@getRanking')->name('client.ranking');
 
-    Route::get('histories', 'HistoryController@getHistories')->name('client.histories');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('histories', 'HistoryController@getHistories')->name('client.histories');
 
-    Route::get('history/{history_id}', 'HistoryController@getHistory')->name('client.history');
+        Route::get('history/{history_id}', 'HistoryController@getHistory')->name('client.history');
+    });
 });

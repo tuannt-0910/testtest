@@ -5,6 +5,7 @@ return [
     'no_data' => 'No data',
     'header' => [
         'login' => 'Login',
+        'logout' => 'Logout',
         'home' => 'Home',
         'blog' => 'Blog',
         'ranking' => 'Ranking',
@@ -89,5 +90,12 @@ return [
         'score' => 'Score',
         'duration' => 'Duration',
         'questions' => 'Questions',
+    ],
+    'login' => [
+        'academics_login' => 'Academics - Login',
+        'email' => 'Email',
+        'password' => 'Password',
+        'login' => 'Log in',
+        'login_false' => 'Login false',
     ],
 ];

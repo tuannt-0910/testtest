@@ -41,6 +41,23 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function getLoginClient()
+    {
+        return view('Client.login');
+    }
+
+    public function loginClient(LoginRequest $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                return redirect()->route('home');
+        } else {
+            return redirect()->back()
+                ->withErrors(['password' => Config::get('constant.input_errors.email_password_wrong')]);
+        }
+    }
+
     public function getLoginAdmin()
     {
         return view('Admin.login');
