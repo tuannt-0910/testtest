@@ -11,6 +11,7 @@ use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
 use App\Services\ExcelService;
 use Yajra\Datatables\Datatables;
 use Config;
+use Auth;
 
 class QuestionController extends Controller
 {
@@ -52,6 +53,7 @@ class QuestionController extends Controller
     public function getQuestions()
     {
         $questions = $this->questionRepository->getAllQuestions();
+        $user = Auth::user();
 
         return Datatables::of($questions)
             ->editColumn('code', function ($question) {
@@ -91,24 +93,29 @@ class QuestionController extends Controller
 
                 return $type;
             })
-            ->addColumn('action', function ($question) {
-                $data = '<ul class="icons-list">' .
-                            '<li>' .
+            ->addColumn('action', function ($question) use ($user) {
+                $data = '<ul class="icons-list">';
+                if ($user->can('edit-question')) {
+                    $data .= '<li>' .
                                 '<a href="' . route('questions.edit', ['id' => $question->id]) . '"
                                     data-popup="tooltip" title="' . trans('page.edit') . '">' .
-                                '<i class="icon-pencil7"></i></a>' .
-                            '</li>' .
-                            '<li>' .
-                    '<form method="POST" action="' . route('questions.destroy', ['id' => $question->id]) . '">' .
-                                    '<input type="hidden" name="_method" value="DELETE">' .
-                                    '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
-                                    '<button class="btn btn-link" data-popup="tooltip" 
+                                    '<i class="icon-pencil7"></i></a>' .
+                            '</li>';
+                }
+
+                if ($user->can('remove-question')) {
+                    $data .= '<li>' .
+                        '<form method="POST" action="' . route('questions.destroy', ['id' => $question->id]) . '">' .
+                                '<input type="hidden" name="_method" value="DELETE">' .
+                                '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
+                                '<button class="btn btn-link" data-popup="tooltip" 
                                             title="' . trans('page.remove') . '">' .
-                                            '<i class="icon-trash"></i>' .
-                                    '</button>' .
-                                '</form>' .
-                            '</li>' .
-                        '</ul>';
+                                    '<i class="icon-trash"></i>' .
+                                '</button>' .
+                        '</form>' .
+                        '</li>';
+                }
+                $data .= '</ul>';
 
                 return $data;
             })

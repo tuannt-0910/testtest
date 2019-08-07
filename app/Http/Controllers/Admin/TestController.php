@@ -34,7 +34,6 @@ class TestController extends Controller
         $this->testQuestionRepository = $testQuestionRepository;
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -48,6 +47,7 @@ class TestController extends Controller
     public function getTests()
     {
         $tests = $this->testRepository->getAllTest();
+        $user = Auth::user();
 
         return Datatables::of($tests)
             ->editColumn('name', function ($test) {
@@ -62,14 +62,18 @@ class TestController extends Controller
             ->editColumn('publish', function ($test) {
                 return $test->publish ? 'x' : '';
             })
-            ->addColumn('action', function ($test) {
-                $data = '<ul class="icons-list">' .
-                            '<li>' .
+            ->addColumn('action', function ($test) use ($user) {
+                $data = '<ul class="icons-list">';
+                if ($user->can('edit-test')) {
+                    $data .= '<li>' .
                                 '<a href="' . route('tests.edit', ['id' => $test->id]) . '"
                                     data-popup="tooltip" title="' . trans('page.edit') . '">' .
                                 '<i class="icon-pencil7"></i></a>' .
-                            '</li>' .
-                            '<li>' .
+                            '</li>';
+                }
+
+                if ($user->can('remove-test')) {
+                    $data .= '<li>' .
                                 '<form method="POST" action="' . route('tests.destroy', ['id' => $test->id]) . '">' .
                                     '<input type="hidden" name="_method" value="DELETE">' .
                                     '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
@@ -78,8 +82,9 @@ class TestController extends Controller
                                         '<i class="icon-trash"></i>' .
                                     '</button>' .
                                 '</form>' .
-                            '</li>' .
-                        '</ul>';
+                            '</li>';
+                }
+                $data .=  '</ul>';
 
                 return $data;
             })
