@@ -69,6 +69,8 @@ class Kernel extends HttpKernel
         'checkViewTests' => \App\Http\Middleware\CheckViewTests::class,
         'checkViewQuestions' => \App\Http\Middleware\CheckViewQuestions::class,
         'checkViewCommands' => \App\Http\Middleware\CheckViewCommands::class,
+        'checkUserViewTest' => \App\Http\Middleware\CheckUserViewTest::class,
+        'checkViewTestResult' => \App\Http\Middleware\CheckViewTestResult::class,
     ];
 
     /**

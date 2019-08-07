@@ -14,6 +14,8 @@ interface TestRepositoryInterface
 
     public function getQuestionAnswerTest($testId, $seed, $limit);
 
+    public function getQuestionAnswerResult($testId);
+
     public function getFreeTests();
 
     public function getNewTests();

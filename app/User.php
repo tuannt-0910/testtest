@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Test', 'test_user', 'user_id', 'test_id');
     }
 
+    public function hasPermissionViewTest($test_id)
+    {
+        return (bool)$this->listTestViewByUser->where('id', $test_id)->count();
+    }
+
     public function createdTests()
     {
         return $this->hasMany('App\Models\Test', 'created_user_id', 'id');

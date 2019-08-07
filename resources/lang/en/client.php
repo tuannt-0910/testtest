@@ -91,6 +91,8 @@ return [
         'score' => 'Score',
         'duration' => 'Duration',
         'questions' => 'Questions',
+        'back' => 'Back',
+        'view_questions' => 'View question:',
     ],
     'login' => [
         'academics_login' => 'Academics - Login',

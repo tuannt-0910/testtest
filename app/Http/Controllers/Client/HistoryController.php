@@ -30,12 +30,12 @@ class HistoryController extends Controller
     public function getHistories(Request $request)
     {
         $test_id = $request->test_id;
-        $user_id = Auth::user()->id;
+        $user = Auth::user();
         $score = $request->score;
         $from_date = $request->from_date;
         $to_date = $request->to_date;
 
-        $histories = $this->historyRepository->getHistories($user_id, $test_id, $score, $from_date, $to_date);
+        $histories = $this->historyRepository->getHistories($user, $test_id, $score, $from_date, $to_date);
         $allCates = $this->categoryRepository->getAllChildCateTests();
         $datas = [
             'test_id' =>$test_id,
