@@ -47,6 +47,20 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
         return $this->_model->where('category_id', $categoryId)->get();
     }
 
+    public function getQuestionAnswerResult($testId)
+    {
+        return $this->_model->with([
+            'questions' => function ($query) {
+                $query->where('questions.deleted_at', null);
+            },
+            'questions.file',
+            'questions.answers' => function ($query) {
+                $query->where('answers.deleted_at', null);
+            },
+            'questions.answers.file',
+        ])->where('id', $testId)->first();
+    }
+
     public function getQuestionAnswerTest($testId, $seed, $limit)
     {
         return $this->_model->with([

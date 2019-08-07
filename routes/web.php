@@ -21,14 +21,21 @@ Route::group(['namespace' => 'Client'], function () {
 
     Route::get('tests/{category_id}', 'CategoryController@getTests')->name('client.tests');
 
-    Route::get('guide-test/{test_id}', 'TestController@getGuideTest')->name('client.test.guide');
+    Route::group(['middleware' => 'checkUserViewTest'], function () {
+        Route::get('guide-test/{test_id}', 'TestController@getGuideTest')->name('client.test.guide');
 
-    Route::get('test/{test_id}', 'TestController@getTest')->name('client.test.get');
-    Route::post('test/{test_id}', 'TestController@postTest')->name('client.test.post');
+        Route::get('test/{test_id}', 'TestController@getTest')->name('client.test.get');
+        Route::post('test/{test_id}', 'TestController@postTest')->name('client.test.post');
+    });
+
+    Route::get('result/{test_id}', 'TestController@getResult')->middleware('checkViewTestResult')
+        ->name('client.test.getResult');
 
     Route::get('ranking', 'RankingController@getRanking')->name('client.ranking');
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::post('comment/{question_id}', 'TestController@postCommand')->name('client.comment.post');
+
         Route::get('histories', 'HistoryController@getHistories')->name('client.histories');
 
         Route::get('history/{history_id}', 'HistoryController@getHistory')->name('client.history');

@@ -104,6 +104,14 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'remove-question',
             ],
             [
+                'name' => 'Add Command Client',
+                'slug' => 'add-command-client',
+            ],
+            [
+                'name' => 'View Commands Client',
+                'slug' => 'view-commands-client',
+            ],
+            [
                 'name' => 'View Commands',
                 'slug' => 'view-commands',
             ],
@@ -124,8 +132,8 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'set-role',
             ],
             [
-                'name' => 'Test Test',
-                'slug' => 'test-test',
+                'name' => 'View Result',
+                'slug' => 'view-result',
             ],
         ];
         foreach ($data as $item) {

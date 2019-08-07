@@ -151,6 +151,14 @@ class RolePermissionTableSeeder extends Seeder
                 'permission_id' => 26,
                 'role_id' => 4,
             ],
+            [
+                'permission_id' => 27,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 28,
+                'role_id' => 4,
+            ],
         ];
         foreach ($data as $item) {
             RolePermission::create($item);
