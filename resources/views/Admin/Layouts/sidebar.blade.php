@@ -27,34 +27,52 @@
                 <ul class="navigation navigation-main navigation-accordion">
                     <li class="navigation-header"><span>{{ trans('sidebar.Main') }}</span> <i class="icon-menu"></i></li>
                     <li class="active"><a href="{{ route('admin.home') }}"><i class="icon-home4"></i> <span>{{ trans('sidebar.Dashboard') }}</span></a></li>
-                    <li>
-                        <a href="#"><i class="icon-stack2"></i> <span>{{ trans('page.users.list.users') }}</span></a>
-                        <ul>
-                            <li><a href="{{ route('admin.users.index') }}">{{ trans('page.list_users') }}</a></li>
-                            <li><a href="{{ route('admin.users.edit') }}">{{ trans('page.add_user') }}</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{ route('categories.index') }}"><i class="icon-copy"></i> <span>{{ trans('page.category.list_categories') }}</span></a>
-                    </li>
-                    <li>
-                        <a href="{{ route('tests.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.test.list_tests') }}</span></a>
-                        <ul>
-                            <li><a href="{{ route('tests.index') }}">{{ trans('page.list_tests') }}</a></li>
-                            <li><a href="{{ route('tests.create') }}">{{ trans('page.add_test') }}</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-droplet2"></i> <span>{{ trans('page.question.questions') }}</span></a>
-                        <ul>
-                            <li><a href="{{ route('questions.index') }}">{{ trans('page.question.list_questions') }}</a></li>
-                            <li><a href="{{ route('questions.create') }}">{{ trans('page.question.add_question') }}</a></li>
-                            <li><a href="{{ route('admin.questions.getImport') }}">{{ trans('page.question.add_question_by_file') }}</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{ route('comments.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.comment.comments') }}</span></a>
-                    </li>
+                    @can('view-users')
+                        <li>
+                            <a href="#"><i class="icon-stack2"></i> <span>{{ trans('page.users.list.users') }}</span></a>
+                            <ul>
+                                <li><a href="{{ route('admin.users.index') }}">{{ trans('page.list_users') }}</a></li>
+                                @can('add-user')
+                                    <li><a href="{{ route('admin.users.edit') }}">{{ trans('page.add_user') }}</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('view-categories')
+                        <li>
+                            <a href="{{ route('categories.index') }}"><i class="icon-copy"></i> <span>{{ trans('page.category.list_categories') }}</span></a>
+                        </li>
+                    @endcan
+                    @can('view-tests')
+                        <li>
+                            <a href="{{ route('tests.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.test.list_tests') }}</span></a>
+                            <ul>
+                                <li><a href="{{ route('tests.index') }}">{{ trans('page.list_tests') }}</a></li>
+                                @can('add-test')
+                                    <li><a href="{{ route('tests.create') }}">{{ trans('page.add_test') }}</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('view-questions')
+                        <li>
+                            <a href="#"><i class="icon-droplet2"></i> <span>{{ trans('page.question.questions') }}</span></a>
+                            <ul>
+                                <li><a href="{{ route('questions.index') }}">{{ trans('page.question.list_questions') }}</a></li>
+                                @can('add-question')
+                                    <li><a href="{{ route('questions.create') }}">{{ trans('page.question.add_question') }}</a></li>
+                                @endcan
+                                @can('import-questions')
+                                    <li><a href="{{ route('admin.questions.getImport') }}">{{ trans('page.question.add_question_by_file') }}</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('view-list-commands')
+                        <li>
+                            <a href="{{ route('comments.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.comment.comments') }}</span></a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
         </div>

@@ -16,9 +16,11 @@
                 </ul>
             </li>
         @endforeach
-        <li>
-            <a href="{{ route('client.histories') }}" class="nav-link text-left">{{ trans('client.header.histories') }}</a>
-        </li>
+        @if(Auth::check())
+            <li>
+                <a href="{{ route('client.histories') }}" class="nav-link text-left">{{ trans('client.header.histories') }}</a>
+            </li>
+        @endif
         <li>
             <a href="{{ route('client.ranking') }}" class="nav-link text-left">{{ trans('client.header.ranking') }}</a>
         </li>

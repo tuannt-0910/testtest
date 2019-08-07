@@ -5,6 +5,8 @@ return [
     'limit_questions' => 10,
     'limit_ranking' => 10,
     'limit_history' => 10,
+    'limit_test_free' => 5,
+    'limit_new_test' => 5,
     'default_password' => 'academics',
     'icon' => [
         'link_logo' => 'Client/images/logo.jpg',

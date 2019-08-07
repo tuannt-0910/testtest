@@ -25,7 +25,9 @@
 
                 <div class="form-group">
                     <div class="alert alert-info mb-10 pb-5 pl-10">
-                        <a href="{{ route('questions.edit', ['id' => $question->id]) }}" type="button" class="close"><i class="icon-pencil7"></i></a>
+                        @can('edit-question')
+                            <a href="{{ route('questions.edit', ['id' => $question->id]) }}" type="button" class="close"><i class="icon-pencil7"></i></a>
+                        @endcan
                         <label class="text-semibold">
                             {{ trans('page.test.question') }} ({{ $question->code }}): <span class="{{ Config('constant.color.' . $question->question_type) }}">{{ $question->question_type }}</span>
                             {{ $question->content }}
@@ -33,11 +35,13 @@
                         <label class="text-semibold">{{ trans('page.test.content_guide') }}: {{ $question->content_suggest }}</label><br/>
                     </div>
 
-                    <div class="row pr-15">
-                        <button type="button" class="btn btn-default btn-sm close" data-toggle="modal" data-target="#modal_default">
-                            <i class="icon-comments"></i>
-                        </button>
-                    </div>
+                    @can('view-commands')
+                        <div class="row pr-15">
+                            <button type="button" class="btn btn-default btn-sm close" data-toggle="modal" data-target="#modal_default">
+                                <i class="icon-comments"></i>
+                            </button>
+                        </div>
+                    @endcan
 
                     <div class="row">
                         @foreach($question->answers as $answer)
@@ -51,49 +55,56 @@
                         @endforeach
                     </div>
 
-                    <div id="modal_default" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h5 class="modal-title">{{ trans('page.question.comments') }}</h5>
-                                    @csrf
-                                </div>
-
-                                <div class="modal-body">
-                                    <div id="messages">
-                                        @foreach($question->comments as $comment)
-                                            <div id="message_{{ $comment->id }}">
-                                                <h6 class="text-semibold">{{ $comment->user->username }} -
-                                                    <span class="content-group-sm text-muted">{{ $comment->created_at }}</span>
-                                                    <button data-urlDestroy="{{ route('comments.destroy', ['id' => $comment->id]) }}"
-                                                            data-id_message="message_{{ $comment->id }}"
-                                                       type="button" class="close btn btn-link message_destroy"><i class="icon-bin2"></i></button>
-                                                </h6>
-                                                <p>{{ $comment->content }}</p>
-
-                                                <hr>
-                                            </div>
-                                        @endforeach
+                    @can('view-commands')
+                        <div id="modal_default" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h5 class="modal-title">{{ trans('page.question.comments') }}</h5>
+                                        @csrf
                                     </div>
 
-                                    @if(count($question->comments) == 0)
-                                        <h6 class="text-semibold">{{ trans('page.question.no_comments') }}</h6>
-                                    @else
-                                        <textarea id="content_message" rows="5" cols="5" class="form-control"
-                                                  placeholder="{{ trans('page.question.default_text_comment') }}"></textarea>
-                                        <button id="send_message" data-urlStore="{{ route('comments.store') }}"
-                                                data-question_id="{{ $question->id }}"
-                                                type="button" class="btn btn-primary">{{ trans('page.question.send') }}</button>
-                                    @endif
-                                </div>
+                                    <div class="modal-body">
+                                        <div id="messages">
+                                            @foreach($question->comments as $comment)
+                                                <div id="message_{{ $comment->id }}">
+                                                    <h6 class="text-semibold">{{ $comment->user->username }} -
+                                                        <span class="content-group-sm text-muted">{{ $comment->created_at }}</span>
+                                                        @can('remove-command')
+                                                            <button data-urlDestroy="{{ route('comments.destroy', ['id' => $comment->id]) }}"
+                                                                    data-id_message="message_{{ $comment->id }}"
+                                                               type="button" class="close btn btn-link message_destroy"><i class="icon-bin2"></i></button>
+                                                        @endcan
+                                                    </h6>
+                                                    <p>{{ $comment->content }}</p>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link" data-dismiss="modal">{{ trans('page.question.close') }}</button>
+                                                    <hr>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        @if(count($question->comments) == 0)
+                                            <h6 class="text-semibold">{{ trans('page.question.no_comments') }}</h6>
+                                        @endif
+
+                                        @can('add-command')
+                                            <textarea id="content_message" rows="5" cols="5" class="form-control"
+                                                      placeholder="{{ trans('page.question.default_text_comment') }}"></textarea>
+                                            <button id="send_message" data-urlStore="{{ route('comments.store') }}"
+                                                data-question_id="{{ $question->id }}"
+                                                    type="button" class="btn btn-primary">{{ trans('page.question.send') }}</button>
+                                        @endcan
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal">{{ trans('page.question.close') }}</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endcan
                 </div>
             </fieldset>
         </div>
@@ -101,5 +112,7 @@
 @endsection
 
 @section('script')
+@can('view-commands')
     <script type="text/javascript" src="{{ asset('Admin/assets/js/comment.js') }}"></script>
+@endcan
 @endsection

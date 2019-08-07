@@ -23,7 +23,10 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
 
     public function getAllUserByKeyword($keyword)
     {
-        return $this->_model
+        return $this->_model->with([
+            'file',
+            'role'
+        ])
             ->where('firstname', 'like', '%' . $keyword . '%')
             ->orWhere('lastname', 'like', '%' . $keyword . '%')
             ->orWhere('username', 'like', '%' . $keyword . '%')

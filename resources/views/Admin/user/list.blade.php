@@ -31,7 +31,9 @@
 
                         <div class="col-lg-2">
                             <input type="submit" class="btn btn-primary" value="{{ trans('page.search') }}">
-                            <a href="{{ route('admin.users.edit') }}" class="btn btn-success">{{ trans('page.add_user') }}</a>
+                            @can('add-user')
+                                <a href="{{ route('admin.users.edit') }}" class="btn btn-success">{{ trans('page.add_user') }}</a>
+                            @endcan
                         </div>
                     </div>
 
@@ -50,7 +52,9 @@
                             <th>{{ trans('page.users.list.table_property.birthday') }}</th>
                             <th>{{ trans('page.users.list.table_property.role') }}</th>
                             <th>{{ trans('page.users.list.table_property.address') }}</th>
-                            <th>{{ trans('page.users.list.table_property.actions') }}</th>
+                            @if(Auth::user()->can('edit-user') || Auth::user()->can('remove-user'))
+                                <th>{{ trans('page.users.list.table_property.actions') }}</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -68,16 +72,25 @@
                                     <td><a href="{{ route('admin.users.profile', ['id' => $user->id]) }}">{{ $user->email }}</a></td>
                                     <td>{{ $user->birthday }}</td>
                                     <td>
-                                        <span class="{{ $user->role->color }}">{{ $user->role->name }}</span><hr />
-                                        <a href="{{ route('admin.users.role_tests', ['user_id' => $user->id]) }}">{{ trans('page.users.role_test') }}</a>
+                                        <span class="{{ $user->role->color }}">{{ $user->role->name }}</span>
+                                        @if($user->hasPermissionBySlug('has-role-test-user') && Auth::user()->can('set-role-test-user'))
+                                            <hr />
+                                            <a href="{{ route('admin.users.role_tests', ['user_id' => $user->id]) }}">{{ trans('page.users.role_test') }}</a>
+                                        @endif
                                     </td>
                                     <td>{{ $user->address }}</td>
-                                    <td>
-                                        <ul class="icons-list">
-                                            <li><a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
-                                            <li><a href="{{ route('admin.users.delete', ['id' => $user->id]) }}" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></a></li>
-                                        </ul>
-                                    </td>
+                                    @if(Auth::user()->can('edit-user') || Auth::user()->can('remove-user'))
+                                        <td>
+                                            <ul class="icons-list">
+                                                @can('edit-user')
+                                                    <li><a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
+                                                @endcan
+                                                @can('remove-user')
+                                                    <li><a href="{{ route('admin.users.delete', ['id' => $user->id]) }}" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></a></li>
+                                                @endcan
+                                            </ul>
+                                        </td>
+                                    @endif
                             @endforeach
                         @else
                             <tr>

@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
                 'active' => 0
             ],
             [
-                'email' => 'nguyenthingac@gmail.com',
+                'email' => 'abc@gmail.com',
                 'username' => 'nguyenthingac',
                 'firstname' => 'Nga C',
                 'lastname' => 'Nguyen Thi',
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
                 'phone' => '0123456789',
                 'birthday' => '1997-12-10',
                 'password' => bcrypt('123456'),
-                'active' => 0
+                'active' => 1
             ],
         ];
         foreach ($data as $item) {

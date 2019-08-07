@@ -15,7 +15,16 @@
                 <span class="small mr-3"><span class="icon-envelope-o mr-2"></span>{{ config('constant.setting.email_help') }}</span>
             </div>
             <div class="col-lg-3 text-right">
-                <a href="#" class="small mr-3"><span class="icon-unlock-alt"></span>{{ trans('client.header.login') }}</a>
+                @if(Auth::check())
+                    {{ Auth::user()->username }}
+                    <a href="{{ route('logout') }}" class="small mr-3">
+                        <span class="icon-unlock-alt"></span> {{ trans('client.header.logout') }}
+                    </a>
+                @else
+                    <a href="{{ route('client.getLogin') }}" class="small mr-3">
+                        <span class="icon-unlock-alt"></span> {{ trans('client.header.login') }}
+                    </a>
+                @endif
             </div>
         </div>
     </div>

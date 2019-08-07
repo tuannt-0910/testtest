@@ -50,17 +50,20 @@
             <div class="row">
                 <div class="col-12">
                     <div class="owl-slide-3 owl-carousel">
-                        <div class="course-1-item">
-                            <figure class="thumnail">
-                                <div class="price">$99.00</div>
-                                <div class="category"><h3>Mobile Application</h3></div>
-                            </figure>
-                            <div class="course-1-content pb-4">
-                                <h2>How To Create Mobile Apps Using Ionic</h2>
-                                <p><a href="#" class="btn btn-primary rounded-0 px-4">{{ trans('client.home.enroll_test') }}</a>
-                                </p>
+                        @foreach($freeTests as $test)
+                            <div class="course-1-item">
+                                <figure class="thumnail">
+                                    <div class="price">{{ trans('client.home.free') }}</div>
+                                    <div class="category"><h3>{{ $test->category->name }}</h3></div>
+                                </figure>
+                                <div class="course-1-content pb-4">
+                                    <h2>({{ $test->code }}) {{ $test->name }}</h2>
+                                    <p><a href="{{ route('client.test.guide', ['test_id' => $test->id]) }}"
+                                          class="btn btn-primary rounded-0 px-4">{{ trans('client.home.enroll_test') }}</a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -85,21 +88,23 @@
     <div class="news-updates">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="section-heading">
                         <h2 class="text-black">{{ trans('client.home.new_update') }}</h2>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
-
-                            <div class="post-entry-big horizontal d-flex mb-4">
-                                <div class="post-content">
-                                    <div class="post-meta">June 6, 2019 / Admission, Updates</div>
-                                    <h3 class="post-heading"><a href="#">Campus Camping and Learning Session</a></h3>
+                        @foreach($newTests as $test)
+                            <div class="col-lg-4">
+                                <div class="post-entry-big horizontal d-flex mb-4">
+                                    <div class="post-content">
+                                        <div class="post-meta">{{ $test->created_at }}</div>
+                                        <h3 class="post-heading">
+                                            <a href="{{ route('client.test.guide', ['test_id' => $test->id]) }}">{{ $test->name }}</a>
+                                        </h3>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
