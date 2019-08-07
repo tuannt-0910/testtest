@@ -44,6 +44,8 @@ class HistoryRepository extends EloquentRepository implements HistoryRepositoryI
         ]);
         if ($user->cannot('view-result')) {
             $query->where('user_id', $user->id);
+        } else {
+            $query->whereNotNull('user_id');
         }
         $query->orderBy('created_at', 'DESC');
 
