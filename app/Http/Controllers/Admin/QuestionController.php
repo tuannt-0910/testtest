@@ -11,6 +11,7 @@ use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
 use App\Services\ExcelService;
 use Yajra\Datatables\Datatables;
 use Config;
+use Auth;
 
 class QuestionController extends Controller
 {
@@ -52,6 +53,7 @@ class QuestionController extends Controller
     public function getQuestions()
     {
         $questions = $this->questionRepository->getAllQuestions();
+        $user = Auth::user();
 
         return Datatables::of($questions)
             ->editColumn('code', function ($question) {
@@ -91,24 +93,29 @@ class QuestionController extends Controller
 
                 return $type;
             })
-            ->addColumn('action', function ($question) {
-                $data = '<ul class="icons-list">' .
-                            '<li>' .
+            ->addColumn('action', function ($question) use ($user) {
+                $data = '<ul class="icons-list">';
+                if ($user->can('edit-question')) {
+                    $data .= '<li>' .
                                 '<a href="' . route('questions.edit', ['id' => $question->id]) . '"
                                     data-popup="tooltip" title="' . trans('page.edit') . '">' .
-                                '<i class="icon-pencil7"></i></a>' .
-                            '</li>' .
-                            '<li>' .
-                    '<form method="POST" action="' . route('questions.destroy', ['id' => $question->id]) . '">' .
-                                    '<input type="hidden" name="_method" value="DELETE">' .
-                                    '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
-                                    '<button class="btn btn-link" data-popup="tooltip" 
+                                    '<i class="icon-pencil7"></i></a>' .
+                            '</li>';
+                }
+
+                if ($user->can('remove-question')) {
+                    $data .= '<li>' .
+                        '<form method="POST" action="' . route('questions.destroy', ['id' => $question->id]) . '">' .
+                                '<input type="hidden" name="_method" value="DELETE">' .
+                                '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
+                                '<button class="btn btn-link" data-popup="tooltip" 
                                             title="' . trans('page.remove') . '">' .
-                                            '<i class="icon-trash"></i>' .
-                                    '</button>' .
-                                '</form>' .
-                            '</li>' .
-                        '</ul>';
+                                    '<i class="icon-trash"></i>' .
+                                '</button>' .
+                        '</form>' .
+                        '</li>';
+                }
+                $data .= '</ul>';
 
                 return $data;
             })
@@ -123,7 +130,11 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('Admin.question.add');
+        if (Auth::user()->can('add-question')) {
+            return view('Admin.question.add');
+        }
+
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -134,23 +145,27 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $question = $this->saveQuestion($request);
+        if (Auth::user()->can('add-question')) {
+            $question = $this->saveQuestion($request);
 
-        for ($i = 1; $i <= 4; $i++) {
-            if ($request->input('answer_content_' . $i) || $request->input('answer_file_' . $i)) {
-                $this->saveAnswer(
-                    $request,
-                    $question->id,
-                    'answer_content_' . $i,
-                    'answer_file_' . $i,
-                    $i == $request->input('key') ? 1 : 0,
-                    $i <= count($question->answers) ? $question->answers[$i - 1]->id : null
-                );
+            for ($i = 1; $i <= 4; $i++) {
+                if ($request->input('answer_content_' . $i) || $request->input('answer_file_' . $i)) {
+                    $this->saveAnswer(
+                        $request,
+                        $question->id,
+                        'answer_content_' . $i,
+                        'answer_file_' . $i,
+                        $i == $request->input('key') ? 1 : 0,
+                        $i <= count($question->answers) ? $question->answers[$i - 1]->id : null
+                    );
+                }
             }
+
+            return redirect()->route('questions.show', ['id' => $question->id])
+                ->with('success', Config::get('constant.success'));
         }
 
-        return redirect()->route('questions.show', ['id' => $question->id])
-            ->with('success', Config::get('constant.success'));
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -178,7 +193,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->questionRepository->find($id);
-        if ($question) {
+        if ($question && Auth::user()->can('edit-question')) {
             return view('Admin.question.edit', ['question' => $question]);
         } else {
             return redirect()->route('questions.index');
@@ -195,7 +210,7 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         $question = $this->questionRepository->find($id);
-        if ($question) {
+        if ($question && Auth::user()->can('edit-question')) {
             $this->saveQuestion($request, $id);
 
             for ($i = 1; $i <= 4; $i++) {
@@ -284,7 +299,7 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = $this->questionRepository->find($id);
-        if ($question) {
+        if ($question && Auth::user()->can('remove-question')) {
             $this->questionRepository->delete($id);
 
             return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
@@ -295,22 +310,30 @@ class QuestionController extends Controller
 
     public function getImport(Request $request)
     {
-        $tests = $this->testRepository->getAllTest();
-        if ($request->test_id) {
-            $selected_test = $this->testRepository->find($request->test_id);
-            if ($selected_test) {
-                return view('Admin.question.import', ['tests' => $tests, 'selected_test' => $selected_test]);
+        if (Auth::user()->can('import-questions')) {
+            $tests = $this->testRepository->getAllTest();
+            if ($request->test_id) {
+                $selected_test = $this->testRepository->find($request->test_id);
+                if ($selected_test) {
+                    return view('Admin.question.import', ['tests' => $tests, 'selected_test' => $selected_test]);
+                }
             }
+
+            return view('Admin.question.import', ['tests' => $tests]);
         }
 
-        return view('Admin.question.import', ['tests' => $tests]);
+        return redirect()->route('questions.index');
     }
 
     public function postImport(Request $request)
     {
-        $this->excelService->importFileQuestion($request);
+        if (Auth::user()->can('import-questions')) {
+            $this->excelService->importFileQuestion($request);
 
-        return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
+            return redirect()->route('questions.index')->with('success', Config::get('constant.success'));
+        }
+
+        return redirect()->route('questions.index');
     }
 
     public function getSearchQuestion(Request $request)

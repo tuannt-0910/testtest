@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\CategoryRepositoryInterface as CategoryRepository;
 use App\Repositories\Contracts\FileRepositoryInterface as FileRepository;
 use Config;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -48,7 +49,7 @@ class CategoryController extends Controller
     {
         $parentCategory = $this->categoryRepository->find($request->parent_id);
 
-        if ($parentCategory) {
+        if ($parentCategory && Auth::user()->can('add-category')) {
             return view('Admin.category.add', ['parentCategory' => $parentCategory]);
         } else {
             return redirect()->route('categories.index');
@@ -63,16 +64,20 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $newCategory = [
-            'name' => $request->name,
-            'parent_id' => $request->parent_id,
-        ];
-        $this->categoryRepository->create($newCategory);
+        if (Auth::user()->can('add-category')) {
+            $newCategory = [
+                'name' => $request->name,
+                'parent_id' => $request->parent_id,
+            ];
+            $this->categoryRepository->create($newCategory);
 
-        $categories = $this->categoryRepository->getTreeCategories();
+            $categories = $this->categoryRepository->getTreeCategories();
 
-        return view('Admin.category.list', ['categories' => $categories])
-            ->with('success', Config::get('constant.success'));
+            return view('Admin.category.list', ['categories' => $categories])
+                ->with('success', Config::get('constant.success'));
+        }
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -85,7 +90,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->find($id);
 
-        if ($category) {
+        if ($category && Auth::user()->can('edit-category')) {
             return view('Admin.category.edit', ['category' => $category]);
         } else {
             return redirect()->route('categories.index');
@@ -103,7 +108,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->find($id);
 
-        if ($category) {
+        if ($category && Auth::user()->can('edit-category')) {
             $updateCategory = [
                 'name' => $request->name
             ];
@@ -117,9 +122,9 @@ class CategoryController extends Controller
             $this->categoryRepository->update($id, $updateCategory);
 
             return redirect()->route('categories.index')->with('success', Config::get('constant.success'));
-        } else {
-            return redirect()->route('categories.index');
         }
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -132,12 +137,12 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->find($id);
 
-        if ($category && $category->parent_id) {
+        if ($category && $category->parent_id && Auth::user()->can('remove-category')) {
             $this->categoryRepository->delete($id);
 
             return redirect()->route('categories.index')->with('success', Config::get('constant.success'));
-        } else {
-            return redirect()->route('categories.index');
         }
+
+        return redirect()->route('categories.index');
     }
 }

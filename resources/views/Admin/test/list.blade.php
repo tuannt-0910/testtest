@@ -36,7 +36,9 @@
                         <th>{{ trans('page.test.free') }}</th>
                         <th>{{ trans('page.test.publish') }}</th>
                         <th>{{ trans('page.test.created_at') }}</th>
-                        <th>{{ trans('page.test.actions') }}</th>
+                        @if(Auth::user()->can('edit-test') || Auth::user()->can('remove-test'))
+                            <th>{{ trans('page.test.actions') }}</th>
+                        @endif
                     </tr>
                 </thead>
             </table>

@@ -63,6 +63,12 @@ class Kernel extends HttpKernel
 
         'checkFirstLogin' => \App\Http\Middleware\CheckFirstLogin::class,
         'passedFirstLogin' => \App\Http\Middleware\PassedFirstLogin::class,
+        'checkAdminLogin' => \App\Http\Middleware\CheckAdminLogin::class,
+        'checkViewUsers' => \App\Http\Middleware\CheckViewUsers::class,
+        'checkViewCategories' => \App\Http\Middleware\CheckViewCategories::class,
+        'checkViewTests' => \App\Http\Middleware\CheckViewTests::class,
+        'checkViewQuestions' => \App\Http\Middleware\CheckViewQuestions::class,
+        'checkViewCommands' => \App\Http\Middleware\CheckViewCommands::class,
     ];
 
     /**

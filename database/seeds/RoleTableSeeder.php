@@ -26,8 +26,13 @@ class RoleTableSeeder extends Seeder
                 'color' => 'label label-success'
             ],
             [
-                'name' => 'manager',
-                'slug' => 'manager',
+                'name' => 'staff',
+                'slug' => 'staff',
+                'color' => 'label label-primary'
+            ],
+            [
+                'name' => 'admin',
+                'slug' => 'admin',
                 'color' => 'label label-primary'
             ],
         ];

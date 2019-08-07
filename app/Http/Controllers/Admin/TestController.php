@@ -34,7 +34,6 @@ class TestController extends Controller
         $this->testQuestionRepository = $testQuestionRepository;
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -48,6 +47,7 @@ class TestController extends Controller
     public function getTests()
     {
         $tests = $this->testRepository->getAllTest();
+        $user = Auth::user();
 
         return Datatables::of($tests)
             ->editColumn('name', function ($test) {
@@ -62,14 +62,18 @@ class TestController extends Controller
             ->editColumn('publish', function ($test) {
                 return $test->publish ? 'x' : '';
             })
-            ->addColumn('action', function ($test) {
-                $data = '<ul class="icons-list">' .
-                            '<li>' .
+            ->addColumn('action', function ($test) use ($user) {
+                $data = '<ul class="icons-list">';
+                if ($user->can('edit-test')) {
+                    $data .= '<li>' .
                                 '<a href="' . route('tests.edit', ['id' => $test->id]) . '"
                                     data-popup="tooltip" title="' . trans('page.edit') . '">' .
                                 '<i class="icon-pencil7"></i></a>' .
-                            '</li>' .
-                            '<li>' .
+                            '</li>';
+                }
+
+                if ($user->can('remove-test')) {
+                    $data .= '<li>' .
                                 '<form method="POST" action="' . route('tests.destroy', ['id' => $test->id]) . '">' .
                                     '<input type="hidden" name="_method" value="DELETE">' .
                                     '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
@@ -78,8 +82,9 @@ class TestController extends Controller
                                         '<i class="icon-trash"></i>' .
                                     '</button>' .
                                 '</form>' .
-                            '</li>' .
-                        '</ul>';
+                            '</li>';
+                }
+                $data .=  '</ul>';
 
                 return $data;
             })
@@ -94,14 +99,18 @@ class TestController extends Controller
      */
     public function create(Request $request)
     {
-        $allCates = $this->categoryRepository->getTreeCategories();
-        if ($request->input('category_id')) {
-            $category = $this->categoryRepository->find($request->input('category_id'));
+        if (Auth::user()->can('add-test')) {
+            $allCates = $this->categoryRepository->getTreeCategories();
+            if ($request->input('category_id')) {
+                $category = $this->categoryRepository->find($request->input('category_id'));
 
-            return view('Admin.test.add', ['category' => $category, 'allCates' => $allCates]);
+                return view('Admin.test.add', ['category' => $category, 'allCates' => $allCates]);
+            }
+
+            return view('Admin.test.add', ['allCates' => $allCates]);
         }
 
-        return view('Admin.test.add', ['allCates' => $allCates]);
+        return redirect()->route('tests.index');
     }
 
     /**
@@ -112,20 +121,24 @@ class TestController extends Controller
      */
     public function store(TestRequest $request)
     {
-        $test = [
-            'name' => $request->name,
-            'code' => $request->test_code,
-            'content_guide' => $request->content_guide,
-            'execute_time' => $request->execute_time,
-            'total_question' => $request->total_question,
-            'created_user_id' => Auth::user()->id,
-            'category_id' => $request->category_id,
-            'free' => isset($request->free) ? 1 : 0,
-            'publish' => isset($request->publish) ? 1 : 0,
-        ];
-        $this->testRepository->create($test);
+        if (Auth::user()->can('add-test')) {
+            $test = [
+                'name' => $request->name,
+                'code' => $request->test_code,
+                'content_guide' => $request->content_guide,
+                'execute_time' => $request->execute_time,
+                'total_question' => $request->total_question,
+                'created_user_id' => Auth::user()->id,
+                'category_id' => $request->category_id,
+                'free' => isset($request->free) ? 1 : 0,
+                'publish' => isset($request->publish) ? 1 : 0,
+            ];
+            $this->testRepository->create($test);
 
-        return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+            return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+        }
+
+        return redirect()->route('tests.index');
     }
 
     /**
@@ -150,10 +163,14 @@ class TestController extends Controller
      */
     public function edit($id)
     {
-        $allCates = $this->categoryRepository->getTreeCategories();
-        $test = $this->testRepository->getTest($id);
+        if (Auth::user()->can('edit-test')) {
+            $allCates = $this->categoryRepository->getTreeCategories();
+            $test = $this->testRepository->getTest($id);
 
-        return view('Admin.test.add', ['test' => $test, 'allCates' => $allCates]);
+            return view('Admin.test.add', ['test' => $test, 'allCates' => $allCates]);
+        }
+
+        return redirect()->route('tests.index');
     }
 
     /**
@@ -165,19 +182,23 @@ class TestController extends Controller
      */
     public function update(TestRequest $request, $id)
     {
-        $test = [
-            'name' => $request->name,
-            'code' => $request->test_code,
-            'content_guide' => $request->content_guide,
-            'execute_time' => $request->execute_time,
-            'total_question' => $request->total_question,
-            'category_id' => $request->category_id,
-            'free' => isset($request->free) ? 1 : 0,
-            'publish' => isset($request->publish) ? 1 : 0,
-        ];
-        $this->testRepository->update($id, $test);
+        if (Auth::user()->can('edit-test')) {
+            $test = [
+                'name' => $request->name,
+                'code' => $request->test_code,
+                'content_guide' => $request->content_guide,
+                'execute_time' => $request->execute_time,
+                'total_question' => $request->total_question,
+                'category_id' => $request->category_id,
+                'free' => isset($request->free) ? 1 : 0,
+                'publish' => isset($request->publish) ? 1 : 0,
+            ];
+            $this->testRepository->update($id, $test);
 
-        return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+            return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+        }
+
+        return redirect()->route('tests.index');
     }
 
     /**
@@ -189,7 +210,7 @@ class TestController extends Controller
     public function destroy($id)
     {
         $test = $this->testRepository->find($id);
-        if ($test) {
+        if ($test && Auth::user()->can('remove-test')) {
             $this->testRepository->delete($id);
 
             return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
@@ -200,21 +221,30 @@ class TestController extends Controller
 
     public function getChooseAddQuestion($test_id)
     {
-        $test = $this->testRepository->find($test_id);
-        return view('Admin.test.chooseQuestion', ['test' => $test]);
+        if (Auth::user()->can('choose-question-test')) {
+            $test = $this->testRepository->find($test_id);
+
+            return view('Admin.test.chooseQuestion', ['test' => $test]);
+        }
+
+        return redirect()->route('tests.index');
     }
 
     public function postChooseAddQuestion(Request $request, $test_id)
     {
-        $test = $this->testQuestionRepository->find($test_id);
-        if ($test && $request->seleted_questions && count($request->seleted_questions) > 0) {
-            $tests = [$test_id];
-            $questions = $request->seleted_questions;
-            $this->testQuestionRepository->createRelationTestsQuestions($tests, $questions);
+        if (Auth::user()->can('choose-question-test')) {
+            $test = $this->testQuestionRepository->find($test_id);
+            if ($test && $request->seleted_questions && count($request->seleted_questions) > 0) {
+                $tests = [$test_id];
+                $questions = $request->seleted_questions;
+                $this->testQuestionRepository->createRelationTestsQuestions($tests, $questions);
 
-            return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+                return redirect()->route('tests.index')->with('success', Config::get('constant.success'));
+            }
+
+            return redirect()->back()->with('action_fault', Config::get('constant.action_fault'));
         }
 
-        return redirect()->back()->with('action_fault', Config::get('constant.action_fault'));
+        return redirect()->route('tests.index');
     }
 }

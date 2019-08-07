@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\HasPermissionsTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasPermissionsTrait;
 
     use SoftDeletes;
 

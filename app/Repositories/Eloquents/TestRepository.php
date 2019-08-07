@@ -60,4 +60,19 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
             'questions.answers.file',
         ])->where('id', $testId)->first();
     }
+
+    public function getFreeTests()
+    {
+        return $this->_model->with('category')
+            ->where('free', 1)
+            ->orderBy('created_at', 'DESC')
+            ->limit(config('constant.limit_test_free'))->get();
+    }
+
+    public function getNewTests()
+    {
+        return $this->_model
+            ->orderBy('created_at', 'DESC')
+            ->limit(config('constant.limit_new_test'))->get();
+    }
 }
