@@ -31,16 +31,20 @@
                                                 <li data-jstree='{"icon":"icon-clipboard"}'>{{ $test->name }}</li>
                                             @endforeach
 
-                                            <li class="add_item" data-jstree='{"icon":"icon-add"}'
-                                                data-href="{{ route('tests.create', ['category_id' => $childCategory->id]) }}"
-                                            ></li>
+                                            @can('add-test')
+                                                <li class="add_item" data-jstree='{"icon":"icon-add"}'
+                                                    data-href="{{ route('tests.create', ['category_id' => $childCategory->id]) }}"
+                                                ></li>
+                                            @endif
                                         </ul>
                                     </li>
                                 @endforeach
 
-                                <li class="add_item" data-jstree='{"icon":"icon-add"}'
-                                    data-href="{{ route('categories.create', ['parent_id' => $category->id]) }}"
-                                ></li>
+                                @can('add-category')
+                                    <li class="add_item" data-jstree='{"icon":"icon-add"}'
+                                        data-href="{{ route('categories.create', ['parent_id' => $category->id]) }}"
+                                    ></li>
+                                @endcan
                             </ul>
                         </li>
                     @endforeach
@@ -53,7 +57,9 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">{{ $category->name }}
-                    <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="btn btn-link" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a>
+                    @can('edit-category')
+                        <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="btn btn-link" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a>
+                    @endcan
                 </h5>
 
                 <div class="heading-elements">
@@ -73,7 +79,9 @@
                             <th>{{ trans('page.category.content_guide') }}</th>
                             <th>{{ trans('page.category.number_of_tests') }}</th>
                             <th>{{ trans('page.last_edit') }}</th>
-                            <th>{{ trans('page.category.actions') }}</th>
+                            @if(Auth::user()->can('edit-category') || Auth::user()->can('remove-category'))
+                                <th>{{ trans('page.category.actions') }}</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -87,14 +95,18 @@
                                     <td>{{ $childCategory->updated_at }}</td>
                                     <td>
                                         <ul class="icons-list">
-                                            <li><a href="{{ route('categories.edit', ['category' => $childCategory->id]) }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
-                                            <li>
-                                                <form method="POST" action="{{ route('categories.destroy', ['category' => $childCategory->id]) }}">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button class="btn btn-link" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></button>
-                                                </form>
-                                            </li>
+                                            @can('edit-category')
+                                                <li><a href="{{ route('categories.edit', ['category' => $childCategory->id]) }}" data-popup="tooltip" title="{{ trans('page.edit') }}"><i class="icon-pencil7"></i></a></li>
+                                            @endcan
+                                            @can('remove-category')
+                                                <li>
+                                                    <form method="POST" action="{{ route('categories.destroy', ['category' => $childCategory->id]) }}">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button class="btn btn-link" data-popup="tooltip" title="{{ trans('page.remove') }}"><i class="icon-trash"></i></button>
+                                                    </form>
+                                                </li>
+                                            @endcan
                                         </ul>
                                     </td>
                             @endforeach

@@ -22,8 +22,12 @@
                     @endif
 
                     <div class="col-lg-12 text-right">
-                        <a href="{{ route('questions.create') }}" class="btn btn-primary">{{ trans('page.question.create_question') }}</a>
-                        <a href="{{ route('admin.questions.getImport') }}" class="btn btn-success">{{ trans('page.question.import_question') }}</a>
+                        @can('add-question')
+                            <a href="{{ route('questions.create') }}" class="btn btn-primary">{{ trans('page.question.create_question') }}</a>
+                        @endcan
+                        @can('import-questions')
+                            <a href="{{ route('admin.questions.getImport') }}" class="btn btn-success">{{ trans('page.question.import_question') }}</a>
+                        @endcan
                     </div>
                 </div>
                 <input id="route_getDatas" type="hidden" value="{{ route('admin.questions.getQuestions') }}">
@@ -37,7 +41,9 @@
                     <th>{{ trans('page.question.suggest') }}</th>
                     <th>{{ trans('page.question.type') }}</th>
                     <th>{{ trans('page.test.created_at') }}</th>
-                    <th>{{ trans('page.test.actions') }}</th>
+                    @if(Auth::user()->can('edit-question') || Auth::user()->can('remove-question'))
+                        <th>{{ trans('page.test.actions') }}</th>
+                    @endif
                 </tr>
                 </thead>
             </table>

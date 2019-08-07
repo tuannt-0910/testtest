@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
 
         'checkFirstLogin' => \App\Http\Middleware\CheckFirstLogin::class,
         'passedFirstLogin' => \App\Http\Middleware\PassedFirstLogin::class,
+        'checkAdminLogin' => \App\Http\Middleware\CheckAdminLogin::class,
     ];
 
     /**
