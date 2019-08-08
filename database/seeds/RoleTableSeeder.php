@@ -16,14 +16,9 @@ class RoleTableSeeder extends Seeder
         DB::table('roles')->truncate();
         $data = [
             [
-                'name' => 'student',
-                'slug' => 'student',
-                'color' => 'label label-default'
-            ],
-            [
-                'name' => 'teacher',
-                'slug' => 'teacher',
-                'color' => 'label label-success'
+                'name' => 'admin',
+                'slug' => 'admin',
+                'color' => 'label label-primary'
             ],
             [
                 'name' => 'staff',
@@ -31,9 +26,14 @@ class RoleTableSeeder extends Seeder
                 'color' => 'label label-primary'
             ],
             [
-                'name' => 'admin',
-                'slug' => 'admin',
-                'color' => 'label label-primary'
+                'name' => 'teacher',
+                'slug' => 'teacher',
+                'color' => 'label label-success'
+            ],
+            [
+                'name' => 'student',
+                'slug' => 'student',
+                'color' => 'label label-default'
             ],
         ];
         foreach ($data as $item) {
