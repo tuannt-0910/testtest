@@ -26,14 +26,14 @@
                                 <tbody>
                                     <tr>
                                         <th rowspan="2">
-                                            <?php echo html_entity_decode(starNumber($test->score)) ?>
+                                            <?php echo html_entity_decode(starNumber($test->history->score)) ?>
                                         </th>
                                         <th width="20%">{{ trans('client.test.score') }}</th>
                                         <th width="20%">{{ trans('client.test.questions') }}</th>
                                         <th width="20%">{{ trans('client.test.duration') }}</th>
                                     </tr>
                                     <tr>
-                                        <th>{{ $test->score ?? 0 }}</th>
+                                        <th>{{ $test->history->score ?? 0 }}</th>
                                         <th>{{ $test->correctNumber }} / {{ $test->total_question }}</th>
                                         <th>{{ toMinutes($test->history->duration) }}</th>
                                     </tr>
