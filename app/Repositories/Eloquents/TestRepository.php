@@ -38,13 +38,15 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
             'answers.file',
             'comments'
         ])->whereHas('tests', function ($query) use ($id) {
-            $query->where('tests.id', $id);
+            $query->whergetTestInCategorye('tests.id', $id);
         })->paginate(config('constant.limit_questions_test'));
     }
 
     public function getTestInCategory($categoryId)
     {
-        return $this->_model->where('category_id', $categoryId)->get();
+        return $this->_model->where('category_id', $categoryId)
+            ->orderBy('free', 'DESC')
+            ->get();
     }
 
     public function getQuestionAnswerResult($testId)
