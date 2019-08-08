@@ -11,4 +11,5 @@ return [
     'my_profile' => 'My profile',
     'account_settings' => 'Account settings',
     'logout' => 'Logout',
+    'view_client' => 'View Page',
 ];

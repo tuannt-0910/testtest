@@ -10,6 +10,7 @@ return [
         'blog' => 'Blog',
         'ranking' => 'Ranking',
         'histories' => 'Histories',
+        'back_admin' => 'Back Admin',
     ],
     'footer' => [
         'slogan' => 'Exercise, Work hard, Run, Success!',
