@@ -97,6 +97,16 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        <div class="form-group text-center">
+                            @if(!count($test->questions))
+                                {{ trans('client.no_data') }}
+                                <br>
+                            @endif
+
+                            <a href="{{ route('client.tests', ['category_id' => $test->category->id]) }}"
+                               class="btn btn-primary btn-lg px-5">{{ trans('client.test.back') }}</a>
+                        </div>
                     </div>
                 </div>
             </div>

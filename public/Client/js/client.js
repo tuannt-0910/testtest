@@ -87,7 +87,7 @@ $(function () {
             timer: 2000
         });
         setTimeout(function () {
-            document.getElementById("form_test").submit();
+            submit_form();
         }, 2000);
     }
 
