@@ -13,6 +13,9 @@
             <div class="col-lg-9 d-none d-lg-block">
                 <span class="small mr-3"><span class="icon-phone2 mr-2"></span>{{ config('constant.setting.phone_help') }}</span>
                 <span class="small mr-3"><span class="icon-envelope-o mr-2"></span>{{ config('constant.setting.email_help') }}</span>
+                @can('view-admin')
+                    <a href="{{ route('admin.home') }}"><span class="icon-retweet"></span>{{ trans('client.header.back_admin') }}</a>
+                @endcan
             </div>
             <div class="col-lg-3 text-right">
                 @if(Auth::check())
