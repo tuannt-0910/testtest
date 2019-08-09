@@ -73,7 +73,7 @@ return [
         'score' => 'Score',
         'created_at' => 'Test date',
         'test' => 'Test',
-        'back' => 'Back Category'
+        'back' => 'Back Category',
     ],
     'ranking' => [
         'academics_ranking' => 'Academics - Ranking',
