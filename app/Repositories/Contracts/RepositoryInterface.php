@@ -10,7 +10,6 @@ interface RepositoryInterface
 
     public function getAll();
 
-
     /**
      * Get one
      * @param $id
