@@ -44,7 +44,9 @@ class TestRepository extends EloquentRepository implements TestRepositoryInterfa
 
     public function getTestInCategory($categoryId)
     {
-        return $this->_model->where('category_id', $categoryId)->get();
+        return $this->_model->where('category_id', $categoryId)
+            ->orderBy('free', 'DESC')
+            ->get();
     }
 
     public function getQuestionAnswerResult($testId)

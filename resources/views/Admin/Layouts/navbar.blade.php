@@ -15,6 +15,10 @@
 
         <p class="navbar-text"><span class="label bg-success">{{ trans('navbar.Online') }}</span></p>
 
+        <p class="navbar-text">
+            <a class="text-success" href="{{ route('home') }}"><i class="icon-backward"></i> {{ trans('navbar.view_client') }}</a>
+        </p>
+
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown language-switch">
                 <a class="dropdown-toggle" data-toggle="dropdown">

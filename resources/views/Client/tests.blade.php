@@ -33,16 +33,27 @@
                                     @foreach($tests as $test)
                                         <tr>
                                             <td>
-                                                <a href="{{ route('client.test.guide', ['test_id' => $test->id]) }}"
-                                                   data-popup="tooltip" title="{{ $test->name }}">
+                                                @if(checkLinkTest(Auth::user(), $test->id, $test->free))
+                                                    <a href="{{ route('client.test.guide', ['test_id' => $test->id]) }}"
+                                                       data-popup="tooltip" title="{{ $test->name }}">
+                                                        {{ $test->code }}
+                                                    </a>
+                                                @else
                                                     {{ $test->code }}
-                                                </a>
+                                                @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('client.test.guide', ['test_id' => $test->id]) }}"
-                                                   data-popup="tooltip" title="{{ $test->name }}">
+                                                @if(checkLinkTest(Auth::user(), $test->id, $test->free))
+                                                    <a href="{{ route('client.test.guide', ['test_id' => $test->id]) }}"
+                                                       data-popup="tooltip" title="{{ $test->name }}">
+                                                        {{ $test->name }}
+                                                    </a>
+                                                @else
                                                     {{ $test->name }}
-                                                </a>
+                                                @endif
+                                                @if($test->free)
+                                                    <span class="badge badge-success">(free)</span>
+                                                @endif
                                             </td>
                                             <td>{{ $test->execute_time }}'</td>
                                         </tr>

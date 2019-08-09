@@ -37,7 +37,7 @@ class CheckUserViewTest
                     //admin
 
                     return redirect()->route('client.test.getResult', ['test_id' => $test_id]);
-                } elseif ($user->hasPermissionViewTest($test_id)) {
+                } elseif ($user->hasPermissionViewTest($test_id) || $test->free) {
                     // permission view test
 
                     return $next($request);
