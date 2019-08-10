@@ -115,23 +115,23 @@ class UserController extends Controller
         if ($user) {
             if ($this->userRepository->setRoleTest($user_id, $selectedTestIds)) {
                 return response()->json([
-                        'status' => true,
-                        'title' => config('constant.title_action_setRole'),
-                        'message' => config('constant.success')
-                    ]);
+                    'status' => true,
+                    'title' => config('constant.title_action_setRole'),
+                    'message' => config('constant.success')
+                ]);
             }
 
             return response()->json([
-                    'status' => false,
-                    'title' => config('constant.title_action_setRole'),
-                    'message' => config('constant.action_fault')
-                ]);
+                'status' => false,
+                'title' => config('constant.title_action_setRole'),
+                'message' => config('constant.action_fault')
+            ]);
         }
 
         return response()->json([
-                'status' => false,
-                'title' => config('constant.title_action_setRole'),
-                'message' => config('constant.action_use_wrong')
-            ]);
+            'status' => false,
+            'title' => config('constant.title_action_setRole'),
+            'message' => config('constant.action_use_wrong')
+        ]);
     }
 }
