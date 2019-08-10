@@ -55,6 +55,7 @@ class FileRepository extends EloquentRepository implements FileRepositoryInterfa
         ];
 
         $file = $this->create($arrData);
+
         return $file;
     }
 
@@ -74,6 +75,7 @@ class FileRepository extends EloquentRepository implements FileRepositoryInterfa
         ];
 
         $file = $this->create($arrData);
+
         return $file;
     }
 }

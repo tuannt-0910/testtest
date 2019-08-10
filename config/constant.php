@@ -30,7 +30,7 @@ return [
     'links' => [
         'link_facebook' => '#',
         'link_youtube' => '#',
-        'link_twitter' => '#'
+        'link_twitter' => '#',
     ],
     'setting' => [
         'phone_help' => '0136 548 245',
