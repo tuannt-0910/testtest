@@ -135,6 +135,10 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'View Result',
                 'slug' => 'view-result',
             ],
+            [
+                'name' => 'Notify test user',
+                'slug' => 'notify-test-user',
+            ],
         ];
         foreach ($data as $item) {
             Permission::create($item);

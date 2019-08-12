@@ -26,6 +26,8 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
 
+    Route::get('notifications', 'UserController@getNotifications')->name('admin.getNotifications');
+
     Route::group(['prefix' => 'users', 'middleware' => 'checkViewUsers'], function () {
         Route::get('/', 'UserController@index')->name('admin.users.index');
 

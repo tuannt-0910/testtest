@@ -75,4 +75,13 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
 
         return true;
     }
+
+    public function getUserHasPermission($permission)
+    {
+        return $this->_model->with(['role', 'role.permissions'])
+            ->whereHas('role.permissions', function ($query) use ($permission) {
+                $query->where('permissions.slug', $permission);
+            })
+            ->get();
+    }
 }

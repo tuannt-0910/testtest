@@ -134,4 +134,9 @@ class UserController extends Controller
             'message' => config('constant.action_use_wrong')
         ]);
     }
+
+    public function getNotifications()
+    {
+        return auth()->user()->unreadNotifications()->get()->toArray();
+    }
 }
