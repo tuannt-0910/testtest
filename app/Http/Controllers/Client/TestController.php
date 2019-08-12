@@ -8,23 +8,25 @@ use App\Repositories\Contracts\TestRepositoryInterface as TestRepository;
 use App\Repositories\Contracts\CommentRepositoryInterface as CommentRepository;
 use App\Services\TestService;
 use Auth;
+use App\Services\SendNotificationService;
 
 class TestController extends Controller
 {
     protected $testRepository;
-
     protected $testService;
-
     protected $commentRepository;
+    protected $sendNotify;
 
     public function __construct(
         TestRepository $testRepository,
         TestService $testService,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        SendNotificationService $sendNotify
     ) {
         $this->testRepository = $testRepository;
         $this->testService = $testService;
         $this->commentRepository = $commentRepository;
+        $this->sendNotify = $sendNotify;
     }
 
     public function getGuideTest($test_id)
@@ -75,7 +77,9 @@ class TestController extends Controller
         if (Auth::check()) {
             $user_id = Auth::user()->id;
         }
+
         $result = $this->testService->getResult($request, $test_id, $user_id);
+        $this->sendNotify->notifySubmitNewTest($user_id, $result);
 
         return view('Client.result', ['test' => $result]);
     }

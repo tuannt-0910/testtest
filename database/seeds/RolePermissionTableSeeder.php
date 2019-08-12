@@ -132,6 +132,10 @@ class RolePermissionTableSeeder extends Seeder
                 'role_id' => 1,
                 'permission_id' => 30,
             ],
+            [
+                'role_id' => 1,
+                'permission_id' => 31,
+            ],
 
             // staff
             [

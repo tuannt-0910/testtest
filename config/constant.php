@@ -7,7 +7,9 @@ return [
     'limit_history' => 10,
     'limit_test_free' => 5,
     'limit_new_test' => 5,
+    'limit_admin_notification' => 5,
     'default_password' => 'academics',
+    'guest_name' => 'New guest',
     'icon' => [
         'link_logo' => 'Client/images/logo.jpg',
         'link_country_gb' => 'Admin/assets/images/flags/gb.png',

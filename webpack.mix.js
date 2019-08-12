@@ -42,6 +42,7 @@ mix.styles([
     'public/Admin/assets/js/core/libraries/jquery_ui/interactions.min.js',
     'public/Admin/assets/js/plugins/trees/fancytree_all.min.js',
     'public/Admin/assets/js/pages/extra_trees.js',
+    'public/Admin/assets/js/app.js',
 ], 'public/js/admin.js')
 .options({
     processCssUrls: false

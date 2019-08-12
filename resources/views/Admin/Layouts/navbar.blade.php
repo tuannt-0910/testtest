@@ -32,42 +32,19 @@
                 </ul>
             </li>
 
-            <li class="dropdown">
+            <li id="dropdown_notify" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-bubbles4"></i>
                     <span class="visible-xs-inline-block position-right">{{ trans('navbar.Messages') }}</span>
-                    <span class="badge bg-warning-400">2</span>
+                    <span id="count_notifications" class="badge bg-warning-400"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-content width-350">
                     <div class="dropdown-content-heading">
                         {{ trans('navbar.Messages') }}
-                        <ul class="icons-list">
-                            <li><a href="#"><i class="icon-compose"></i></a></li>
-                        </ul>
                     </div>
 
-                    <ul class="media-list dropdown-content-body">
-                        <li class="media">
-                            <div class="media-left">
-                                <img src="{{ asset(config('constant.icon.link_country_placeholder')) }}" class="img-circle img-sm">
-                                <span class="badge bg-danger-400 media-badge">5</span>
-                            </div>
-
-                            <div class="media-body">
-                                <a href="#" class="media-heading">
-                                    <span class="text-semibold"></span>
-                                    <span class="media-annotation pull-right"></span>
-                                </a>
-
-                                <span class="text-muted"></span>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="dropdown-content-footer">
-                        <a href="#" data-popup="tooltip"><i class="icon-menu display-block"></i></a>
-                    </div>
+                    <ul id="list_notifications" class="media-list dropdown-content-body"></ul>
                 </div>
             </li>
 
