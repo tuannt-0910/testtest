@@ -32,7 +32,7 @@
                 </ul>
             </li>
 
-            <li class="dropdown">
+            <li id="dropdown_notify" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-bubbles4"></i>
                     <span class="visible-xs-inline-block position-right">{{ trans('navbar.Messages') }}</span>

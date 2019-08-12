@@ -39,16 +39,33 @@ class UserTested extends Notification implements ShouldQueue
         return ['database', 'broadcast'];
     }
 
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
         $user = $this->user;
-        $fullname = $user ? $user->firtname . ' ' . $user->lastname : config('guest_name');
-        $link_history = route('client.history', ['history_id' => $this->history->id]);
+        $fullname = $user ? ($user->firtname . ' ' . $user->lastname) : config('guest_name');
+        $link = route('admin.readNotify', ['history_id' => $this->history->id]);
 
         return [
             'user_name' => $fullname,
-            'test_name' => $this->testResult->name,
-            'link_history' => $link_history
+            'test_name' => '(' . $this->testResult->name . ')' . $this->testResult->name,
+            'link' => $link
+        ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        $user = $this->user;
+        $fullname = $user ? ($user->firtname . ' ' . $user->lastname) : config('guest_name');
+        $link = route('admin.readNotify', ['history_id' => $this->history->id]);
+
+        return [
+            'id' => $this->id,
+            'read_at' => null,
+            'data' => [
+                'user_name' => $fullname,
+                'test_name' => '(' . $this->testResult->name . ')' . $this->testResult->name,
+                'link' => $link
+            ],
         ];
     }
 }

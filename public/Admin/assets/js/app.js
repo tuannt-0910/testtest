@@ -31,8 +31,8 @@ $(function () {
 
             //add notify
             function addNotifications(newNotifications) {
-                notifications = [...notifications, ...newNotifications];
-                $('#count_notifications').text(notifications.length);
+                notifications = [...newNotifications, ...notifications];
+                notifications.length ? $('#count_notifications').text(notifications.length) : '';
 
                 // show only last 5 notifications
                 if (notifications.length >= limit_notify) {
@@ -57,7 +57,7 @@ $(function () {
             function makeNotification (notification) {
                 if (notification.type == NOTIFICATION_TYPES.newTest) {
                     return renderHTML(
-                        notification.data.link_history,
+                        notification.data.link + '&read_notify=' + notification.id,
                         notification.data.user_name,
                         notification.data.test_name,
                         notification.created_at
@@ -82,7 +82,6 @@ $(function () {
             // listen even notify
             window.Echo.private('App.User.' + userId)
                 .notification((notification) => {
-                    console.log(notification);
                     addNotifications([notification]);
                 });
         }

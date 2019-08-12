@@ -139,4 +139,11 @@ class UserController extends Controller
     {
         return auth()->user()->unreadNotifications()->get()->toArray();
     }
+
+    public function readNotify(Request $request)
+    {
+        if ($request->has('history_id')) {
+            return redirect()->route('client.history', ['history_id' => $request->history_id]);
+        }
+    }
 }
