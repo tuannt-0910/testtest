@@ -22,9 +22,15 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'middleware' => ['auth', 'checkFirstLogin', 'checkAdminLogin']
+    'middleware' => ['auth', 'checkFirstLogin', 'checkAdminLogin', 'MarkNotifyAsRead']
 ], function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
+
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::get('/', 'UserController@getNotifications')->name('admin.getNotifications');
+
+        Route::get('read', 'UserController@readNotify')->name('admin.readNotify');
+    });
 
     Route::group(['prefix' => 'users', 'middleware' => 'checkViewUsers'], function () {
         Route::get('/', 'UserController@index')->name('admin.users.index');

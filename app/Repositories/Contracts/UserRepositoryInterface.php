@@ -13,4 +13,6 @@ interface UserRepositoryInterface
     public function getTreeTestsWithRole($roleTests, $user_id);
 
     public function setRoleTest($user_id, $selectedTestIds);
+
+    public function getUserHasPermission($permission);
 }
