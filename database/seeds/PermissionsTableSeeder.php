@@ -139,6 +139,10 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'Notify test user',
                 'slug' => 'notify-test-user',
             ],
+            [
+                'name' => 'Email statical daily',
+                'slug' => 'email-statical-daily',
+            ],
         ];
         foreach ($data as $item) {
             Permission::create($item);
