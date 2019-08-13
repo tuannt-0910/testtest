@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('sendMailDaily:statically')
-                  ->dailyAt('0:35')->withoutOverlapping();
+                  ->dailyAt('0:39')->withoutOverlapping();
     }
 
     /**
