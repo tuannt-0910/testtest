@@ -45,9 +45,7 @@
             </div>
             <div class="ml-auto">
                 <div class="social-wrap">
-                    <a href="#"><span class="icon-facebook"></span></a>
-                    <a href="#"><span class="icon-twitter"></span></a>
-                    <a href="#"><span class="icon-linkedin"></span></a>
+                    <a href="{{ route('loginFacebook', ['social' => 'github']) }}"><span class="icon-github"></span></a>
                 </div>
             </div>
         </div>
