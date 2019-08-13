@@ -21,6 +21,8 @@ class SendNotificationService
     {
         $testUser = $this->userRepository->find($testUser_id);
         $viewUser = $this->userRepository->getUserHasPermission('notify-test-user');
-        Notification::send($viewUser, new UserTested($testUser, $result, $result->history));
+        if ($viewUser) {
+            Notification::send($viewUser, new UserTested($testUser, $result, $result->history));
+        }
     }
 }
