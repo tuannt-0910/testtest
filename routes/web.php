@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('redirect/{social}', 'SocialAuthController@redirect')->name('loginFacebook');
+Route::get('callback/{social}', 'SocialAuthController@callback');
+
 Route::get('login', 'Auth\LoginController@getLoginClient')->name('client.getLogin');
 Route::post('login', 'Auth\LoginController@loginClient')->name('client.postLogin');
 
