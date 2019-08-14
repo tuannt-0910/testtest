@@ -89,6 +89,11 @@
                             <a href="{{ route('comments.index') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.comment.comments') }}</span></a>
                         </li>
                     @endcan
+                    @can('view-list-backups')
+                        <li class="{{ request()->is('admin/backups') ? 'active' : '' }}">
+                            <a href="{{ route('admin.backup.getList') }}"><i class="icon-droplet2"></i> <span>{{ trans('page.backup.list_backup') }}</span></a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
         </div>

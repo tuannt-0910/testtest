@@ -72,4 +72,8 @@ Route::group([
         Route::resource('comments', 'CommentController')->except(['show', 'edit', 'update', 'create']);
         Route::get('getComments', 'CommentController@getComments')->name('admin.comments.getComments');
     });
+
+    Route::group(['prefix' => 'backups', 'middleware' => 'checkViewBackups'], function () {
+        Route::get('/', 'BackupController@index')->name('admin.backup.getList');
+    });
 });

@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'checkViewCommands' => \App\Http\Middleware\CheckViewCommands::class,
         'checkUserViewTest' => \App\Http\Middleware\CheckUserViewTest::class,
         'checkViewTestResult' => \App\Http\Middleware\CheckViewTestResult::class,
+        'checkViewBackups' => \App\Http\Middleware\CheckViewBackups::class,
         'MarkNotifyAsRead' => \App\Http\Middleware\MarkNotificationAsRead::class,
     ];
 

@@ -18,6 +18,7 @@ class CheckViewUsers
         if ($request->user()->can('view-users')) {
             return $next($request);
         }
+
         return redirect()->route('admin.home');
     }
 }

@@ -18,6 +18,7 @@ class CheckViewCategories
         if ($request->user()->can('view-categories')) {
             return $next($request);
         }
+
         return redirect()->route('admin.home');
     }
 }
