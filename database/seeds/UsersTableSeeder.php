@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->truncate();
         $data = [
             [
-                'email' => 'academics-admin@gmail.com',
+                'email' => 'tuannghiemtien97@gmail.com',
                 'username' => 'admin',
                 'firstname' => 'admin',
                 'lastname' => 'admin',

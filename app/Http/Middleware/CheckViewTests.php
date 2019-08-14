@@ -18,6 +18,7 @@ class CheckViewTests
         if ($request->user()->can('view-tests')) {
             return $next($request);
         }
+
         return redirect()->route('admin.home');
     }
 }
