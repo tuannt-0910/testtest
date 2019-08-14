@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckViewQuestions
+class CheckViewBackups
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class CheckViewQuestions
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->can('view-questions')) {
+        if ($request->user()->can('view-list-backups')) {
             return $next($request);
         }
 

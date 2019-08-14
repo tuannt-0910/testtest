@@ -170,4 +170,10 @@ return [
         'content' => 'Command',
         'created_at' => 'Time',
     ],
+    'backup' => [
+        'list_backup' => 'Backup Files',
+        'index' => '#',
+        'file' => 'File',
+        'created_at' => 'Created_at',
+    ],
 ];

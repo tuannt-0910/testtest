@@ -18,6 +18,7 @@ class CheckViewCommands
         if ($request->user()->can('view-commands')) {
             return $next($request);
         }
+
         return redirect()->route('admin.home');
     }
 }
