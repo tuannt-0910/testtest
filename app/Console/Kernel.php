@@ -24,8 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('sendMailDaily:statically')
-                  ->dailyAt('0:39')->withoutOverlapping();
+        $schedule->command('sendMailDaily:statically')
+            ->dailyAt('00:00')->withoutOverlapping();
+
+         $schedule->command('backup:clean')->daily()->at('00:00');
+         $schedule->command('backup:run --only-db')->daily()->at('00:00');
     }
 
     /**

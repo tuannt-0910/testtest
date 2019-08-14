@@ -180,6 +180,7 @@ return [
         App\Providers\HelperServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*
