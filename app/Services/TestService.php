@@ -8,15 +8,17 @@ use App\Repositories\Contracts\HistoryRepositoryInterface as HistoryRepository;
 class TestService
 {
     protected $testRepository;
-
     protected $historyRepository;
+    protected $sendNotify;
 
     public function __construct(
         TestRepository $testRepository,
-        HistoryRepository $historyRepository
+        HistoryRepository $historyRepository,
+        SendNotificationService $sendNotify
     ) {
         $this->testRepository = $testRepository;
         $this->historyRepository = $historyRepository;
+        $this->sendNotify = $sendNotify;
     }
 
     public function getResult($request, $test_id, $user_id)
@@ -29,8 +31,9 @@ class TestService
                 $seed = $history->random_seed;
             }
             $test = $this->testRepository->getQuestionAnswerTest($test_id, $seed, $test->total_question);
+            $result = $this->scoreTest($request, $seed, $test_id, $user_id, $test);
 
-            return $this->scoreTest($request, $seed, $test_id, $user_id, $test);
+            return $result;
         }
 
         return false;
@@ -78,12 +81,15 @@ class TestService
         ];
         if (session()->has('test_seed_' . $test_id)) {
             $history = $this->historyRepository->create($history);
+            $test->history = $history;
+
+            // send notify the first
+            $this->sendNotify->notifySubmitNewTest($user_id, $test);
             session()->forget('test_seed_' . $test_id);
             session()->put('history_' . $test_id, $history);
         } else {
-            $history = session('history_' . $test_id, $history);
+            $test->history  = session('history_' . $test_id, $history);
         }
-        $test->history = $history;
 
         return $test;
     }

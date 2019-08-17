@@ -15,18 +15,15 @@ class TestController extends Controller
     protected $testRepository;
     protected $testService;
     protected $commentRepository;
-    protected $sendNotify;
 
     public function __construct(
         TestRepository $testRepository,
         TestService $testService,
-        CommentRepository $commentRepository,
-        SendNotificationService $sendNotify
+        CommentRepository $commentRepository
     ) {
         $this->testRepository = $testRepository;
         $this->testService = $testService;
         $this->commentRepository = $commentRepository;
-        $this->sendNotify = $sendNotify;
     }
 
     public function getGuideTest($test_id)
@@ -79,7 +76,6 @@ class TestController extends Controller
         }
 
         $result = $this->testService->getResult($request, $test_id, $user_id);
-        $this->sendNotify->notifySubmitNewTest($user_id, $result);
 
         return view('Client.result', ['test' => $result]);
     }
