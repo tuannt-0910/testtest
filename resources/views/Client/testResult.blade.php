@@ -124,6 +124,10 @@
 @endsection
 
 @section('script')
+    @cannot('view-admin')
+        <script src="{{ asset('Client/js/tawk.to.js') }}"></script>
+    @endcannot
+
     @can('add-command-client')
         <script type="text/javascript" src="{{ asset('Client/js/comment.js') }}"></script>
     @endcan

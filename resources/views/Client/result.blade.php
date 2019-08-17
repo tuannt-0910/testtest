@@ -118,4 +118,7 @@
 
 @section('script')
     <script src="{{ asset('Client/js/client.js') }}"></script>
+    @cannot('view-admin')
+        <script src="{{ asset('Client/js/tawk.to.js') }}"></script>
+    @endcannot
 @endsection
