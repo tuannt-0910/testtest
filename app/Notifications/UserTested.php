@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,7 +20,7 @@ class UserTested extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, $testResult, $history)
+    public function __construct($user, $testResult, $history)
     {
         $this->user = $user;
         $this->testResult = $testResult;
