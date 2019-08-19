@@ -172,6 +172,14 @@ class RolePermissionTableSeeder extends Seeder
             ],
             [
                 'role_id' => 2,
+                'permission_id' => 23,
+            ],
+            [
+                'role_id' => 2,
+                'permission_id' => 24,
+            ],
+            [
+                'role_id' => 2,
                 'permission_id' => 25,
             ],
             [
@@ -180,10 +188,6 @@ class RolePermissionTableSeeder extends Seeder
             ],
 
             // teacher
-            [
-                'role_id' => 3,
-                'permission_id' => 1,
-            ],
             [
                 'role_id' => 3,
                 'permission_id' => 23,

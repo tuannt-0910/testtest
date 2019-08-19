@@ -85,3 +85,9 @@
 
     <div class="site-section pb-0"></div>
 @endsection
+
+@cannot('view-admin')
+    @section('script')
+        <script src="{{ asset('Client/js/tawk.to.js') }}"></script>
+    @endsection
+@endcannot
