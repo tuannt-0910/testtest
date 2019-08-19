@@ -68,9 +68,9 @@ class CommentController extends Controller
     {
         if (Auth::user()->can('add-command')) {
             $comment = [
-                'content' => $request->input('content'),
+                'content' => strip_tags(trim($request->input('content'))),
                 'user_id' => Auth::user()->id,
-                'question_id' => $request->input('question_id'),
+                'question_id' => addslashes($request->input('question_id')),
             ];
             $comment = $this->commentRepository->create($comment)->load(['user']);
             $data = [
