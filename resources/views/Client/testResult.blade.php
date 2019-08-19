@@ -28,7 +28,7 @@
                                         <label class="text-semibold">
                                             {{ trans('client.test.content_question') }} {{ $key + 1 }}: ({{ $question->code }}) {{ $question->content }}
                                         </label>
-                                        @can('view-command-client')
+                                        @can('view-commands-client')
                                             <button type="button" class="btn btn-default btn-sm close text-danger"
                                                     data-toggle="modal" data-target="#modal_{{ $question->id }}">
                                                 <i class="icon-comments"></i>
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
 
-                                    @can('view-command-client')
+                                    @can('view-commands-client')
                                         @csrf
                                         <div id="modal_{{ $question->id }}" class="modal fade">
                                             <div class="modal-dialog mw-60">
